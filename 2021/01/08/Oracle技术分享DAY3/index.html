@@ -96,8 +96,13 @@
 <meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108144612-gk5uivt-image.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108145531-j8qynfz-image.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108150004-b9ymlhy-image.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107144303-q5mxlcl-image.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107150651-e24lbrr-image.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151223-xwmrbzy-image.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151748-0hv2l22-image.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108103708-6hwelcf-image.png">
 <meta property="article:published_time" content="2021-01-08T02:40:34.000Z">
-<meta property="article:modified_time" content="2022-05-25T08:15:08.099Z">
+<meta property="article:modified_time" content="2022-06-14T13:00:41.796Z">
 <meta property="article:author" content="KaloSora">
 <meta property="article:tag" content="Oracle">
 <meta name="twitter:card" content="summary">
@@ -391,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,347 字
+                  1,858 字
                 </span>
               
 
@@ -407,7 +412,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -540,48 +545,122 @@
 <h6 id="AWR报告部分"><a href="#AWR报告部分" class="headerlink" title="AWR报告部分"></a>AWR报告部分</h6><p>找到 <code>ADDM Reports</code></p>
 <h6 id="Cloud-Control"><a href="#Cloud-Control" class="headerlink" title="Cloud Control"></a>Cloud Control</h6><p><strong>Oracle Enterprise Manager Cloud Control</strong></p>
 <p>可视化的oracle数据库管理系统，见虚拟机2</p>
-<h2 id="Oracle-RAC"><a href="#Oracle-RAC" class="headerlink" title="Oracle RAC"></a>Oracle RAC</h2><p>Oracle 数据库集群（10g以后）</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
-<li>ASM：即Auto Storage Management，自动存储管理</li>
-<li>Oracle Voting Disk：集群决策磁盘，用于节点发生故障时的决策</li>
-<li>Oracle OCR：共享存储</li>
-<li>Clusterware</li>
-<li>服务间可通信（宽带尽可能快），允许心跳连接</li>
-</ul>
-<h3 id="数据一致性问题"><a href="#数据一致性问题" class="headerlink" title="数据一致性问题"></a>数据一致性问题</h3><p>RAC架构下，一份数据所有集群共享。</p>
-<p>集群容易产生数据一致性问题：</p>
+<h2 id="Oracle性能分析"><a href="#Oracle性能分析" class="headerlink" title="Oracle性能分析"></a>Oracle性能分析</h2><h3 id="AWR报告"><a href="#AWR报告" class="headerlink" title="AWR报告"></a>AWR报告</h3><p>通过SQL Developer可视化生成报告；抑或是采用命令方式生成。</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107144303-q5mxlcl-image.png" alt="image.png"></p>
+<p>命令方式</p>
 <blockquote>
-<p>Instance A 修改数据为50</p>
-<p>Instance B 修改数据为100</p>
-<p>共享存储原数据为 20，此时需要统一的数据访问控制</p>
+<p>@?/rdbms/admin/awrrpt.sql</p>
 </blockquote>
-<p>RAC下数据自动划分区域，把多个数据库合成一个逻辑上的整体。多个数据库实例之间通过心跳连接相互访问。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>见实验环境虚拟机2</p>
-<p>检索rac上的数据文件，只有通过 <code>asmcmd</code> 命令才能进入rac数据文件目录。</p>
-<p>目录下存放oracle的关键文件，如数据文件、日志文件、控制文件等。</p>
-<blockquote>
-<p>select file_name from dba_data_files;</p>
-<p>asmcmd</p>
-</blockquote>
-<p>除了 <code>asmcmd</code> 外，提供sqlplus的连接方式</p>
-<blockquote>
-<p>sqlplus / as sysasm</p>
-</blockquote>
-<p>其他</p>
+<p>简单的性能分析</p>
 <ul>
-<li><p>RAC可以保证高可用性</p>
-</li>
-<li><p>不会额外消耗IO，通过心跳连接发送不同实例的数据块（Cache Fusion技术）</p>
+<li><p>Report Summary</p>
 <ul>
-<li>当大量Cache Fusion产生时（多次跨实例访问数据块），会导致单个实例性能下降</li>
-<li>如果应用允许分库分表，使用微服务架构，能够带来更高的性能。即业务拆分</li>
+<li>确定系统类型：分析/交易 类型</li>
+<li>Redo Size （Per Second）：Redo量小，可能是分析类型的系统；如果大的话可能是交易类型的系统</li>
+<li>Logical read（从内存里取数称为逻辑度）：如果量大，则可能为大量的select查询</li>
+<li>Transactions：每秒事务数</li>
 </ul>
 </li>
-<li><p>需要在rac上运行应用进行测试，保证性能不下降</p>
+<li><p>SQL ordered by Elapsed Time</p>
+<ul>
+<li>Elapsed Time：在报告生成时间内执行总时间，等于执行次数 * 每秒执行时间</li>
+<li>Executions：执行次数</li>
+<li>Elapsed Time per Exec（s）：每秒执行时间</li>
+<li>SQL Id：SQL查询id，不同的库是一样的。生成方式：把SQL转换成ASCII码，然后针对ASCII码生成hash码。</li>
+</ul>
 </li>
-<li><p>通过Grd提供统一的权限管理机制，所有权限请求都是串行执行。</p>
+<li><p>SQL ordered by Gets</p>
+<ul>
+<li>逻辑读</li>
+<li>Buffer Gets：逻辑读总时间</li>
+<li>Executions：执行次数</li>
+<li>Gets per Exec：单次逻辑读时间</li>
+</ul>
+</li>
+<li><p>SQL ordered by Reads</p>
+<ul>
+<li>物理读</li>
+</ul>
+</li>
+<li><p>Top 5 Evnets</p>
+<ul>
+<li>最消耗性能的5个事件</li>
+</ul>
 </li>
 </ul>
+<h3 id="通过SQL-Developer优化"><a href="#通过SQL-Developer优化" class="headerlink" title="通过SQL Developer优化"></a>通过SQL Developer优化</h3><p>查看实时SQL监视</p>
+<p>路径：查看 -&gt; DBA</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107150651-e24lbrr-image.png" alt="image.png"></p>
+<p>查看SQL顶级报告</p>
+<p>路径：查看 -&gt; 报告 -&gt; 数据字典报告 -&gt; 数据库管理 -&gt; 顶级SQL</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151223-xwmrbzy-image.png" alt="image.png"></p>
+<h3 id="SQL-优化手册"><a href="#SQL-优化手册" class="headerlink" title="SQL 优化手册"></a>SQL 优化手册</h3><p><strong>SQL Tuning Guide</strong></p>
+<p><strong>Database Performance Tuning Guide</strong></p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151748-0hv2l22-image.png" alt="image.png"></p>
+<ul>
+<li><p>Shared Pool Check，即软解析，存放常用解析后的结果</p>
+</li>
+<li><p>Soft Parse，即软解析，如果软解析过大，可能会出现在 <code>Shared Pool Check</code> 中出现资源争抢，超出资源限制的请求将进入队列等待。</p>
+</li>
+<li><p>Hard Parse，即硬解析，语句首次执行，消耗CPU</p>
+<ul>
+<li>OLAP（分析类型事务），实现硬解析，不要有软解析</li>
+<li>OLTP（处理类型事务），尽可能多地实现软解析</li>
+<li>尽可能在写SQL的时候，保证大小写，因为SQL语句是通过ASCII码生成hashCode来判断是否实现软解析，而大小写的ASCII码不同，会导致硬解析。</li>
+</ul>
+</li>
+<li><p>Optimization，即优化器，当sql进入硬解析的时候，优化器会判断是走索引还是全表扫描。</p>
+<ul>
+<li><p>RBO，即rule-based optimizer，指基于规则的优化</p>
+</li>
+<li><p>CBO，即cost-based optimizer，指基于开销的优化，需要考虑诸多因素的成本，给出最符合条件的sql结果（10g以后，CBO为默认优化模式）</p>
+<ul>
+<li>CPU</li>
+<li>IO</li>
+<li>内存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>查看优化器</p>
+<blockquote>
+<p>show parameter optimizer</p>
+</blockquote>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108103708-6hwelcf-image.png" alt="image.png"></p>
+<p>修改优化器模式</p>
+<blockquote>
+<p>alter system set optimizer_mode = ‘rule’</p>
+</blockquote>
+<h4 id="软解析与硬解析实例"><a href="#软解析与硬解析实例" class="headerlink" title="软解析与硬解析实例"></a>软解析与硬解析实例</h4><p>实例1：</p>
+<blockquote>
+<p>select count(*) from test1;  –硬解析</p>
+<p>select count(*) from TEST1;  –修改表名再次执行，也是硬解析</p>
+</blockquote>
+<p>实例2：</p>
+<p>使用绑定变量，则多次执行也会被判断为软解析</p>
+<blockquote>
+<p>select count(*) from TEST1 where id= :x ;  –使用绑定变量</p>
+</blockquote>
+<p>实例3：</p>
+<p>分析型系统，少有软解析。<strong>如果是分析型数据检索大量数据，尽量全表扫描，不要走索引；如果是检索少量数据，走索引速度会更快。</strong></p>
+<p>分析类型的数据是倾斜的，查找的数据是不定的，不均匀的。如果采用绑定变量的方式，实现软解析，那么面对倾斜数据时，根据软解析复用执行计划，针对应该走索引和全表扫描的查询，都执行同样的执行计划显然是不合理的。</p>
+<p>降低分析型系统（如数据仓库等）响应时间的方法：</p>
+<ul>
+<li><p>使物理读变为逻辑读</p>
+</li>
+<li><p>使用更好的压缩技术</p>
+</li>
+<li><p>使用更好的并行查询技术，使用大量的进程并行查询</p>
+</li>
+<li><p>更换硬盘，提高IO速度</p>
+</li>
+<li><p>更好的扫描算法</p>
+</li>
+<li><p>Oracle In-Memory Database内存数据库会自动删除索引，更适合于分析类型。</p>
+</li>
+</ul>
+<p>#TODO# 实践的方法？如：AWR报告分析、SQL优化技巧实战</p>
 
       
     </div>
@@ -705,7 +784,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -716,7 +795,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -727,7 +806,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -760,7 +839,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle技术分享-DAY-3"><span class="nav-number">1.</span> <span class="nav-text">Oracle技术分享 - DAY 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器数据库"><span class="nav-number">1.1.</span> <span class="nav-text">容器数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL优化"><span class="nav-number">1.2.</span> <span class="nav-text">SQL优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL执行顺序"><span class="nav-number">1.2.1.</span> <span class="nav-text">SQL执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL解释计划"><span class="nav-number">1.3.</span> <span class="nav-text">SQL解释计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.3.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP1-保证信息一致"><span class="nav-number">1.3.2.0.1.</span> <span class="nav-text">STEP1 保证信息一致</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP2-优化工具"><span class="nav-number">1.3.2.0.2.</span> <span class="nav-text">STEP2 优化工具</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#概览"><span class="nav-number">1.3.2.0.2.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ORACLE-STA"><span class="nav-number">1.3.2.0.2.2.</span> <span class="nav-text">ORACLE STA</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#SQL-Developer"><span class="nav-number">1.3.2.0.2.3.</span> <span class="nav-text">SQL Developer</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#AWR报告部分"><span class="nav-number">1.3.2.0.2.4.</span> <span class="nav-text">AWR报告部分</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Cloud-Control"><span class="nav-number">1.3.2.0.2.5.</span> <span class="nav-text">Cloud Control</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle-RAC"><span class="nav-number">1.4.</span> <span class="nav-text">Oracle RAC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提"><span class="nav-number">1.4.1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据一致性问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">数据一致性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">1.4.3.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle技术分享-DAY-3"><span class="nav-number">1.</span> <span class="nav-text">Oracle技术分享 - DAY 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器数据库"><span class="nav-number">1.1.</span> <span class="nav-text">容器数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL优化"><span class="nav-number">1.2.</span> <span class="nav-text">SQL优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL执行顺序"><span class="nav-number">1.2.1.</span> <span class="nav-text">SQL执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL解释计划"><span class="nav-number">1.3.</span> <span class="nav-text">SQL解释计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.3.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP1-保证信息一致"><span class="nav-number">1.3.2.0.1.</span> <span class="nav-text">STEP1 保证信息一致</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP2-优化工具"><span class="nav-number">1.3.2.0.2.</span> <span class="nav-text">STEP2 优化工具</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#概览"><span class="nav-number">1.3.2.0.2.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ORACLE-STA"><span class="nav-number">1.3.2.0.2.2.</span> <span class="nav-text">ORACLE STA</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#SQL-Developer"><span class="nav-number">1.3.2.0.2.3.</span> <span class="nav-text">SQL Developer</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#AWR报告部分"><span class="nav-number">1.3.2.0.2.4.</span> <span class="nav-text">AWR报告部分</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Cloud-Control"><span class="nav-number">1.3.2.0.2.5.</span> <span class="nav-text">Cloud Control</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle性能分析"><span class="nav-number">1.4.</span> <span class="nav-text">Oracle性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AWR报告"><span class="nav-number">1.4.1.</span> <span class="nav-text">AWR报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过SQL-Developer优化"><span class="nav-number">1.4.2.</span> <span class="nav-text">通过SQL Developer优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-优化手册"><span class="nav-number">1.4.3.</span> <span class="nav-text">SQL 优化手册</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软解析与硬解析实例"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">软解析与硬解析实例</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -794,7 +873,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.7k</span>
+    <span title="Site words total count">60.9k</span>
   
 </div>
 
