@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="Oracle 开发常用代码基本获取环境信息USEREVN()方法返回用户环境的信息。 option 可以是 ENTRYID,SESSIONID,TERMINAL,ISDBA,LANGUAGE,CLIENT_INFO,LANG,VSIZE 12345678910111213141516171819202122232425262728293031--查看当前用户是否是 DBA，如果是返回 truese">
+<meta name="description" content="基本获取环境信息USEREVN()方法返回用户环境的信息。 option 可以是 ENTRYID,SESSIONID,TERMINAL,ISDBA,LANGUAGE,CLIENT_INFO,LANG,VSIZE 12345678910111213141516171819202122232425262728293031--查看当前用户是否是 DBA，如果是返回 trueselect userevn(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Oracle 开发常用代码">
 <meta property="og:url" content="http://yoursite.com/2022/06/14/Oracle%20%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="KaloSora的博客">
-<meta property="og:description" content="Oracle 开发常用代码基本获取环境信息USEREVN()方法返回用户环境的信息。 option 可以是 ENTRYID,SESSIONID,TERMINAL,ISDBA,LANGUAGE,CLIENT_INFO,LANG,VSIZE 12345678910111213141516171819202122232425262728293031--查看当前用户是否是 DBA，如果是返回 truese">
+<meta property="og:description" content="基本获取环境信息USEREVN()方法返回用户环境的信息。 option 可以是 ENTRYID,SESSIONID,TERMINAL,ISDBA,LANGUAGE,CLIENT_INFO,LANG,VSIZE 12345678910111213141516171819202122232425262728293031--查看当前用户是否是 DBA，如果是返回 trueselect userevn(">
 <meta property="article:published_time" content="2022-06-14T13:42:34.000Z">
-<meta property="article:modified_time" content="2022-06-14T13:42:58.188Z">
+<meta property="article:modified_time" content="2022-06-14T13:47:50.466Z">
 <meta property="article:author" content="KaloSora">
 <meta property="article:tag" content="Oracle">
 <meta name="twitter:card" content="summary">
@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,150 字
+                  1,143 字
                 </span>
               
 
@@ -416,7 +416,7 @@
       
 
       
-        <h1 id="Oracle-开发常用代码"><a href="#Oracle-开发常用代码" class="headerlink" title="Oracle 开发常用代码"></a>Oracle 开发常用代码</h1><h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><h3 id="获取环境信息"><a href="#获取环境信息" class="headerlink" title="获取环境信息"></a>获取环境信息</h3><p>USEREVN()方法返回用户环境的信息。</p>
+        <h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><h3 id="获取环境信息"><a href="#获取环境信息" class="headerlink" title="获取环境信息"></a>获取环境信息</h3><p>USEREVN()方法返回用户环境的信息。</p>
 <p>option 可以是 ENTRYID,SESSIONID,TERMINAL,ISDBA,LANGUAGE,CLIENT_INFO,LANG,VSIZE</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--查看当前用户是否是 DBA，如果是返回 true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'isbda'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回 SESSION 会话 ID</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'sessionid'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回多人会话人数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'entryid'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回当前 instance 标志</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'instance'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回当前语言环境</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'language'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回当前语言环境的缩写，如 ZHS,EN 等</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'lang'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回用户终端或机器标识</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(<span class="string">'terminal'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--返回传入字符的字节数，以 X 为例，返回的就是 X 字符的大小</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> userevn(X) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
 
@@ -566,7 +566,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -621,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle-开发常用代码"><span class="nav-number">1.</span> <span class="nav-text">Oracle 开发常用代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">1.1.</span> <span class="nav-text">基本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取环境信息"><span class="nav-number">1.1.1.</span> <span class="nav-text">获取环境信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截取到某一个字符串前面的内容"><span class="nav-number">1.1.2.</span> <span class="nav-text">截取到某一个字符串前面的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置当前会话日期格式"><span class="nav-number">1.1.3.</span> <span class="nav-text">设置当前会话日期格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启控制台输出"><span class="nav-number">1.1.4.</span> <span class="nav-text">开启控制台输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭参数输入"><span class="nav-number">1.1.5.</span> <span class="nav-text">关闭参数输入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库指标"><span class="nav-number">1.2.</span> <span class="nav-text">数据库指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看占用表空间大小"><span class="nav-number">1.2.1.</span> <span class="nav-text">查看占用表空间大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看占用的磁盘空间"><span class="nav-number">1.2.2.</span> <span class="nav-text">查看占用的磁盘空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询锁住的表"><span class="nav-number">1.2.3.</span> <span class="nav-text">查询锁住的表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-number">1.3.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字转换成大写"><span class="nav-number">1.3.1.</span> <span class="nav-text">数字转换成大写</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">1.</span> <span class="nav-text">基本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取环境信息"><span class="nav-number">1.1.</span> <span class="nav-text">获取环境信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截取到某一个字符串前面的内容"><span class="nav-number">1.2.</span> <span class="nav-text">截取到某一个字符串前面的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置当前会话日期格式"><span class="nav-number">1.3.</span> <span class="nav-text">设置当前会话日期格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启控制台输出"><span class="nav-number">1.4.</span> <span class="nav-text">开启控制台输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭参数输入"><span class="nav-number">1.5.</span> <span class="nav-text">关闭参数输入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库指标"><span class="nav-number">2.</span> <span class="nav-text">数据库指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看占用表空间大小"><span class="nav-number">2.1.</span> <span class="nav-text">查看占用表空间大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看占用的磁盘空间"><span class="nav-number">2.2.</span> <span class="nav-text">查看占用的磁盘空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询锁住的表"><span class="nav-number">2.3.</span> <span class="nav-text">查询锁住的表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-number">3.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字转换成大写"><span class="nav-number">3.1.</span> <span class="nav-text">数字转换成大写</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -655,7 +655,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">60.9k</span>
+    <span title="Site words total count">61.2k</span>
   
 </div>
 
