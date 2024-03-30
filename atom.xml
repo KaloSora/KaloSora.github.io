@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-29T14:31:00.147Z</updated>
+  <updated>2024-03-30T03:31:59.330Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://example.com/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/"/>
     <id>http://example.com/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/</id>
     <published>2024-03-29T14:22:13.000Z</published>
-    <updated>2024-03-29T14:31:00.147Z</updated>
+    <updated>2024-03-30T03:31:59.330Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="旅程还在继续"><a href="#旅程还在继续" class="headerlink" title="旅程还在继续"></a>旅程还在继续</h1><p>Mac重置数据以后才发现，原来的博客数据没有备份…</p><p>还好有记下hexo配置的过程，只能从头来过</p><p>Hexo NEXT主题也从原来的5.X升级到了7.X</p><p>​<img src="/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/image-20240317124230-zpap1uq.png" alt="image">​</p><p>‍</p><p>旅程还在继续，学习也不能止步。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="旅程还在继续"><a href="#旅程还在继续" class="headerlink" title="旅程还在继续"></a>旅程还在继续</h1><p>一年半没有更新博客，原因是Mac重置数据以后，我发现博客数据没有备份…</p><p>还好有记下hexo配置的过程，于是只能从头来过</p><p>Hexo NEXT主题也从原来的5.X升级到了7.X</p><p>​<img src="/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/image-20240317124230-zpap1uq.png" alt="image">​</p><p>‍</p><p>旅程还在继续，学习也不能止步。</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;旅程还在继续&quot;&gt;&lt;a href=&quot;#旅程还在继续&quot; class=&quot;headerlink&quot; title=&quot;旅程还在继续&quot;&gt;&lt;/a&gt;旅程还在继续&lt;/h1&gt;&lt;p&gt;Mac重置数据以后才发现，原来的博客数据没有备份…&lt;/p&gt;
-&lt;p&gt;还好有记下hexo配置的过程，只能从头来过</summary>
+    <summary type="html">&lt;h1 id=&quot;旅程还在继续&quot;&gt;&lt;a href=&quot;#旅程还在继续&quot; class=&quot;headerlink&quot; title=&quot;旅程还在继续&quot;&gt;&lt;/a&gt;旅程还在继续&lt;/h1&gt;&lt;p&gt;一年半没有更新博客，原因是Mac重置数据以后，我发现博客数据没有备份…&lt;/p&gt;
+&lt;p&gt;还好有记下hexo配置</summary>
       
     
     
