@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java Core," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java反射 &amp; 注解学习总结反射概念 &amp; 作用反射(reflection)：运行时查看元数据，反观察、修改程序内部结构。  元数据（MetaData），指运行时的数据，如模块、类、函数、注解、源代码  运行时修改代码：一般指修改Bytecode，byte[]，用工具Javasist   【注意】如果在运行时分析泛型类的实例，将不会得到太多的信息，因为它们已经被擦除了。 ‍ 反射实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java反射 &amp; 注解学习总结">
+<meta property="og:url" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="Java反射 &amp; 注解学习总结反射概念 &amp; 作用反射(reflection)：运行时查看元数据，反观察、修改程序内部结构。  元数据（MetaData），指运行时的数据，如模块、类、函数、注解、源代码  运行时修改代码：一般指修改Bytecode，byte[]，用工具Javasist   【注意】如果在运行时分析泛型类的实例，将不会得到太多的信息，因为它们已经被擦除了。 ‍ 反射实">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406204850-i86ssqz.png">
+<meta property="og:image" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406204913-gez0ay1.png">
+<meta property="og:image" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406205011-6sfjbdm.png">
+<meta property="og:image" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210408115531-7w0gzvf.png">
+<meta property="og:image" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210409135446-wlxp4t1.png">
+<meta property="article:published_time" content="2021-04-06T06:14:54.000Z">
+<meta property="article:modified_time" content="2024-03-29T14:06:29.615Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Java Core">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406204850-i86ssqz.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/04/06/Java反射/"/>
+
+
+
+
+
+  <title>Java反射 & 注解学习总结 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/06/Java%E5%8F%8D%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java反射 & 注解学习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-06T14:14:54+08:00">
+                2021-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,162 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java反射-注解学习总结"><a href="#Java反射-注解学习总结" class="headerlink" title="Java反射 &amp; 注解学习总结"></a>Java反射 &amp; 注解学习总结</h1><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="概念-作用"><a href="#概念-作用" class="headerlink" title="概念 &amp; 作用"></a>概念 &amp; 作用</h3><p>反射(reflection)：运行时查看<code>元数据</code>，反观察、修改程序内部结构。</p>
+<ul>
+<li><p>元数据（MetaData），指运行时的数据，如模块、类、函数、注解、源代码</p>
+</li>
+<li><p>运行时修改代码：一般指修改Bytecode，byte[]，用工具<code>Javasist</code></p>
+</li>
+</ul>
+<p>【注意】如果在运行时分析泛型类的实例，将不会得到太多的信息，因为它们已经被擦除了。</p>
+<p>‍</p>
+<h3 id="反射实例"><a href="#反射实例" class="headerlink" title="反射实例"></a>反射实例</h3><p>常用方法</p>
+<ul>
+<li>Class.forName()：通过类全限定名获取一个class，要传入全路径</li>
+<li>getClass()：获取一个对象的运行时类</li>
+<li>[class].getConstructor().newInstance()：通过构造器创建一个类</li>
+<li>[class].getDeclaredFields()：获取所有属性，包括private</li>
+<li>[class]..getDeclaredMethods()：获取所有方法</li>
+<li>[class].getClassLoader()：获取类加载器</li>
+<li>method.invoke([class])：调用一个类中的所有方法</li>
+</ul>
+<h4 id="获取类的属性、方法"><a href="#获取类的属性、方法" class="headerlink" title="获取类的属性、方法"></a>获取类的属性、方法</h4><p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个类</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> Arrays.asList(<span class="string">&quot;List&quot;</span>, <span class="string">&quot;Tree&quot;</span>, <span class="string">&quot;Array&quot;</span>);</span><br><span class="line">    <span class="type">var</span> <span class="variable">randomGen</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomStringGenerator</span>(list);</span><br><span class="line">    <span class="type">var</span> <span class="variable">clazz</span> <span class="operator">=</span> randomGen.getClass();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取类名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    System.out.println(<span class="string">&quot;class name:&quot;</span> + clazz.getName());</span><br><span class="line">    System.out.println();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取所有属性</span></span><br><span class="line"><span class="comment">     *    getField() 只能获取public的，包括从父类继承来的字段</span></span><br><span class="line"><span class="comment">     *    getDeclaredField() 可以获取当前类所有的字段，包括private的，但是不能获取继承来的字段</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">fields</span> <span class="operator">=</span> clazz.getDeclaredFields();</span><br><span class="line">    System.out.println(<span class="string">&quot;All fields are as below: &quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> field : fields)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;field name: &quot;</span> + field.getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;field type: &quot;</span> + field.getGenericType());</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取所有方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">methods</span> <span class="operator">=</span> clazz.getDeclaredMethods();</span><br><span class="line">    System.out.println(<span class="string">&quot;All methods are as below: &quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> method : methods)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;method sign: &quot;</span></span><br><span class="line">                + Modifier.toString(method.getModifiers()) + <span class="string">&quot; &quot;</span></span><br><span class="line">                + method.getReturnType() + <span class="string">&quot; &quot;</span></span><br><span class="line">                + method.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h4 id="反射创建对象-调用方法"><a href="#反射创建对象-调用方法" class="headerlink" title="反射创建对象 &amp; 调用方法"></a>反射创建对象 &amp; 调用方法</h4><p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> Arrays.asList(<span class="string">&quot;List&quot;</span>, <span class="string">&quot;Tree&quot;</span>, <span class="string">&quot;Array&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过反射创建实例，带参数的构造器</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">clazz</span> <span class="operator">=</span> (RandomStringGenerator)Class.forName(<span class="string">&quot;com.javacoding.collection.RandomStringGenerator&quot;</span>)</span><br><span class="line">            .getConstructor(List.class).newInstance(list);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取main方法，并调用</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">methods</span> <span class="operator">=</span> Arrays.stream(clazz.getClass().getMethods())</span><br><span class="line">            .filter(x -&gt; x.getName().equals(<span class="string">&quot;main&quot;</span>))</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line">    <span class="comment">// 设置传参类型</span></span><br><span class="line">    methods.get(<span class="number">0</span>).invoke(<span class="literal">null</span>, <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;test1&quot;</span>,<span class="string">&quot;test2&quot;</span>,<span class="string">&quot;test3&quot;</span>&#125;&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用main方法不能用如下的方法：</span></span><br><span class="line">    <span class="comment">//methods.get(0).invoke(String[].class);</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里注意一下 <code>main</code> 方法的调用</p>
+<blockquote>
+<p>java1.4是没有可变参数的，即Method.invoke(Obeject objecr ,Object obj[]{“xx”,“yy”});用数组传递多个参数 。<br>java1.5有了可变参数，即Method.invoke(Objet objecr,Object…args);用可变参数传递多个参数。</p>
+<p>由于兼容性问题，在JDK1.4没有引入可变参数Object…类型，所以使用数组来表示，invoke函数接收到String数组后会进行拆分，得到两个String变量，但是没有main函数接受 两个String值，所以不行。</p>
+<p>而且只要参数是new Object[]{“xxx”,”yyy”}，javac 为了兼容1.4，只把它当作 jdk1.4 的语法进行理解，而不把它当作 jdk1.5 的语法解释，也就是说不能传递new String[]{};。</p>
+<p>解决方法：<br>(1)、mainMethod.invoke(null,new Object[]{new String[]{“20190212”}});该方法还是会按1.4处理，会将参数打散，但没关系，里面就是对的参数new String[]{“xxx”}。</p>
+<p>(2)、mainMethod.invoke(null,(Object)new String[]{“20190212”}); 不会打散，因为强转为Object了，编译器会认为这不是一个数组，此时是一个完整的参数。但注意他本质还是一个数组，作用仅仅是骗过编译器而已。</p>
+</blockquote>
+<p>‍</p>
+<h3 id="实际应用-AOP"><a href="#实际应用-AOP" class="headerlink" title="实际应用 - AOP"></a>实际应用 - AOP</h3><ul>
+<li><p>实现AOP，面向切面编程(即Aspect Oriented Programming)的框架</p>
+<ul>
+<li><p>关注点分离原则（SoC，即Seperation of Concern），强调把程序分成多个部分，每个部分负责独立的功能</p>
+</li>
+<li><p>程序有一个主关注点 + 多个其他关注点</p>
+<ul>
+<li>什么时候触发：before、after、around</li>
+<li>触发什么：调用对象</li>
+</ul>
+<blockquote>
+<p>举例：订单系统中的核心能力（下单、支付）；其他能力（日志、通知、抽奖等等）</p>
+</blockquote>
+<p><img src="/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406204850-i86ssqz.png" alt="image.png"></p>
+</li>
+<li><p>实现1：代理模式（Java中的Proxy类）</p>
+<ul>
+<li>代理的作用，相当于是把多个 <code>Aspect</code> 和 一个核心方法，在运行时融合起来</li>
+<li><img src="/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406204913-gez0ay1.png" alt="image.png"></li>
+</ul>
+</li>
+<li><p>实现2：函数式：高阶编程</p>
+<ul>
+<li>f：核心方法</li>
+<li>g：方面包装方法</li>
+<li>x：核心输入方法</li>
+<li>最后调用方法：h &#x3D; fg(x)</li>
+</ul>
+</li>
+<li><p>实现3：Javassist库动态添加方法</p>
+<ul>
+<li>AspectJ等框架会使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>实现注解</p>
+</li>
+</ul>
+<p>‍</p>
+<h4 id="手写AOP实例"><a href="#手写AOP实例" class="headerlink" title="手写AOP实例"></a>手写AOP实例</h4><p>Java 的代理 <code>Proxy</code>类</p>
+<p><img src="/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210406205011-6sfjbdm.png" alt="image.png"></p>
+<blockquote>
+<p>Proxy.newInstance(classloader,  interfaces, InvocationHandler);</p>
+</blockquote>
+<ul>
+<li>classloader：用于创建InvocationHander和代理对象的ClassLoader</li>
+<li>interfaces： 代理哪些接口</li>
+<li>InvocationHandler： 代理方法触发后的实际执行者</li>
+</ul>
+<p>本质上，Proxy是把多个模块化的 <code>Aspect</code> 和 一个核心方法，在运行时融合起来，当成是一个综合实现多个功能的类。</p>
+<p>‍</p>
+<p>1.创建业务接口IOrder</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 订单支付接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IOrder</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>2.创建业务实现类Order</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 订单支付实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> <span class="keyword">implements</span> <span class="title class_">IOrder</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">state</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模拟支付时间间隔</span></span><br><span class="line">        Thread.sleep(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 支付完毕</span></span><br><span class="line">        <span class="built_in">this</span>.state = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;order state:&quot;</span> + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>3.创建切面接口Aspect，内置静态方法，用于创建Proxy</p>
+<p>该类只能针对接口做的代理</p>
+<blockquote>
+<p>Proxy.newInstance(classloader,  interfaces, InvocationHandler);</p>
+</blockquote>
+<ul>
+<li>classloader：用于创建InvocationHandler和代理对象的ClassLoader</li>
+<li>interfaces： 代理哪些接口</li>
+<li>InvocationHandler： 代理方法触发后的实际执行者</li>
+</ul>
+<p>‍</p>
+<p>思考：</p>
+<ul>
+<li><p>为什么需要InvocationHandler?</p>
+<ul>
+<li>用来衔接、融合代理对象和Aspect对象</li>
+</ul>
+</li>
+<li><p>为什么需要传入Interfaces?</p>
+<ul>
+<li>接口可能会有多个，被代理的接口会被拦截</li>
+</ul>
+</li>
+<li><p>为什么需要ClassLoader?</p>
+<ul>
+<li>可能会有多个ClassLoader做不同的事情，必须要指定</li>
+</ul>
+</li>
+</ul>
+<p>‍</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * AOP接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Aspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提供静态方法</span></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; T <span class="title function_">getProxy</span><span class="params">(Class&lt;T&gt; cls, String... aspects)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">aspectInsts</span> <span class="operator">=</span> Arrays.stream(aspects).map(name -&gt; Try.ofFailable(() -&gt; &#123;</span><br><span class="line">            <span class="type">var</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(name);</span><br><span class="line">            <span class="keyword">return</span> (Aspect) clazz.getConstructor().newInstance();</span><br><span class="line">        &#125;))</span><br><span class="line">                .filter(aspect -&gt; aspect.isSuccess())</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">inst</span> <span class="operator">=</span> cls.getConstructor().newInstance();</span><br><span class="line">        <span class="keyword">return</span> (T) Proxy.newProxyInstance(cls.getClassLoader(),</span><br><span class="line">                cls.getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvocationHandler</span>() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">var</span> aspect : aspectInsts) &#123;</span><br><span class="line">                            aspect.get().before();</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="type">var</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(inst);</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">var</span> aspect : aspectInsts) &#123;</span><br><span class="line">                            aspect.get().after();</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">return</span> result;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>4.创建一个切面实例，计算方法的执行时间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * AOP实现：用于监控程序运行时间</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TimeUsageAspect</span> <span class="keyword">implements</span> <span class="title class_">Aspect</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> start;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span> &#123;</span><br><span class="line">        start = System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">usage</span> <span class="operator">=</span> System.currentTimeMillis() - start;</span><br><span class="line"></span><br><span class="line">        System.out.format(<span class="string">&quot;time usage : %dms\n&quot;</span>,usage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>5.新建测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * AOP测试实例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyExampleTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test_Proxy</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException &#123;</span><br><span class="line">        <span class="type">IOrder</span> <span class="variable">order</span> <span class="operator">=</span> Aspect.getProxy(Order.class,<span class="string">&quot;com.javacoding.proxy.TimeUsageAspect&quot;</span>);</span><br><span class="line">        order.pay();</span><br><span class="line">        order.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>【注意1】静态方法返回值为泛型的时候为什么static后要加<code>&lt;T&gt;</code>?</p>
+<blockquote>
+<p>这个是java声明泛型方法的固定格式，在方法的返回值声明之前的位置，<T>定义该方法所拥有的泛型标识符，个数可以是多个，比如</T></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static&lt;<span class="built_in">T1</span>,<span class="built_in">T2</span>,<span class="built_in">T3</span>&gt; Response&lt;<span class="built_in">T1</span>&gt; test(<span class="built_in">T2</span> <span class="built_in">t2</span>,<span class="built_in">T3</span> <span class="built_in">t3</span>)&#123;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，在方法的返回值或者入参的地方，就可以使用“T”这个泛型。<br>泛型标识符的名字可以是任意符合java规范的变量名，比如Map就使用&lt;K,V&gt;作为它的key和value的泛型标识符。</p>
+</blockquote>
+<p>【注意2】<code>String...</code>为可变参数，可以传入一个或多个<code>String</code>，在编译时会自动封装为String数组</p>
+<p>‍</p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解就像一个标签，是贴在程序代码上供另一个程序读取的。其实也可以理解为一些外部的通用功能，在运行时融合到业务类中，但是传递参数的时候变得更加容易。本质还是为了解耦和提供类能力的扩展。</p>
+<p>一般而言，注解多由第三方库提供，通过动态代理<code>proxy</code>和反射实现，或者是<code>Javassist</code>动态修改类来达到目的。</p>
+<p>基本流程：程序读取注解 -&gt; 找到注解 -&gt; 找到类并实例化</p>
+<p><img src="/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210408115531-7w0gzvf.png" alt="image.png"></p>
+<p>‍</p>
+<h3 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h3><p>注解声明，此时注解没有作用域，仅仅是一个定义。</p>
+<p>按如下的定义，可以这样调用注解<code>@Aspect(name = UsageAspect.class)</code> ，相当于是给name()方法赋值，传入了一个名为 <code>UsageAspect</code> 的类，这个类可以通过反射获取。</p>
+<p>同理，<code>@Aspect(value = &quot;测试&quot;)</code>可以给value()方法传入一个字符串。这些属性可以通过反射获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Aspect &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接收一个class类</span></span><br><span class="line">    <span class="keyword">public</span> Class <span class="title function_">name</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接受一个值</span></span><br><span class="line">    <span class="comment">//public String value();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>【注意】本质上<code>@interface</code>相当于继承了一个<code>Annotation</code>接口，而注解里的方法被编译为<code>Abstract</code>方法</p>
+<p>‍</p>
+<h4 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h4><p><code>@Retention</code></p>
+<p>声明注解的存活周期</p>
+<p>一般开发都是通过反射获取注解，故使用<code>@Retention(RetentionPolicy.RUNTIME)</code></p>
+<ul>
+<li>Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源码（编译期），字节码（类加载）或者运行期（JVM中运行）。在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期</li>
+<li>@Retention(RetentionPolicy.SOURCE)，注解仅存在于源码中，在class字节码文件中不包含</li>
+<li>@Retention(RetentionPolicy.CLASS)， 默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得</li>
+<li>@Retention(RetentionPolicy.RUNTIME)， 注解会在class字节码文件中存在，在运行时可以通过反射获取到</li>
+</ul>
+<p>‍</p>
+<p><code>@Target</code></p>
+<p>声明注解的作用范围</p>
+<p>常用<code>@Target(ElementType.TYPE)</code></p>
+<ul>
+<li>Target的英文意思是目标，这也很容易理解，使用@Target元注解表示我们的注解作用的范围就比较具体了，可以是类，方法，方法参数变量等，同样也是通过枚举类ElementType表达作用类型</li>
+<li>@Target(ElementType.TYPE) 作用接口、类、枚举、注解</li>
+<li>@Target(ElementType.FIELD) 作用属性字段、枚举的常量</li>
+<li>@Target(ElementType.METHOD) 作用方法</li>
+<li>@Target(ElementType.PARAMETER) 作用方法参数</li>
+<li>@Target(ElementType.CONSTRUCTOR) 作用构造函数</li>
+<li>@Target(ElementType.LOCAL_VARIABLE)作用局部变量</li>
+<li>@Target(ElementType.ANNOTATION_TYPE)作用于注解（@Retention注解中就使用该属性）</li>
+<li>@Target(ElementType.PACKAGE) 作用于包</li>
+</ul>
+<p>‍</p>
+<p>其他的3个元注解，用到再写</p>
+<ul>
+<li>@Document</li>
+<li>@Inherited</li>
+<li>@Repeatable</li>
+</ul>
+<p>‍</p>
+<h3 id="注解实例"><a href="#注解实例" class="headerlink" title="注解实例"></a>注解实例</h3><h4 id="实例：注解实现AOP"><a href="#实例：注解实现AOP" class="headerlink" title="实例：注解实现AOP"></a>实例：注解实现AOP</h4><p>1.定义注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span>  <span class="comment">// 注解存活时间</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span>  <span class="comment">// 指可以用于类型上</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Aspect &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Class <span class="title function_">type</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>2.定义切面接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>3.定义切面实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * AOP实现：用于监控程序运行时间</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TimeUsageAspect</span> <span class="keyword">implements</span> <span class="title class_">IAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> start;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span> &#123;</span><br><span class="line">        start = System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">usage</span> <span class="operator">=</span> System.currentTimeMillis() - start;</span><br><span class="line"></span><br><span class="line">        System.out.format(<span class="string">&quot;time usage : %dms\n&quot;</span>,usage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>4.定义业务接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 订单支付接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IOrder</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>5.定义业务实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 订单支付实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Aspect(type=TimeUsageAspect.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> <span class="keyword">implements</span> <span class="title class_">IOrder</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">state</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模拟支付时间间隔</span></span><br><span class="line">        Thread.sleep(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 支付完毕</span></span><br><span class="line">        <span class="built_in">this</span>.state = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;order state:&quot;</span> + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>6.定义工厂方法 &amp; 单元测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 订单支付实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Aspect(type=TimeUsageAspect.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> <span class="keyword">implements</span> <span class="title class_">IOrder</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">state</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模拟支付时间间隔</span></span><br><span class="line">        Thread.sleep(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 支付完毕</span></span><br><span class="line">        <span class="built_in">this</span>.state = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;order state:&quot;</span> + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h4 id="实例：注解实现属性注入"><a href="#实例：注解实现属性注入" class="headerlink" title="实例：注解实现属性注入"></a>实例：注解实现属性注入</h4><p>1.定义一个注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.FIELD&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Injection &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>2.定义一个实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hero</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Injection(value = &quot;Ashe&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Injection(value = &quot;600&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String range;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Injection(value = &quot;100&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String DPS;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hero&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, range=&#x27;&quot;</span> + range + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, DPS=&#x27;&quot;</span> + DPS + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>3.定义一个静态工厂，负责属性注入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InjectionFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Object <span class="title function_">inject</span><span class="params">(Class&lt;T&gt; cls,Class&lt;? extends Injection&gt; annotation)</span> <span class="keyword">throws</span> IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">fields</span> <span class="operator">=</span> cls.getDeclaredFields();</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">obj</span> <span class="operator">=</span> cls.getConstructor().newInstance();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> field : fields) &#123;</span><br><span class="line">            <span class="keyword">if</span> (field.isAnnotationPresent(annotation)) &#123;</span><br><span class="line">                <span class="comment">// 允许访问私有属性</span></span><br><span class="line">                field.setAccessible(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">                <span class="type">var</span> <span class="variable">value</span> <span class="operator">=</span> field.getAnnotation(annotation).value();</span><br><span class="line">                field.set(obj, value);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;属性注入完成！&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>4.测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestInjection</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test_injection</span><span class="params">()</span> <span class="keyword">throws</span> InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">obj</span> <span class="operator">=</span> (Hero) InjectionFactory.inject(Hero.class,Injection.class);</span><br><span class="line"></span><br><span class="line">        System.out.println(obj.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>CGLib&#x2F;Javassist 实现动态修改字节码</p>
+<p><img src="/2021/04/06/Java%E5%8F%8D%E5%B0%84/image-20210409135446-wlxp4t1.png" alt="image.png"></p>
+<p>‍</p>
+<h3 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h3><p>#TODO# 元编程</p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Core/" rel="tag"># Java Core</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/19/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="next" title="Java 函数式编程学习总结">
+                <i class="fa fa-chevron-left"></i> Java 函数式编程学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/" rel="prev" title="Java8-11的新特性">
+                Java8-11的新特性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%8F%8D%E5%B0%84-%E6%B3%A8%E8%A7%A3%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">Java反射 &amp; 注解学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84"><span class="nav-number">1.1.</span> <span class="nav-text">反射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">概念 &amp; 作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">反射实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B1%BB%E7%9A%84%E5%B1%9E%E6%80%A7%E3%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">获取类的属性、方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1-%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">反射创建对象 &amp; 调用方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8-AOP"><span class="nav-number">1.1.3.</span> <span class="nav-text">实际应用 - AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99AOP%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">手写AOP实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">元注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">注解实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0AOP"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">实例：注解实现AOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">实例：注解实现属性注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%BC%96%E7%A8%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">元编程</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

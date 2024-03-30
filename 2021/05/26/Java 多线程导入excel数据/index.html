@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java 多线程导入excel数据项目源码：  前端springboo-excel 后端springboot-excel-process  ‍ 本质上是如何高效地处理大量的数据集合：  从一个数据库抓取另一个数据库的大量数据 从大文件Excel中导入到数据库  目标分解使用springboot，方便使用依赖和后续的文件上传  使用POI生成Excel文件  使用POI解析Excel文件  多线程拆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 多线程导入excel数据">
+<meta property="og:url" content="http://example.com/2021/05/26/Java%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AF%BC%E5%85%A5excel%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="Java 多线程导入excel数据项目源码：  前端springboo-excel 后端springboot-excel-process  ‍ 本质上是如何高效地处理大量的数据集合：  从一个数据库抓取另一个数据库的大量数据 从大文件Excel中导入到数据库  目标分解使用springboot，方便使用依赖和后续的文件上传  使用POI生成Excel文件  使用POI解析Excel文件  多线程拆">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-05-26T02:54:02.000Z">
+<meta property="article:modified_time" content="2024-03-29T14:11:42.347Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/05/26/Java 多线程导入excel数据/"/>
+
+
+
+
+
+  <title>Java 多线程导入excel数据 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/26/Java%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AF%BC%E5%85%A5excel%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java 多线程导入excel数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-26T10:54:02+08:00">
+                2021-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,886 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  30 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java-多线程导入excel数据"><a href="#Java-多线程导入excel数据" class="headerlink" title="Java 多线程导入excel数据"></a>Java 多线程导入excel数据</h1><p>项目源码：</p>
+<ul>
+<li>前端<code>springboo-excel</code></li>
+<li>后端<code>springboot-excel-process</code></li>
+</ul>
+<p>‍</p>
+<p>本质上是如何高效地处理大量的数据集合：</p>
+<ul>
+<li>从一个数据库抓取另一个数据库的大量数据</li>
+<li>从大文件Excel中导入到数据库</li>
+</ul>
+<h2 id="目标分解"><a href="#目标分解" class="headerlink" title="目标分解"></a>目标分解</h2><p>使用springboot，方便使用依赖和后续的文件上传</p>
+<ol>
+<li><p>使用POI生成Excel文件</p>
+</li>
+<li><p>使用POI解析Excel文件</p>
+</li>
+<li><p>多线程拆分Excel文件，并导入到数据库，观察耗时</p>
+<ol>
+<li>尝试使用多线程以降低耗时</li>
+<li>使用 spring jdbc template，前端使用MultipartFile</li>
+<li>生产者读取，消费者写入</li>
+</ol>
+</li>
+</ol>
+<p>‍</p>
+<h2 id="Springboot通用配置"><a href="#Springboot通用配置" class="headerlink" title="Springboot通用配置"></a>Springboot通用配置</h2><p>0.<code>application.yml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    active: oracle</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>1.<code>application-oracle.yml</code>，用于连接oracle数据库</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8003</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  # 数据源的相关配置</span><br><span class="line">  datasource:</span><br><span class="line">    type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP</span><br><span class="line">    driver-class-name: oracle.jdbc.driver.OracleDriver</span><br><span class="line">    url: jdbc:oracle:thin:@10.38.1.101:1521:PROD</span><br><span class="line">    username: apps</span><br><span class="line">    password: It2017</span><br><span class="line">    hikari:</span><br><span class="line">      connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒</span><br><span class="line">      minimum-idle: 5                 # 最小连接数</span><br><span class="line">      maximum-pool-size: 20           # 最大连接数</span><br><span class="line">      auto-commit: true               # 自动提交</span><br><span class="line">      idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟</span><br><span class="line">      pool-name: DateSourceHikariCP   # 连接池名字</span><br><span class="line">      max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms</span><br><span class="line">      connection-test-query: SELECT 1 FROM DUAL</span><br><span class="line">  application:</span><br><span class="line">    name: spring-excel</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>2.<code>pom.xml</code> 使用jdk1.8</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springboot-excel-process<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-bootstrap-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- apache poi --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 用于操作微软办公文档 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- Spring Jdbc Template --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- Oralce Jdbc --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.oracle.database.jdbc<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ojdbc8<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>12.2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- fastJson --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;project.artifactId&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- Java 编译 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>3.<code>swagger2.java</code>接口调试配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package com.excel.config;</span><br><span class="line"></span><br><span class="line">import com.google.common.base.Predicate;</span><br><span class="line">import com.google.common.base.Predicates;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import springfox.documentation.RequestHandler;</span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">public class Swagger2 &#123;</span><br><span class="line"></span><br><span class="line">//    http://localhost:8088/swagger-ui.html     原路径</span><br><span class="line">//    http://localhost:8088/doc.html     新路径，github开源的swagger页面，自带汉化</span><br><span class="line">    // 配置swagger2核心配置 docket</span><br><span class="line">    @Bean</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line"></span><br><span class="line">        Predicate<span class="tag">&lt;<span class="name">RequestHandler</span>&gt;</span> excelPredicate = RequestHandlerSelectors.basePackage(&quot;com.excel.controller&quot;);</span><br><span class="line"></span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)  // 指定api类型为swagger2</span><br><span class="line">                .apiInfo(apiInfo())                 // 用于定义api文档汇总信息</span><br><span class="line">                .select()</span><br><span class="line">                .apis(Predicates.or(excelPredicate))</span><br><span class="line">                .paths(PathSelectors.any())         // 所有controller</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    private ApiInfo apiInfo() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">                .title(&quot;sora blog·博客接口api&quot;)                       // 文档页标题</span><br><span class="line">                .contact(new Contact(&quot;sora&quot;,</span><br><span class="line">                        &quot;https://www.kalosora.work&quot;,</span><br><span class="line">                        &quot;kalosora@gmail.com&quot;))                   // 联系人信息</span><br><span class="line">                .description(&quot;sora blog博客的api文档&quot;)      // 详细信息</span><br><span class="line">                .version(&quot;1.0.0&quot;)                               // 文档版本号</span><br><span class="line">                .termsOfServiceUrl(&quot;https://www.kalosora.work&quot;)     // 网站地址</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>‍</p>
+<h2 id="生成Excel文件"><a href="#生成Excel文件" class="headerlink" title="生成Excel文件"></a>生成Excel文件</h2><h3 id="生成简单的Excel表格"><a href="#生成简单的Excel表格" class="headerlink" title="生成简单的Excel表格"></a>生成简单的Excel表格</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;excel&quot;)</span></span><br><span class="line"><span class="meta">@Api(value = &quot;EXCEL处理相关Controller&quot;, tags = &#123;&quot;EXCEL处理相关Controller&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExcelController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建Excel文件</span></span><br><span class="line"><span class="comment">     * 一个Excel文件，包括多个Sheet；一个Sheet包括多个Cell</span></span><br><span class="line"><span class="comment">     * 一个Cell包括多个Column</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;createSampleExcel&quot;)</span></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;创建简单Excel文件&quot;, notes = &quot;创建简单Excel文件&quot;, httpMethod = &quot;GET&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">createExcel</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">excelFilePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop/sample.xls&quot;</span>;</span><br><span class="line">        <span class="type">File</span> <span class="variable">excelFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(excelFilePath);</span><br><span class="line">        <span class="keyword">if</span> (excelFile.exists()) &#123;</span><br><span class="line">            excelFile.createNewFile();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 开始创建Excel</span></span><br><span class="line">        <span class="type">HSSFWorkbook</span> <span class="variable">workbook</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HSSFWorkbook</span>();</span><br><span class="line">        <span class="type">HSSFSheet</span> <span class="variable">sheet</span> <span class="operator">=</span> workbook.createSheet(<span class="string">&quot;Sheet1&quot;</span>);</span><br><span class="line">        <span class="comment">// 从第0行开始创建</span></span><br><span class="line">        <span class="type">HSSFRow</span> <span class="variable">row</span> <span class="operator">=</span> sheet.createRow(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 设置单元格内容，从0开始</span></span><br><span class="line">        row.createCell(<span class="number">0</span>).setCellValue(<span class="string">&quot;发票编号&quot;</span>);</span><br><span class="line">        row.createCell(<span class="number">1</span>).setCellValue(<span class="string">&quot;经营单位&quot;</span>);</span><br><span class="line">        row.createCell(<span class="number">2</span>).setCellValue(<span class="string">&quot;GL日期&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置Excel备注信息</span></span><br><span class="line">        setExcelDesc(workbook);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写入到Excel</span></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(excelFile);</span><br><span class="line">        workbook.write(fos);</span><br><span class="line">        workbook.close();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;创建成功!输出到:&quot;</span> + excelFilePath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置Excel文档信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> workbook</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">setExcelDesc</span><span class="params">(HSSFWorkbook workbook)</span> &#123;</span><br><span class="line">        workbook.createInformationProperties();                     <span class="comment">//创建文档信息</span></span><br><span class="line">        <span class="type">DocumentSummaryInformation</span> <span class="variable">dsi</span> <span class="operator">=</span> workbook.getDocumentSummaryInformation();<span class="comment">//摘要信息</span></span><br><span class="line">        dsi.setCategory(<span class="string">&quot;Excel文件&quot;</span>);                                <span class="comment">//类别</span></span><br><span class="line">        dsi.setManager(<span class="string">&quot;kalosora&quot;</span>);                                 <span class="comment">//管理者</span></span><br><span class="line">        dsi.setCompany(<span class="string">&quot;--&quot;</span>);                                       <span class="comment">//公司</span></span><br><span class="line">        <span class="type">SummaryInformation</span> <span class="variable">si</span> <span class="operator">=</span> workbook.getSummaryInformation();   <span class="comment">//摘要信息</span></span><br><span class="line">        si.setSubject(<span class="string">&quot;测试文档&quot;</span>);                                   <span class="comment">//主题</span></span><br><span class="line">        si.setTitle(<span class="string">&quot;测试文档&quot;</span>);                                     <span class="comment">//标题</span></span><br><span class="line">        si.setAuthor(<span class="string">&quot;kalosora&quot;</span>);                                   <span class="comment">//作者</span></span><br><span class="line">        si.setComments(<span class="string">&quot;POI测试文档&quot;</span>);                               <span class="comment">//备注</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="改进：从数据库导出到excel"><a href="#改进：从数据库导出到excel" class="headerlink" title="改进：从数据库导出到excel"></a>改进：从数据库导出到excel</h3><p>使用spring jdbc Template导出excel文件</p>
+<p>Repository层，<code>ApInvoiceVO.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.excel.repository;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 发票实体类VO</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApInvoiceVO</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发票编号</span></span><br><span class="line">    <span class="keyword">private</span> String invoiceNum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 经营单位</span></span><br><span class="line">    <span class="keyword">private</span> String orgName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 总账日期</span></span><br><span class="line">    <span class="keyword">private</span> String glDate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getter &amp; setter</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getInvoiceNum</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> invoiceNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setInvoiceNum</span><span class="params">(String invoiceNum)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.invoiceNum = invoiceNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getOrgName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> orgName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setOrgName</span><span class="params">(String orgName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orgName = orgName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getGlDate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> glDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setGlDate</span><span class="params">(String glDate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.glDate = glDate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Service层，<code>ApInvoiceService.java</code>，使用Jdbc Template</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 发票Service层</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApInvoiceService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ApInvoiceService</span><span class="params">(JdbcTemplate jdbcTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.jdbcTemplate = jdbcTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询发票信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;ApInvoiceVO&gt; <span class="title function_">queryInvoiceInfo</span><span class="params">(String querySql)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.query(querySql, <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;&#125;, <span class="keyword">new</span> <span class="title class_">BeanPropertyRowMapper</span>&lt;&gt;(ApInvoiceVO.class));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Controller层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/createExcelFromDB&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(value = &quot;从数据库导出Excel文件&quot;, notes = &quot;从数据库导出Excel文件&quot;, httpMethod = &quot;GET&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">createExcelFromDB</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取数据源</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    sb.append(<span class="string">&quot;select aia.invoice_num,hou.name org_name,to_char(aia.gl_date,&#x27;yyyy-mm-dd hh24:mi:ss&#x27;) gl_date &quot;</span>);</span><br><span class="line">    sb.append(<span class="string">&quot;from ap_invoices_all aia,hr_operating_units hou &quot;</span>);</span><br><span class="line">    sb.append(<span class="string">&quot;where 1=1 and aia.org_id = hou.organization_id &quot;</span>);</span><br><span class="line">    sb.append(<span class="string">&quot;and gl_date &gt;= to_date(&#x27;2021-05-01&#x27;,&#x27;yyyy-mm-dd&#x27;)&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// fixme：测试sql语句</span></span><br><span class="line">    System.out.println(<span class="string">&quot;查询语句:&quot;</span> + sb.toString());</span><br><span class="line"></span><br><span class="line">    List&lt;ApInvoiceVO&gt; invoiceVOList = apInvoiceService.queryInvoiceInfo(sb.toString());</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">excelFilePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop/sampleDB.xls&quot;</span>;</span><br><span class="line">    <span class="type">File</span> <span class="variable">excelFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(excelFilePath);</span><br><span class="line">    <span class="keyword">if</span> (excelFile.exists()) &#123;</span><br><span class="line">        excelFile.createNewFile();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开始创建Excel</span></span><br><span class="line">    <span class="type">HSSFWorkbook</span> <span class="variable">workbook</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HSSFWorkbook</span>();</span><br><span class="line">    <span class="type">HSSFSheet</span> <span class="variable">sheet</span> <span class="operator">=</span> workbook.createSheet(<span class="string">&quot;Sheet1&quot;</span>);</span><br><span class="line">    <span class="comment">// 设置表头</span></span><br><span class="line">    <span class="type">HSSFRow</span> <span class="variable">row</span> <span class="operator">=</span> sheet.createRow(<span class="number">0</span>);</span><br><span class="line">    row.createCell(<span class="number">0</span>).setCellValue(<span class="string">&quot;发票编号&quot;</span>);</span><br><span class="line">    row.createCell(<span class="number">1</span>).setCellValue(<span class="string">&quot;经营单位&quot;</span>);</span><br><span class="line">    row.createCell(<span class="number">2</span>).setCellValue(<span class="string">&quot;GL日期&quot;</span>);</span><br><span class="line">    <span class="comment">// 写入到Sheet1中</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; invoiceVOList.size(); i++) &#123;</span><br><span class="line">        row = sheet.createRow(i);</span><br><span class="line">        <span class="comment">// 设置单元格内容，从0开始</span></span><br><span class="line">        row.createCell(<span class="number">0</span>).setCellValue(invoiceVOList.get(i).getInvoiceNum());</span><br><span class="line">        row.createCell(<span class="number">1</span>).setCellValue(invoiceVOList.get(i).getOrgName());</span><br><span class="line">        row.createCell(<span class="number">2</span>).setCellValue(invoiceVOList.get(i).getGlDate());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置Excel备注信息</span></span><br><span class="line">    setExcelDesc(workbook);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入到Excel</span></span><br><span class="line">    <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(excelFile);</span><br><span class="line">    workbook.write(fos);</span><br><span class="line">    workbook.close();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;创建成功!输出到:&quot;</span> + excelFilePath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="改进：freemarker导出到excel"><a href="#改进：freemarker导出到excel" class="headerlink" title="改进：freemarker导出到excel"></a>改进：freemarker导出到excel</h3><p>上传sql文件，并且导出到excel</p>
+<p>步骤分解</p>
+<ol>
+<li>从file中获取sql语句</li>
+<li>读取select后，from前的所有字段，生成字节码（动态生成实体类）</li>
+<li>连接数据库，通过freemarker导出到excel</li>
+</ol>
+<p>‍</p>
+<h2 id="从Excel导入"><a href="#从Excel导入" class="headerlink" title="从Excel导入"></a>从Excel导入</h2><h3 id="解析简单的Excel表格"><a href="#解析简单的Excel表格" class="headerlink" title="解析简单的Excel表格"></a>解析简单的Excel表格</h3><p>excel包含少量数据，使用Spring Jdbc Template处理，并在数据库创建记录</p>
+<p>【注意】xls格式最大行数为65535，以二进制形式存储文件；xlsx格式以xml形式存储文件，可以最多存储100w+行数据</p>
+<p>前端：<code>excel.html</code>，使用Vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Excel文件上传页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;excelProcess&quot;</span>&gt;</span></span><br><span class="line">        请选择excel文件: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;file&quot;</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;excelUpload&quot;</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;测试连接&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;testPostStatus&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./vue/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./vue/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> excelProcess = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&quot;#excelProcess&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">created</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">methods</span>: &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 测试前后端连接</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">testPostStatus</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> postUrl = <span class="string">&quot;http://localhost:8003/testPost?postMsg=&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> msg = <span class="string">&quot;从VUE发送消息!&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                axios.<span class="title function_">post</span>(postUrl + msg).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span> (res.<span class="property">data</span>.<span class="property">status</span> == <span class="number">200</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title function_">alert</span>(<span class="string">&quot;连接服务器成功&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title function_">alert</span>(<span class="string">&quot;连接服务器失败&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 上传Excel文件</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">excelUpload</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> excelUploadUrl = <span class="string">&quot;http://localhost:8003/excel/readExcelIntoDB&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                formData.<span class="title function_">append</span>(<span class="string">&#x27;excel&#x27;</span>, <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">file</span>.<span class="property">files</span>[<span class="number">0</span>]);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                axios.<span class="title function_">post</span>(excelUploadUrl, formData).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span> (res.<span class="property">data</span>.<span class="property">status</span> == <span class="number">200</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title function_">alert</span>(<span class="string">&quot;文件上传成功！&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title function_">alert</span>(<span class="string">&quot;文件解析失败！&quot;</span> + res.<span class="property">data</span>.<span class="property">msg</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>后端，连接的是mysql数据库</p>
+<p><code>ExcelService.java</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.excel.service;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.jdbc.core.JdbcTemplate;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class ExcelService &#123;</span><br><span class="line"></span><br><span class="line">    private final JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public ExcelService(JdbcTemplate jdbcTemplate) &#123;</span><br><span class="line">        this.jdbcTemplate = jdbcTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void insertExcelData(String sqlStr)</span><br><span class="line">    &#123;</span><br><span class="line">        jdbcTemplate.update(sqlStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p><code>ExcelController.java</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 从数据库导出到Excel</span><br><span class="line"> *</span><br><span class="line"> * @return</span><br><span class="line"> * @throws IOException</span><br><span class="line"> */</span><br><span class="line">@GetMapping(&quot;/createExcelFromDB&quot;)</span><br><span class="line">@ApiOperation(value = &quot;从数据库导出Excel文件&quot;, notes = &quot;从数据库导出Excel文件&quot;, httpMethod = &quot;GET&quot;)</span><br><span class="line">public String createExcelFromDB() throws IOException &#123;</span><br><span class="line"></span><br><span class="line">    // 获取数据源</span><br><span class="line">    StringBuilder sb = new StringBuilder();</span><br><span class="line">    sb.append(&quot;select aia.invoice_num,hou.name org_name,to_char(aia.gl_date,&#x27;yyyy-mm-dd hh24:mi:ss&#x27;) gl_date &quot;);</span><br><span class="line">    sb.append(&quot;from ap_invoices_all aia,hr_operating_units hou &quot;);</span><br><span class="line">    sb.append(&quot;where 1=1 and aia.org_id = hou.organization_id &quot;);</span><br><span class="line">    sb.append(&quot;and gl_date &gt;= to_date(&#x27;2021-05-01&#x27;,&#x27;yyyy-mm-dd&#x27;)&quot;);</span><br><span class="line"></span><br><span class="line">    // fixme：测试sql语句</span><br><span class="line">    System.out.println(&quot;查询语句:&quot; + sb.toString());</span><br><span class="line"></span><br><span class="line">    List<span class="tag">&lt;<span class="name">ApInvoiceVO</span>&gt;</span> invoiceVOList = apInvoiceService.queryInvoiceInfo(sb.toString());</span><br><span class="line"></span><br><span class="line">    String excelFilePath = &quot;/Users/kalosora/Desktop/sampleDB.xls&quot;;</span><br><span class="line">    File excelFile = new File(excelFilePath);</span><br><span class="line">    if (excelFile.exists()) &#123;</span><br><span class="line">        excelFile.createNewFile();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 开始创建Excel</span><br><span class="line">    HSSFWorkbook workbook = new HSSFWorkbook();</span><br><span class="line">    HSSFSheet sheet = workbook.createSheet(&quot;Sheet1&quot;);</span><br><span class="line">    // 设置表头</span><br><span class="line">    HSSFRow row = sheet.createRow(0);</span><br><span class="line">    row.createCell(0).setCellValue(&quot;发票编号&quot;);</span><br><span class="line">    row.createCell(1).setCellValue(&quot;经营单位&quot;);</span><br><span class="line">    row.createCell(2).setCellValue(&quot;GL日期&quot;);</span><br><span class="line">    // 写入到Sheet1中</span><br><span class="line">    for (int i = 1; i &lt; invoiceVOList.size(); i++) &#123;</span><br><span class="line">        row = sheet.createRow(i);</span><br><span class="line">        // 设置单元格内容，从0开始</span><br><span class="line">        row.createCell(0).setCellValue(invoiceVOList.get(i).getInvoiceNum());</span><br><span class="line">        row.createCell(1).setCellValue(invoiceVOList.get(i).getOrgName());</span><br><span class="line">        row.createCell(2).setCellValue(invoiceVOList.get(i).getGlDate());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 设置Excel备注信息</span><br><span class="line">    setExcelDesc(workbook);</span><br><span class="line"></span><br><span class="line">    // 写入到Excel</span><br><span class="line">    FileOutputStream fos = new FileOutputStream(excelFile);</span><br><span class="line">    workbook.write(fos);</span><br><span class="line">    workbook.close();</span><br><span class="line"></span><br><span class="line">    return &quot;创建成功!输出到:&quot; + excelFilePath;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 解析Excel文件，并插入到数据库</span><br><span class="line"> *</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">@PostMapping(&quot;/readExcelIntoDB&quot;)</span><br><span class="line">@ApiOperation(value = &quot;解析Excel文件并插入到数据库&quot;, notes = &quot;解析Excel文件并插入到数据库&quot;, httpMethod = &quot;POST&quot;)</span><br><span class="line">public Map&lt;String, Object&gt; readExcelIntoDB(@RequestParam(&quot;excel&quot;) MultipartFile excel) &#123;</span><br><span class="line">    Map&lt;String, Object&gt; resultMap = new HashMap<span class="tag">&lt;&gt;</span>();</span><br><span class="line"></span><br><span class="line">    // 校验文件类型</span><br><span class="line">    String originFile = excel.getOriginalFilename();</span><br><span class="line">    if (!originFile.contains(&quot;xls&quot;) &amp;&amp; !originFile.contains(&quot;xlsx&quot;)) &#123;</span><br><span class="line">        resultMap.put(&quot;status&quot;, -1);</span><br><span class="line">        resultMap.put(&quot;msg&quot;, &quot;无法解析的Excel文件类型&quot;);</span><br><span class="line">        return resultMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 解析Excel文件，xls文件最大行数65535，使用POI进行简单的数据导入</span><br><span class="line">    Map&lt;Integer, List<span class="tag">&lt;<span class="name">String</span>&gt;</span>&gt; excelMap = new HashMap<span class="tag">&lt;&gt;</span>();</span><br><span class="line">    try &#123;</span><br><span class="line">        InputStream is = excel.getInputStream();</span><br><span class="line">        Workbook workBook = new HSSFWorkbook(is, true);</span><br><span class="line">        excelMap = processWorkBook(workBook);</span><br><span class="line"></span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        System.out.println(&quot;获取Excel文件失败：&quot; + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 拼接Mysql SQL语句,当然也可以采用实体类的方式。拼接的方式比较节省空间</span><br><span class="line">    StringBuilder sb = new StringBuilder();</span><br><span class="line">    sb.append(&quot;insert into `sample-table` (column1,column2,column3) values &quot;);</span><br><span class="line">    // 插入到数据库，第0行一般为标题，故忽略</span><br><span class="line">    for (int i = 1; i &lt; excelMap.size(); i++) &#123;</span><br><span class="line">        List<span class="tag">&lt;<span class="name">String</span>&gt;</span> columnList = excelMap.get(i);</span><br><span class="line"></span><br><span class="line">        StringJoiner joiner = new StringJoiner(&quot;,&quot;, &quot;(&quot;, &quot;),&quot;);</span><br><span class="line">        for (String column : columnList) &#123;</span><br><span class="line">            column = &quot;&#x27;&quot; + column + &quot;&#x27;&quot;;</span><br><span class="line">            joiner.add(column);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(joiner);</span><br><span class="line">    &#125;</span><br><span class="line">    String sqlStr = sb.toString();</span><br><span class="line">    sqlStr = sqlStr.substring(0, sqlStr.lastIndexOf(&quot;,&quot;));</span><br><span class="line">    System.out.println(&quot;sql语句:&quot; + sqlStr);</span><br><span class="line"></span><br><span class="line">    // 插入到数据库</span><br><span class="line">    excelService.insertExcelData(sqlStr);</span><br><span class="line"></span><br><span class="line">    resultMap.put(&quot;status&quot;, 200);</span><br><span class="line">    return resultMap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 处理Excel文件</span><br><span class="line"> *</span><br><span class="line"> * @param workbook</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">private Map&lt;Integer, List<span class="tag">&lt;<span class="name">String</span>&gt;</span>&gt; processWorkBook(Workbook workbook) &#123;</span><br><span class="line">    Sheet sheet = workbook.getSheetAt(0);</span><br><span class="line"></span><br><span class="line">    // 二维集合对应Excel二维表</span><br><span class="line">    Map&lt;Integer, List<span class="tag">&lt;<span class="name">String</span>&gt;</span>&gt; map = new HashMap<span class="tag">&lt;&gt;</span>();</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    for (Row row : sheet) &#123;</span><br><span class="line">        map.put(i, new ArrayList<span class="tag">&lt;<span class="name">String</span>&gt;</span>());</span><br><span class="line">        for (Cell cell : row) &#123; // 遍历当前行的所有cell</span><br><span class="line">            switch (cell.getCellType()) &#123;</span><br><span class="line">                case STRING:</span><br><span class="line">                    map.get(i).add(cell.getRichStringCellValue().getString()); // 如果是字符串则保存</span><br><span class="line">                    break;</span><br><span class="line">                case _NONE:</span><br><span class="line">                    break;</span><br><span class="line">                case NUMERIC:</span><br><span class="line">                    map.get(i).add(cell.getNumericCellValue() + &quot;&quot;); //将数值转换为字符串</span><br><span class="line">                    break;</span><br><span class="line">                case BOOLEAN:</span><br><span class="line">                    break;</span><br><span class="line">                case FORMULA:</span><br><span class="line">                    break;</span><br><span class="line">                case BLANK:</span><br><span class="line">                    break;</span><br><span class="line">                case ERROR:</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return map;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>‍</p>
+<h4 id="改进：添加AOP并观察单线程运行速度"><a href="#改进：添加AOP并观察单线程运行速度" class="headerlink" title="改进：添加AOP并观察单线程运行速度"></a>改进：添加AOP并观察单线程运行速度</h4><p>尝试导入10w条数据，并观察导入的速度，添加AOP拦截</p>
+<h5 id="AOP配置"><a href="#AOP配置" class="headerlink" title="AOP配置"></a>AOP配置</h5><p>0.修改<code>application.yml</code>配置文件，修改允许上传文件的尺寸</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    active: mariadb</span><br><span class="line">  servlet:</span><br><span class="line">    multipart:</span><br><span class="line">      max-file-size: 50MB</span><br><span class="line">      max-request-size: 50MB</span><br></pre></td></tr></table></figure>
+
+<p>1.<code>pom.xml</code>引入AOP依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.Aspect配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.excel.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServiceLogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(ServiceLogAspect.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * AOP通知：</span></span><br><span class="line"><span class="comment">     * 1.前置通知</span></span><br><span class="line"><span class="comment">     * 2.后置通知</span></span><br><span class="line"><span class="comment">     * 3.环绕通知：调用service之前和之后执行</span></span><br><span class="line"><span class="comment">     * 4.异常通知：service发生异常的时候通知</span></span><br><span class="line"><span class="comment">     * 5.最终通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.excel.controller.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">recordTimeOfService</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        logger.info(<span class="string">&quot;==== 开始执行 &#123;&#125;.&#123;&#125; ====&quot;</span>,</span><br><span class="line">                joinPoint.getTarget().getClass(),</span><br><span class="line">                joinPoint.getSignature().getName());</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> joinPoint.proceed();</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="type">long</span> <span class="variable">takeTime</span> <span class="operator">=</span> end - start;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (takeTime &gt; <span class="number">3000</span>) &#123;</span><br><span class="line">            logger.error(<span class="string">&quot;当前执行耗时：&#123;&#125;&quot;</span>, takeTime);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (takeTime &gt; <span class="number">2000</span>) &#123;</span><br><span class="line">            logger.warn(<span class="string">&quot;当前执行耗时：&#123;&#125;&quot;</span>, takeTime);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            logger.info(<span class="string">&quot;当前执行耗时：&#123;&#125;&quot;</span>, takeTime);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h5 id="数据导入测试"><a href="#数据导入测试" class="headerlink" title="数据导入测试"></a>数据导入测试</h5><p>准备了10w行的xls文档，导入到空表，观察测试结果</p>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210526102050-srjdrwj.png)</p>
+<p>‍</p>
+<p>实际测试发现，仅能导入65535行，耗时1875ms</p>
+<p>springboot单机导入</p>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210526103408-jsigw9k.png)</p>
+<p>mysql数据总数</p>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210526102956-x5hphwk.png)</p>
+<p>‍</p>
+<h3 id="解析xlsx的Excel表格"><a href="#解析xlsx的Excel表格" class="headerlink" title="解析xlsx的Excel表格"></a>解析xlsx的Excel表格</h3><p>pom.xml添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 用于操作微软办公文档2007 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加XLSX解析的方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">@PostMapping(&quot;/readExcelXLSXIntoDB&quot;)</span><br><span class="line">@ApiOperation(value = &quot;解析xlsx文件并插入到数据库&quot;, notes = &quot;解析xlsx文件并插入到数据库&quot;, httpMethod = &quot;POST&quot;)</span><br><span class="line">public Map&lt;String, Object&gt; readExcelXLSXIntoDB(@RequestParam(&quot;excel&quot;) MultipartFile excel) &#123;</span><br><span class="line">    Map&lt;String, Object&gt; resultMap = new HashMap<span class="tag">&lt;&gt;</span>();</span><br><span class="line"></span><br><span class="line">    // 校验文件类型</span><br><span class="line">    String originFile = excel.getOriginalFilename();</span><br><span class="line">    if (!originFile.contains(&quot;xls&quot;) &amp;&amp; !originFile.contains(&quot;xlsx&quot;)) &#123;</span><br><span class="line">        resultMap.put(&quot;status&quot;, -1);</span><br><span class="line">        resultMap.put(&quot;msg&quot;, &quot;无法解析的Excel文件类型&quot;);</span><br><span class="line">        return resultMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 解析Excel文件，xlsx文件最大行数100w+</span><br><span class="line">    Map&lt;Integer, List<span class="tag">&lt;<span class="name">String</span>&gt;</span>&gt; excelMap = new HashMap<span class="tag">&lt;&gt;</span>();</span><br><span class="line">    try &#123;</span><br><span class="line">        InputStream is = excel.getInputStream();</span><br><span class="line">        Workbook workBook = new XSSFWorkbook(is);</span><br><span class="line">        excelMap = processWorkBook(workBook);</span><br><span class="line"></span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        System.out.println(&quot;获取Excel文件失败：&quot; + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 拼接Mysql SQL语句,当然也可以采用实体类的方式。拼接的方式比较节省空间</span><br><span class="line">    StringBuilder sb = new StringBuilder();</span><br><span class="line">    sb.append(&quot;insert into `sample-table` (column1,column2,column3) values &quot;);</span><br><span class="line">    // 插入到数据库，第0行一般为标题，故忽略</span><br><span class="line">    for (int i = 1; i &lt; excelMap.size(); i++) &#123;</span><br><span class="line">        List<span class="tag">&lt;<span class="name">String</span>&gt;</span> columnList = excelMap.get(i);</span><br><span class="line"></span><br><span class="line">        StringJoiner joiner = new StringJoiner(&quot;,&quot;, &quot;(&quot;, &quot;),&quot;);</span><br><span class="line">        for (String column : columnList) &#123;</span><br><span class="line">            column = &quot;&#x27;&quot; + column + &quot;&#x27;&quot;;</span><br><span class="line">            joiner.add(column);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(joiner);</span><br><span class="line">    &#125;</span><br><span class="line">    String sqlStr = sb.toString();</span><br><span class="line">    sqlStr = sqlStr.substring(0, sqlStr.lastIndexOf(&quot;,&quot;));</span><br><span class="line">    System.out.println(&quot;sql语句:&quot; + sqlStr);</span><br><span class="line"></span><br><span class="line">    // 插入到数据库</span><br><span class="line">    excelService.insertExcelData(sqlStr);</span><br><span class="line"></span><br><span class="line">    resultMap.put(&quot;status&quot;, 200);</span><br><span class="line">    return resultMap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>实际测试发现，导入10W行</p>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210526160723-yzwn6bj.png)</p>
+<p>‍</p>
+<p>mysql数据总数</p>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210526160746-jrxa084.png)</p>
+<p>‍</p>
+<h3 id="多线程导入"><a href="#多线程导入" class="headerlink" title="多线程导入"></a>多线程导入</h3><p>场景：Springboot 单线程导入100w行Excel数据，报GC溢出</p>
+<blockquote>
+<p>GC Overhead Limit Exceeded Error简介</p>
+<p>OutOfMemoryError是java.lang.VirtualMachineError的子类，当JVM资源利用出现问题时抛出，更具体地说，这个错误是由于JVM花费太长时间执行GC且只能回收很少的堆内存时抛出的。根据Oracle官方文档，默认情况下，如果Java进程花费98%以上的时间执行GC，并且每次只有不到2%的堆被恢复，则JVM抛出此错误。换句话说，<strong>这意味着我们的应用程序几乎耗尽了所有可用内存</strong>，垃圾收集器花了太长时间试图清理它，并多次失败。</p>
+<p>在这种情况下，用户会体验到应用程序响应非常缓慢，通常只需要几毫秒就能完成的某些操作，此时则需要更长的时间来完成，这是因为所有的CPU正在进行垃圾收集，因此无法执行其他任务。</p>
+</blockquote>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210527134344-07tmkad.png)</p>
+<p>‍</p>
+<h4 id="改进：生产者消费者模型"><a href="#改进：生产者消费者模型" class="headerlink" title="改进：生产者消费者模型"></a>改进：生产者消费者模型</h4><h5 id="步骤分解"><a href="#步骤分解" class="headerlink" title="步骤分解"></a>步骤分解</h5><ol>
+<li><p>获取上传的文件并保存副本到临时目录</p>
+</li>
+<li><p>确定长度</p>
+<ol>
+<li>文件总长度</li>
+<li>每个线程处理的任务长度</li>
+<li>生产者预计线程数，根据机器性能给定，或者用 文件长度&#x2F;线程任务长度</li>
+<li>消费者预计线程数，根据机器性能给定，或者按比例分配（生产者:消费者 &#x3D; 4:1）</li>
+</ol>
+</li>
+<li><p>数据分片处理</p>
+<ol>
+<li><p>多线程任务一般都是需要进行数据分片</p>
+</li>
+<li><p>任务开始位置：<code>I * 线程任务长度</code></p>
+</li>
+<li><p>任务结束位置：<code>（I+1） * 线程任务长度</code></p>
+</li>
+<li><p>Excel文件处理</p>
+<ol>
+<li><code>sheet.getRow(startPos).getRowNum()</code>获取特定行数进行行循环</li>
+<li><code>Map&lt;Integer, List&lt;String&gt;&gt;</code>定义数据结构保存Excel二维表</li>
+<li><code>map.get(i).add(cell.getRichStringCellValue().getString())</code>进行列循环并保存到数据结构中</li>
+<li>拼接成mysql的<code>insert into</code>语句，并放入生产者队列中</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>开启多线程</p>
+<ol>
+<li><code>ExecutorService</code>分别开启生产者和消费者线程</li>
+<li><code>CountDownLatch</code>观察生产者任务（转换mysql语句）是否完成</li>
+<li><code>LinkedBlockingQueue</code>线程安全的无界链队列，保存mysql语句供消费者调用</li>
+</ol>
+</li>
+</ol>
+<p>‍</p>
+<p>实例代码：</p>
+<p>Controller</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/readXLSXMultiIntoDB&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(value = &quot;多线程导入xlsx文件到数据库&quot;, notes = &quot;多线程导入xlsx文件到数据库&quot;, httpMethod = &quot;POST&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title function_">readXLSXMultiIntoDB</span><span class="params">(<span class="meta">@RequestParam(&quot;excel&quot;)</span> MultipartFile excel)</span> &#123;</span><br><span class="line">    Map&lt;String, Object&gt; resultMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 多线程处理EXCEL时，文件要先保存到本地</span></span><br><span class="line">    <span class="comment">// https://blog.csdn.net/bieber007/article/details/109963775</span></span><br><span class="line">    <span class="type">MultipartFile</span> <span class="variable">multipartFile</span> <span class="operator">=</span> excel;</span><br><span class="line">    <span class="type">String</span> <span class="variable">localStorePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop/exceltmp/&quot;</span> + excel.getOriginalFilename();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        multipartFile.transferTo(<span class="keyword">new</span> <span class="title class_">File</span>(localStorePath));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;保存上传文件失败:&quot;</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开本地文件</span></span><br><span class="line">    <span class="type">File</span> <span class="variable">localFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(localStorePath);</span><br><span class="line">    <span class="type">Workbook</span> <span class="variable">workBook</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">Sheet</span> <span class="variable">sheet</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(localFile);</span><br><span class="line">        workBook = <span class="keyword">new</span> <span class="title class_">XSSFWorkbook</span>(is);</span><br><span class="line">        <span class="comment">// 默认读取第一个表格</span></span><br><span class="line">        sheet = workBook.getSheetAt(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        resultMap.put(<span class="string">&quot;status&quot;</span>, -<span class="number">1</span>);</span><br><span class="line">        resultMap.put(<span class="string">&quot;msg&quot;</span>, <span class="string">&quot;解析Excel文件失败: &quot;</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟已知文档长度，如果计算的话需要50秒，这里节省性能</span></span><br><span class="line">    <span class="type">Integer</span> <span class="variable">fileLength</span> <span class="operator">=</span> <span class="number">1000000</span>;  <span class="comment">//500000，单个线程处理5000，通过测试，耗时335s</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 假设每个线程处理5000数据</span></span><br><span class="line">    <span class="type">Integer</span> <span class="variable">threadLength</span> <span class="operator">=</span> <span class="number">5000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算生产者 &amp; 消费者线程数</span></span><br><span class="line">    <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">producerThreadCount</span> <span class="operator">=</span> fileLength / threadLength;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">consumerThreadCount</span> <span class="operator">=</span> producerThreadCount / <span class="number">4</span>; <span class="comment">// 生产者:消费者 4:1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 任务队列</span></span><br><span class="line">    LinkedBlockingQueue&lt;String&gt; excelQueue = <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;();</span><br><span class="line">    <span class="type">CountDownLatch</span> <span class="variable">latch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(producerThreadCount);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 机器性能限制，只开启100个线程</span></span><br><span class="line">    <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newFixedThreadPool(<span class="number">100</span>);</span><br><span class="line">    <span class="type">ExecutorService</span> <span class="variable">consumerService</span> <span class="operator">=</span> Executors.newFixedThreadPool(consumerThreadCount);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动生产者</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; producerThreadCount; i++) &#123;</span><br><span class="line">        <span class="comment">// 创建线程副本</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">LocalI</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="type">Sheet</span> <span class="variable">localSheet</span> <span class="operator">=</span> sheet;</span><br><span class="line"></span><br><span class="line">        executorService.submit(() -&gt; &#123;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">startPos</span> <span class="operator">=</span> LocalI * threadLength + <span class="number">1</span>;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">endPos</span> <span class="operator">=</span> (LocalI + <span class="number">1</span>) * threadLength;</span><br><span class="line">            <span class="type">CountDownLatch</span> <span class="variable">localCountDown</span> <span class="operator">=</span> latch;</span><br><span class="line"></span><br><span class="line">            processXLSXMulti(excelQueue, localCountDown, localSheet, startPos, endPos);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动消费者</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; consumerThreadCount; i++) &#123;</span><br><span class="line">        consumerService.submit(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (excelQueue.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">sqlStr</span> <span class="operator">=</span> excelQueue.poll();</span><br><span class="line">                    <span class="comment">// 插入到数据库</span></span><br><span class="line">                    excelService.insertExcelData(sqlStr);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        latch.await();</span><br><span class="line">        System.out.println(<span class="string">&quot;生产者任务已完成!&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;任务屏障失败:&quot;</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阻塞，等待消费者任务执行完毕</span></span><br><span class="line">    System.out.println(<span class="string">&quot;等待消费者任务 ...&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (excelQueue.size() &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            executorService.shutdown();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    resultMap.put(<span class="string">&quot;status&quot;</span>, <span class="number">200</span>);</span><br><span class="line">    <span class="keyword">return</span> resultMap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生产者：读取XLSX数据</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sheet</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> startPos Excel开始位置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> endPos   Excel结束为止</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">processXLSXMulti</span><span class="params">(LinkedBlockingQueue&lt;String&gt; excelQueue,</span></span><br><span class="line"><span class="params">                              CountDownLatch localCountDown,</span></span><br><span class="line"><span class="params">                              Sheet sheet,</span></span><br><span class="line"><span class="params">                              Integer startPos,</span></span><br><span class="line"><span class="params">                              Integer endPos)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 二维集合对应Excel二维表</span></span><br><span class="line">    Map&lt;Integer, List&lt;String&gt;&gt; excelMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取起止行数</span></span><br><span class="line">    <span class="type">Integer</span> <span class="variable">startRowNum</span> <span class="operator">=</span> sheet.getRow(startPos).getRowNum();</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">endRowNum</span> <span class="operator">=</span> sheet.getRow(endPos).getRowNum();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 行循环</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">row</span> <span class="operator">=</span> startRowNum; row &lt;= endRowNum; row++) &#123;</span><br><span class="line">        <span class="type">Row</span> <span class="variable">currentRow</span> <span class="operator">=</span> sheet.getRow(row);</span><br><span class="line">        excelMap.put(count, <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 列循环</span></span><br><span class="line">        <span class="keyword">for</span> (Cell cell : currentRow) &#123; <span class="comment">// 遍历当前行的所有cell</span></span><br><span class="line">            <span class="keyword">switch</span> (cell.getCellType()) &#123;</span><br><span class="line">                <span class="keyword">case</span> STRING:</span><br><span class="line">                    excelMap.get(count).add(cell.getRichStringCellValue().getString()); <span class="comment">// 如果是字符串则保存</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> _NONE:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> NUMERIC:</span><br><span class="line">                    excelMap.get(count).add(cell.getNumericCellValue() + <span class="string">&quot;&quot;</span>); <span class="comment">//将数值转换为字符串</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> BOOLEAN:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> FORMULA:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> BLANK:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> ERROR:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;[线程&quot;</span> + Thread.currentThread().getId() + <span class="string">&quot;] &quot;</span></span><br><span class="line">            + <span class="string">&quot;EXCEL开始行数: &quot;</span> + startRowNum</span><br><span class="line">            + <span class="string">&quot;，EXCEL结束行数: &quot;</span> + endRowNum</span><br><span class="line">            + <span class="string">&quot;, 列表长度：&quot;</span> + excelMap.size());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拼接Mysql SQL语句,当然也可以采用实体类的方式。拼接的方式比较节省空间</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    sb.append(<span class="string">&quot;insert into `sample-table` (column1,column2,column3) values &quot;</span>);</span><br><span class="line">    <span class="comment">// 插入到数据库，第0行一般为标题，故忽略</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; count; k++) &#123;</span><br><span class="line">        List&lt;String&gt; columnList = excelMap.get(k);</span><br><span class="line"></span><br><span class="line">        <span class="type">StringJoiner</span> <span class="variable">joiner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringJoiner</span>(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;(&quot;</span>, <span class="string">&quot;),&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (String column : columnList) &#123;</span><br><span class="line">            column = <span class="string">&quot;&#x27;&quot;</span> + column + <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">            joiner.add(column);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(joiner);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">String</span> <span class="variable">sqlStr</span> <span class="operator">=</span> sb.toString();</span><br><span class="line">    sqlStr = sqlStr.substring(<span class="number">0</span>, sqlStr.lastIndexOf(<span class="string">&quot;,&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 任务入队</span></span><br><span class="line">    excelQueue.offer(sqlStr);</span><br><span class="line">    localCountDown.countDown();</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;[线程&quot;</span> + Thread.currentThread().getId() + <span class="string">&quot;] 已完成&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Service</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExcelService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ExcelService</span><span class="params">(JdbcTemplate jdbcTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.jdbcTemplate = jdbcTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insertExcelData</span><span class="params">(String sqlStr)</span></span><br><span class="line">    &#123;</span><br><span class="line">        jdbcTemplate.update(sqlStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>进一步优化的方案</p>
+<blockquote>
+<p>提升Excel导入速度的方法：</p>
+<ul>
+<li>使用更快的 Excel 读取框架(推荐使用阿里 EasyExcel)</li>
+<li>对于需要与数据库交互的校验、按照业务逻辑适当的使用缓存。用空间换时间</li>
+<li>使用 values(),(),() 拼接长 SQL 一次插入多行数据</li>
+<li>使用多线程插入数据，利用掉网络IO等待时间(推荐使用并行流，简单易用)</li>
+<li>避免在循环中打印无用的日志</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/258525453">https://zhuanlan.zhihu.com/p/258525453</a></p>
+</blockquote>
+<p>‍</p>
+<h2 id="导出到Excel"><a href="#导出到Excel" class="headerlink" title="导出到Excel"></a>导出到Excel</h2><p>从plsql中导出100w条数据，耗时745秒</p>
+<p>多线程目标：导出100w条数据，至少优化到400秒以下</p>
+<p>![image.png](Java 多线程导入excel数据&#x2F;image-20210527133017-h2hde4n.png)</p>
+<p>有空再做吧…</p>
+<p>‍</p>
+<p>‍</p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23258804">java多线程进行大批量EXcel数据导入实现方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/holmofy/article/details/82532311">java POI详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/joycesunny/article/details/106246302">java POI 实例</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/easyexcel">代替POI的EasyExcel</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.iocoder.cn/Spring-Boot/battcn/v2-orm-jdbc//">Spring Jdbc Template</a></p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/" rel="next" title="Java8-11的新特性">
+                <i class="fa fa-chevron-left"></i> Java8-11的新特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/18/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" rel="prev" title="Java 文件上传与下载">
+                Java 文件上传与下载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AF%BC%E5%85%A5excel%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">Java 多线程导入excel数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%88%86%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">目标分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Springboot%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">Springboot通用配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90Excel%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">生成Excel文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84Excel%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.3.1.</span> <span class="nav-text">生成简单的Excel表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%EF%BC%9A%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%BC%E5%87%BA%E5%88%B0excel"><span class="nav-number">1.3.2.</span> <span class="nav-text">改进：从数据库导出到excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%EF%BC%9Afreemarker%E5%AF%BC%E5%87%BA%E5%88%B0excel"><span class="nav-number">1.3.3.</span> <span class="nav-text">改进：freemarker导出到excel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8EExcel%E5%AF%BC%E5%85%A5"><span class="nav-number">1.4.</span> <span class="nav-text">从Excel导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E7%AE%80%E5%8D%95%E7%9A%84Excel%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.4.1.</span> <span class="nav-text">解析简单的Excel表格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%EF%BC%9A%E6%B7%BB%E5%8A%A0AOP%E5%B9%B6%E8%A7%82%E5%AF%9F%E5%8D%95%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">改进：添加AOP并观察单线程运行速度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AOP%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.1.1.1.</span> <span class="nav-text">AOP配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.1.1.2.</span> <span class="nav-text">数据导入测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90xlsx%E7%9A%84Excel%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.4.2.</span> <span class="nav-text">解析xlsx的Excel表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AF%BC%E5%85%A5"><span class="nav-number">1.4.3.</span> <span class="nav-text">多线程导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%EF%BC%9A%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">改进：生产者消费者模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E5%88%86%E8%A7%A3"><span class="nav-number">1.4.3.1.1.</span> <span class="nav-text">步骤分解</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E5%88%B0Excel"><span class="nav-number">1.5.</span> <span class="nav-text">导出到Excel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="nav-number">1.6.</span> <span class="nav-text">参考来源</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java Core," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java集合‍ Iterator集合中的顶级接口，源代码如下 12345678910111213141516public interface Iterator&lt;E&gt; &#123;  boolean hasNext();  E next();  default void remove() &#123;        throw new UnsupportedOperationExcept">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合">
+<meta property="og:url" content="http://example.com/2019/11/17/Java%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="Java集合‍ Iterator集合中的顶级接口，源代码如下 12345678910111213141516public interface Iterator&lt;E&gt; &#123;  boolean hasNext();  E next();  default void remove() &#123;        throw new UnsupportedOperationExcept">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2019/11/17/Java%E9%9B%86%E5%90%88/402670-20191117185306543-1130864512-20210317094853-modvcpu.png">
+<meta property="og:image" content="http://example.com/2019/11/17/Java%E9%9B%86%E5%90%88/image-20210322163538-uypfrz0.png">
+<meta property="og:image" content="http://example.com/2019/11/17/Java%E9%9B%86%E5%90%88/image-20210322164604-bouxtrz.png">
+<meta property="article:published_time" content="2019-11-17T00:12:43.000Z">
+<meta property="article:modified_time" content="2024-03-18T13:41:26.157Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Java Core">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/11/17/Java%E9%9B%86%E5%90%88/402670-20191117185306543-1130864512-20210317094853-modvcpu.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/11/17/Java集合/"/>
+
+
+
+
+
+  <title>Java集合 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/11/17/Java%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-17T08:12:43+08:00">
+                2019-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,105 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java集合"><a href="#Java集合" class="headerlink" title="Java集合"></a>Java集合</h1><p>‍</p>
+<h2 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h2><p>集合中的顶级接口，源代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Iterator</span>&lt;E&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">  E <span class="title function_">next</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UnsupportedOperationException</span>(<span class="string">&quot;remove&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">forEachRemaining</span><span class="params">(Consumer&lt;? <span class="built_in">super</span> E&gt; action)</span> &#123;</span><br><span class="line">        Objects.requireNonNull(action);</span><br><span class="line">        <span class="keyword">while</span> (hasNext())</span><br><span class="line">            action.accept(next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>包含2个动态方法</p>
+<p>循环的时候要先调用hasNext进行判断，然后再调用next</p>
+<h3 id="实例1：Iterator遍历"><a href="#实例1：Iterator遍历" class="headerlink" title="实例1：Iterator遍历"></a>实例1：Iterator遍历</h3><p>通过操作迭代器来进行集合的遍历</p>
+<p>集合中的任何数据结构，都可以使用foreach代替iterator循环。</p>
+<p>原因是Collection接口扩展了Iterable接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟Iterator</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> Stream.of(<span class="string">&quot;Ashe&quot;</span>, <span class="string">&quot;Zed&quot;</span>, <span class="string">&quot;Yasuo&quot;</span>)</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 任何实现了 Iterator&lt;E&gt; 接口的方法，都会有迭代器</span></span><br><span class="line">    <span class="comment">// 获取list的迭代器</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">iterator</span> <span class="operator">=</span> list.iterator();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用迭代器循环</span></span><br><span class="line">    <span class="comment">// 循环输出list，每次调用next方法，都要先判断hasNext</span></span><br><span class="line">    <span class="comment">// 如果没有判断，会抛出NoSuchElementException</span></span><br><span class="line">    System.out.println(<span class="string">&quot;迭代器循环：&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">        System.out.println(iterator.next());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for循环与迭代器循环等价</span></span><br><span class="line">    System.out.println(<span class="string">&quot;foreach循环：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> element : list) &#123;</span><br><span class="line">        System.out.println(element);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="实例2：Iterator删除"><a href="#实例2：Iterator删除" class="headerlink" title="实例2：Iterator删除"></a>实例2：Iterator删除</h3><p>Iterator 类似于一个指针，或者是SQL中的一个游标：在执行查找操作的同时，迭代器的位置会随之向前移动。可以通过next方法移动到下一个元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>).collect(Collectors.toList());</span><br><span class="line">    <span class="type">var</span> <span class="variable">iterator</span> <span class="operator">=</span> list.iterator();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除第二个元素，需要移动两次迭代器</span></span><br><span class="line">    <span class="comment">// 这里从第0位移动到了第2位</span></span><br><span class="line">    iterator.next();</span><br><span class="line">    iterator.next();</span><br><span class="line">    iterator.remove();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> element : list) &#123;</span><br><span class="line">        System.out.println(element);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="实例3：随机序列产生器"><a href="#实例3：随机序列产生器" class="headerlink" title="实例3：随机序列产生器"></a>实例3：随机序列产生器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 实现随机序列产生器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RandomStringGenerator</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Iterable</span>&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造器</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RandomStringGenerator</span><span class="params">(List&lt;T&gt; list)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.list = list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;T&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Iterator</span>&lt;T&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> T <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> list.get((<span class="type">int</span>) (list.size() * Math.random()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> Arrays.asList(<span class="string">&quot;List&quot;</span>, <span class="string">&quot;Tree&quot;</span>, <span class="string">&quot;Array&quot;</span>);</span><br><span class="line">        <span class="type">var</span> <span class="variable">gen</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomStringGenerator</span>&lt;String&gt;(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 操作迭代器</span></span><br><span class="line">        <span class="type">var</span> <span class="variable">it</span> <span class="operator">=</span> gen.iterator();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.println(it.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        ArrayList转换成数组</span></span><br><span class="line"><span class="comment">//        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span></span><br><span class="line"><span class="comment">//        arr.add(&quot;3&quot;);</span></span><br><span class="line"><span class="comment">//        var strArr = arr.toArray(new String[0]);</span></span><br><span class="line"><span class="comment">//        System.out.println(strArr.toString());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// ArrayList通过构造器转换为数组</span></span><br><span class="line"><span class="comment">//        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span></span><br><span class="line"><span class="comment">//        arr.add(&quot;3&quot;);</span></span><br><span class="line"><span class="comment">//        // Method Reference ::</span></span><br><span class="line"><span class="comment">//        // 通过这种方式可以访问到数组的构造方法</span></span><br><span class="line"><span class="comment">//        var strArr = arr.toArray(String[]::new);</span></span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>从上述实例中可以看出，Iterator接口只具有<code>遍历</code>和<code>删除</code>元素的功能</p>
+</li>
+<li><p>Collection接口<code>继承</code>了Iterable接口，并且提供了<code>查询</code>、<code>判断</code>等等的扩展功能</p>
+</li>
+<li><p>AbstractCollection实现了Collection方法，相当于提供了默认的方法，如果子集合中有更高效的实现可以交给子类提供。</p>
+<ol>
+<li>但是java8以后接口引入了<code>default</code>，这种方式应该交给default方法，充当动态方法，允许子类重写</li>
+<li>Abstract方法必须先被继承后，才能够实例化；主要用于当一个类&#x2F;接口不足以描述一个对象的时候的补充手段，相当于提供默认的实现</li>
+<li>Abstract方法，一般用于<code>模板方法设计模式</code>，提供通用的总体算法骨架 以及 具体的业务抽象方法（该方法由子类来实现）</li>
+</ol>
+</li>
+</ol>
+<p>‍</p>
+<p>‍</p>
+<h2 id="容器框架图"><a href="#容器框架图" class="headerlink" title="容器框架图"></a>容器框架图</h2><p>容器：用于容纳一组<strong>对象</strong>，不能容纳非对象类型，要能够<code>增删改与遍历</code></p>
+<p>容器 <code>Collection</code> 关系图</p>
+<p><img src="/2019/11/17/Java%E9%9B%86%E5%90%88/402670-20191117185306543-1130864512-20210317094853-modvcpu.png" alt="image.png"></p>
+<p>‍</p>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>LinkedList</p>
+<ul>
+<li>优点：插入、删除元素的开销小</li>
+<li>缺点：无法随机读取元素</li>
+<li>场景：适用于查询少、操作多的场景</li>
+</ul>
+<p>Java中的链表都是双向链表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">   list.add(<span class="string">&quot;Ashe&quot;</span>);</span><br><span class="line">   list.add(<span class="string">&quot;Yasuo&quot;</span>);</span><br><span class="line">   list.add(<span class="string">&quot;Zed&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 获取迭代器</span></span><br><span class="line">   <span class="type">var</span> <span class="variable">iterator</span> <span class="operator">=</span> list.iterator();</span><br><span class="line">   <span class="type">String</span> <span class="variable">first</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">   <span class="type">String</span> <span class="variable">second</span> <span class="operator">=</span> iterator.next();</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;第一个元素: &quot;</span> + first);</span><br><span class="line">    System.out.println(<span class="string">&quot;第二个元素: &quot;</span> + second);</span><br><span class="line"></span><br><span class="line">    list.remove();</span><br><span class="line">    System.out.println(list);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add方法，元素表尾添加</span></span><br><span class="line">    list.add(<span class="string">&quot;NuNu&quot;</span>);</span><br><span class="line">    System.out.println(list);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移动指针后，读取前驱</span></span><br><span class="line">    <span class="comment">// ListIterator 扩展了Iterator方法，使其具有add和反向遍历的能力</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">listIterator</span> <span class="operator">=</span> list.listIterator();</span><br><span class="line">    listIterator.next();</span><br><span class="line">    System.out.println(listIterator.previous());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="散列集"><a href="#散列集" class="headerlink" title="散列集"></a>散列集</h3><p>适用于快速查找对象，并且不关心集合中元素顺序的场景</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">words</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;String&gt;();</span><br><span class="line">    <span class="type">long</span> <span class="variable">totalTime</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in)) &#123;</span><br><span class="line">        <span class="keyword">while</span> (in.hasNext()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">word</span> <span class="operator">=</span> in.next();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(word.equals(<span class="string">&quot;exit&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="type">long</span> <span class="variable">callTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">            words.add(word);</span><br><span class="line">            callTime = System.currentTimeMillis() - callTime;</span><br><span class="line">            totalTime += callTime;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">iterator</span> <span class="operator">=</span> words.iterator();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; <span class="number">20</span> &amp;&amp; iterator.hasNext(); i++) &#123;</span><br><span class="line">        System.out.println(iterator.next());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;words size: &quot;</span> + words.size() + <span class="string">&quot; totalTime: &quot;</span> + totalTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="树集"><a href="#树集" class="headerlink" title="树集"></a>树集</h3><p>是一个有序集合，输入一个任意顺序的元素，在遍历时会自动按照排序后的顺序呈现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">treeSet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;Integer&gt;();</span><br><span class="line">    treeSet.add(<span class="number">1</span>);</span><br><span class="line">    treeSet.add(<span class="number">8</span>);</span><br><span class="line">    treeSet.add(<span class="number">3</span>);</span><br><span class="line">    treeSet.add(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(treeSet);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h3><p>key-value存储的数据结构，指两组数据的映射关系</p>
+<p>通过get()方法获取值，通过put方法设置值，通过remove方法删除值</p>
+<p>‍</p>
+<p>TreeMap通过一定的顺序来组织元素，而HashMap里的元素则是无序的</p>
+<p>TreeMap实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">treeMap</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;String, String&gt;();</span><br><span class="line"></span><br><span class="line">    treeMap.put(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;Yasuo&quot;</span>);</span><br><span class="line">    treeMap.put(<span class="string">&quot;8&quot;</span>, <span class="string">&quot;Ashe&quot;</span>);</span><br><span class="line">    treeMap.put(<span class="string">&quot;5&quot;</span>,<span class="string">&quot;NuNu&quot;</span>);</span><br><span class="line">    treeMap.put(<span class="string">&quot;2&quot;</span>,<span class="string">&quot;Zed&quot;</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(treeMap);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取键集合</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">keys</span> <span class="operator">=</span> treeMap.keySet();</span><br><span class="line">    System.out.println(<span class="string">&quot;All keys: &quot;</span> + keys.toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取值集合</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">values</span> <span class="operator">=</span> treeMap.values();</span><br><span class="line">    System.out.println(<span class="string">&quot;All values: &quot;</span> + values.toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取键&amp;值集合</span></span><br><span class="line">    System.out.println(<span class="string">&quot;All Key &amp; Value: &quot;</span>);</span><br><span class="line">    <span class="type">var</span> <span class="variable">entrySet</span> <span class="operator">=</span> treeMap.entrySet();</span><br><span class="line">    treeMap.forEach((k,v) -&gt; &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;key: &quot;</span> + k + <span class="string">&quot; value: &quot;</span> + v);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="链接散列集与映射"><a href="#链接散列集与映射" class="headerlink" title="链接散列集与映射"></a>链接散列集与映射</h3><p>#TODO# LinkedHashSet &amp; LinkedHashMap</p>
+<p>‍</p>
+<h4 id="实现LRU缓存"><a href="#实现LRU缓存" class="headerlink" title="实现LRU缓存"></a>实现LRU缓存</h4><p>LRU(Least Recently Used)缓存：最近最少使用，页面被置换</p>
+<p>为什么选择LinkedHashMap</p>
+<ul>
+<li>链表能够实现队列，完成先进先出的逻辑</li>
+<li>&lt;K,V&gt;的映射能够通过Key来索引数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用 LinkedHashMap 实现LRU缓存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LRUCache</span>&lt;K, V&gt; <span class="keyword">implements</span> <span class="title class_">Iterable</span>&lt;K&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">MAX</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    LinkedHashMap&lt;K, V&gt; cache = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">cache</span><span class="params">(K key, V value)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据LRU，如果key已经存在，则先删除，然后从最右边入队</span></span><br><span class="line">        <span class="keyword">if</span> (cache.containsKey(key)) &#123;</span><br><span class="line">            cache.remove(key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 当cache已满，移除最左边的元素</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (cache.size() &gt;= MAX) &#123;</span><br><span class="line">            <span class="comment">// 获取迭代器</span></span><br><span class="line">            <span class="type">var</span> <span class="variable">it</span> <span class="operator">=</span> cache.keySet().iterator();</span><br><span class="line">            <span class="comment">// 通过迭代器获取第一位元素（即最左边元素），并移除</span></span><br><span class="line">            <span class="type">var</span> <span class="variable">first</span> <span class="operator">=</span> it.next();</span><br><span class="line">            cache.remove(first);</span><br><span class="line">        &#125;</span><br><span class="line">        cache.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;K&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">it</span> <span class="operator">=</span> cache.entrySet().iterator();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Iterator</span>&lt;K&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> it.hasNext();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> K <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> it.next().getKey();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// main function</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">lru</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LRUCache</span>&lt;String, Integer&gt;();</span><br><span class="line">        lru.cache(<span class="string">&quot;A&quot;</span>, <span class="number">1</span>);</span><br><span class="line">        lru.cache(<span class="string">&quot;B&quot;</span>, <span class="number">2</span>);</span><br><span class="line">        lru.cache(<span class="string">&quot;C&quot;</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        lru.cache(<span class="string">&quot;D&quot;</span>, <span class="number">4</span>);</span><br><span class="line">        lru.cache(<span class="string">&quot;C&quot;</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(</span><br><span class="line">                <span class="string">&quot;leave &lt;-&quot;</span> +</span><br><span class="line">                StreamSupport.stream(lru.spliterator(), <span class="literal">false</span>)</span><br><span class="line">                        .map(x -&gt; x.toString())</span><br><span class="line">                        .collect(Collectors.joining(<span class="string">&quot;&lt;-&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="HashMap-HashTable"><a href="#HashMap-HashTable" class="headerlink" title="HashMap &amp; HashTable"></a>HashMap &amp; HashTable</h3><p>#TODO# HashMap &amp; HashTable</p>
+<p>‍</p>
+<h2 id="容器的工厂方法"><a href="#容器的工厂方法" class="headerlink" title="容器的工厂方法"></a>容器的工厂方法</h2><p><strong>Java9</strong> 新特性：<code>of</code>与<code>ofEntries</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// List</span></span><br><span class="line">    <span class="comment">// 该List是可变的</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(List.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Set</span></span><br><span class="line">    <span class="type">var</span>  <span class="variable">set</span> <span class="operator">=</span> Set.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Map</span></span><br><span class="line">    Map&lt;String,Integer&gt; map = ofEntries(</span><br><span class="line">            entry(<span class="string">&quot;Ashe&quot;</span>,<span class="number">1</span>),</span><br><span class="line">            entry(<span class="string">&quot;Zed&quot;</span>,<span class="number">2</span>),</span><br><span class="line">            entry(<span class="string">&quot;Yasuo&quot;</span>,<span class="number">3</span>)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：工厂方法创建出来的集合对象都是不可变的，但是以下方式可以构造一个可变的集合</p>
+<blockquote>
+<p>var list &#x3D; new ArrayList&lt;&gt;(List.of(1,2,3,4,5));</p>
+</blockquote>
+<p>‍</p>
+<h4 id="Arrays-asList"><a href="#Arrays-asList" class="headerlink" title="Arrays.asList"></a>Arrays.asList</h4><p>Arrays.asList 被称为不可变集合，该集合中元素可以更改，但是大小不可变</p>
+<p>1.通过 <code>Arrays.asList()</code> 方法构造出来的list，不能执行<code>add()</code>和<code>remove()</code>。</p>
+<p>这里的list，并非 java.util.ArrayList，它没有重写父类<code>AbstractList</code>的方法。</p>
+<p><img src="/2019/11/17/Java%E9%9B%86%E5%90%88/image-20210322163538-uypfrz0.png" alt="image.png"></p>
+<p>2.如果使用<code>Arrays.asList()</code>生成新的数组，那么修改的内容也会同步影响到旧数组上。</p>
+<p><img src="/2019/11/17/Java%E9%9B%86%E5%90%88/image-20210322164604-bouxtrz.png" alt="image.png"></p>
+<p>总结：尽量用于测试，不要用于开发业务上。</p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Core/" rel="tag"># Java Core</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/23/BIEE%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" rel="prev" title="BIEE开发代码相关">
+                BIEE开发代码相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E9%9B%86%E5%90%88"><span class="nav-number">1.</span> <span class="nav-text">Java集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator"><span class="nav-number">1.1.</span> <span class="nav-text">Iterator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B1%EF%BC%9AIterator%E9%81%8D%E5%8E%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">实例1：Iterator遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B2%EF%BC%9AIterator%E5%88%A0%E9%99%A4"><span class="nav-number">1.1.2.</span> <span class="nav-text">实例2：Iterator删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B3%EF%BC%9A%E9%9A%8F%E6%9C%BA%E5%BA%8F%E5%88%97%E4%BA%A7%E7%94%9F%E5%99%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">实例3：随机序列产生器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E6%A1%86%E6%9E%B6%E5%9B%BE"><span class="nav-number">1.2.</span> <span class="nav-text">容器框架图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E9%9B%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">散列集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E9%9B%86"><span class="nav-number">1.2.3.</span> <span class="nav-text">树集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%A0%E5%B0%84"><span class="nav-number">1.2.4.</span> <span class="nav-text">映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%E6%95%A3%E5%88%97%E9%9B%86%E4%B8%8E%E6%98%A0%E5%B0%84"><span class="nav-number">1.2.5.</span> <span class="nav-text">链接散列集与映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0LRU%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">实现LRU缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-HashTable"><span class="nav-number">1.2.6.</span> <span class="nav-text">HashMap &amp; HashTable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">容器的工厂方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Arrays-asList"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Arrays.asList</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

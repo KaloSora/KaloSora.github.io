@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java Core," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="多线程断点续传‍ 步骤拆分1.下载文件 2.断点续传 3.多线程下载 4.多线程断点续传 ‍ 下载文件断点续传下载步骤分解 推荐至少两个线程，当然也可以一个HttpURLConnection打开后，获取完文件长度，再关闭；然后再打开，然后设置文件数据范围  主线程：HttpURLConnection.getContentLengthLong() 获取文件大小 子线程：HttpURLConnecti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 多线程断点续传">
+<meta property="og:url" content="http://example.com/2020/11/28/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="多线程断点续传‍ 步骤拆分1.下载文件 2.断点续传 3.多线程下载 4.多线程断点续传 ‍ 下载文件断点续传下载步骤分解 推荐至少两个线程，当然也可以一个HttpURLConnection打开后，获取完文件长度，再关闭；然后再打开，然后设置文件数据范围  主线程：HttpURLConnection.getContentLengthLong() 获取文件大小 子线程：HttpURLConnecti">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-28T13:11:03.000Z">
+<meta property="article:modified_time" content="2024-03-29T00:50:11.177Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Java Core">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/11/28/多线程断点续传/"/>
+
+
+
+
+
+  <title>Java 多线程断点续传 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/28/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java 多线程断点续传</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-28T21:11:03+08:00">
+                2020-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,321 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  26 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="多线程断点续传"><a href="#多线程断点续传" class="headerlink" title="多线程断点续传"></a>多线程断点续传</h1><p>‍</p>
+<h2 id="步骤拆分"><a href="#步骤拆分" class="headerlink" title="步骤拆分"></a>步骤拆分</h2><p>1.下载文件</p>
+<p>2.断点续传</p>
+<p>3.多线程下载</p>
+<p>4.多线程断点续传</p>
+<p>‍</p>
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><h3 id="断点续传下载"><a href="#断点续传下载" class="headerlink" title="断点续传下载"></a>断点续传下载</h3><h4 id="步骤分解"><a href="#步骤分解" class="headerlink" title="步骤分解"></a>步骤分解</h4><ol>
+<li><p>推荐至少两个线程，当然也可以一个HttpURLConnection打开后，获取完文件长度，再关闭；然后再打开，然后设置文件数据范围</p>
+<ol>
+<li>主线程：HttpURLConnection.getContentLengthLong() 获取文件大小</li>
+<li>子线程：HttpURLConnection.setRequestProperty(“Range”, “bytes&#x3D;” + filePos + “-“ + fileEnd) 获取文件数据范围</li>
+</ol>
+</li>
+<li><p>File.length()与HttpURLConnection.getContentLengthLong()比较文件大小</p>
+</li>
+<li><p>RandomAccessFile写入文件（如下）</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RandomAccessFile</span> <span class="variable">raf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(fileDir, <span class="string">&quot;rws&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 搜索续传的起始位置</span></span><br><span class="line">        raf.seek(filePos);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件写入</span></span><br><span class="line">        <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> length;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> connection.getInputStream();</span><br><span class="line">        <span class="keyword">while</span> ((length = is.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            raf.write(buffer, <span class="number">0</span>, length);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        raf.close();</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.playgroud;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.HttpURLConnection;</span><br><span class="line"><span class="keyword">import</span> java.net.MalformedURLException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单线程下的断点续传</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DownloadTest</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下载的URL</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载路径</span></span><br><span class="line">    <span class="keyword">private</span> String storePath;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件名</span></span><br><span class="line">    <span class="keyword">private</span> String fileName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载的容量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> <span class="variable">fileReqLength</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DownloadTest</span><span class="params">(String url, String storePath)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.url = url;</span><br><span class="line">        <span class="built_in">this</span>.storePath = storePath;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TODO 考虑获取不到文件名的情况</span></span><br><span class="line">        <span class="comment">// 获取文件名</span></span><br><span class="line">        <span class="built_in">this</span>.fileName = url.substring(url.lastIndexOf(<span class="string">&#x27;/&#x27;</span>) + <span class="number">1</span>, url</span><br><span class="line">                .contains(<span class="string">&quot;?&quot;</span>) ? url.lastIndexOf(<span class="string">&#x27;?&#x27;</span>) : url.length());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 下载文件</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">download</span><span class="params">(String url, <span class="type">long</span> fileStart, <span class="type">long</span> fileEnd)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            downloadURL = <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">            connection = (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">            connection.setRequestProperty(<span class="string">&quot;Range&quot;</span>, <span class="string">&quot;bytes=&quot;</span> + fileStart + <span class="string">&quot;-&quot;</span> + fileEnd);</span><br><span class="line">            connection.connect();</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;开始断点续传...&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">RandomAccessFile</span> <span class="variable">raf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName, <span class="string">&quot;rws&quot;</span>);</span><br><span class="line">            raf.seek(fileStart);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写入到文件</span></span><br><span class="line">            <span class="type">int</span> length;</span><br><span class="line">            <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> connection.getInputStream();</span><br><span class="line">            <span class="keyword">while</span> ((length = is.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                raf.write(buffer, <span class="number">0</span>, length);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            raf.close();</span><br><span class="line">            is.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件续传失败!&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;文件下载完成!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">openHttpConnection</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;连接中...&quot;</span>);</span><br><span class="line">            downloadURL = <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">            connection = (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">            connection.connect();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;URL无效&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// http请求设置</span></span><br><span class="line">        connection.setConnectTimeout(<span class="number">10000</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection.connect();</span><br><span class="line">            <span class="keyword">if</span> (connection.getResponseCode() == <span class="number">200</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;连接服务器成功!&quot;</span>);</span><br><span class="line"></span><br><span class="line">                fileReqLength = connection.getContentLength();</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;连接服务器失败: &quot;</span> + connection.getResponseCode()</span><br><span class="line">                        + <span class="string">&quot;:&quot;</span> + connection.getResponseMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;连接文件服务器失败!&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接文件服务器</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打开http连接，获取文件总大小</span></span><br><span class="line">        openHttpConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件全路径</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">downloadFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName);</span><br><span class="line">        System.out.println(<span class="string">&quot;文件名: &quot;</span> + downloadFile.toString());</span><br><span class="line">        System.out.println(<span class="string">&quot;文件类型: &quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;文件大小: &quot;</span> + (fileReqLength / <span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">&quot;MB&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!downloadFile.exists()) &#123;</span><br><span class="line">            <span class="comment">// 文件不存在则直接下载</span></span><br><span class="line">            download(url, <span class="number">0</span>, fileReqLength);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 文件存在，则比较文件大小</span></span><br><span class="line">            <span class="type">long</span> <span class="variable">fileLocalLength</span> <span class="operator">=</span> downloadFile.length();</span><br><span class="line">            <span class="keyword">if</span> (fileReqLength == fileLocalLength) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件已下载完成!&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件已连接，已下载: &quot;</span> + (fileLocalLength / <span class="number">1024</span> / <span class="number">1024</span>)</span><br><span class="line">                        + <span class="string">&quot;MB&quot;</span> + <span class="string">&quot;；剩余: &quot;</span> + (fileReqLength - fileLocalLength) / <span class="number">1024</span> / <span class="number">1024</span> + <span class="string">&quot;MB&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 断点续传</span></span><br><span class="line">                <span class="type">long</span> <span class="variable">filePos</span> <span class="operator">=</span> fileLocalLength;</span><br><span class="line">                download(url, filePos, fileReqLength);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Main Thread</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">storePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://dldir1.qq.com/qqfile/qq/QQ7.9/16621/QQ7.9.exe&quot;</span>;</span><br><span class="line">        <span class="type">DownloadTest</span> <span class="variable">downloadTest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DownloadTest</span>(url, storePath);</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(downloadTest);</span><br><span class="line">        t1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>普通文件下载</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DownloadTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下载的URL</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载路径</span></span><br><span class="line">    <span class="keyword">private</span> String storePath;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件名称</span></span><br><span class="line">    <span class="keyword">private</span> String fileName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DownloadTest</span><span class="params">(String url, String storePath, String fileName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.url = url;</span><br><span class="line">        <span class="built_in">this</span>.storePath = storePath;</span><br><span class="line">        <span class="built_in">this</span>.fileName = fileName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 下载文件</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">download</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">        <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">        <span class="comment">//File tempFile = new File(storePath);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置超时时间，单位ms</span></span><br><span class="line">        connection.setConnectTimeout(<span class="number">10000</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取文件长度,单位byte</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">fileLength</span> <span class="operator">=</span> connection.getContentLengthLong();</span><br><span class="line">        <span class="comment">// FIXME 文件大小判断不准确</span></span><br><span class="line">        System.out.println(<span class="string">&quot;文件大小: &quot;</span> + fileLength / <span class="number">1024</span> / <span class="number">1024</span> + <span class="string">&quot;MB&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TODO 获取文件类型和文件名 lastIndexOf</span></span><br><span class="line">        System.out.println(<span class="string">&quot;文件类型:&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在本地新建文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">fileDir</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName);</span><br><span class="line">        System.out.println(<span class="string">&quot;文件路径:&quot;</span> + fileDir);</span><br><span class="line">        <span class="keyword">if</span>(!fileDir.exists())</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写入文件</span></span><br><span class="line">            <span class="comment">// TODO 断点续传</span></span><br><span class="line"><span class="comment">//            RandomAccessFile raf = new RandomAccessFile(fileDir,&quot;rws&quot;);</span></span><br><span class="line"><span class="comment">//            raf.setLength(fileLength);</span></span><br><span class="line"><span class="comment">//            raf.close();</span></span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;下载中...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(fileDir);</span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> connection.getInputStream();</span><br><span class="line">            <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> length;</span><br><span class="line">            <span class="keyword">while</span> ((length = is.read(buffer)) != -<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                fos.write(buffer,<span class="number">0</span>,length);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            is.close();</span><br><span class="line">            fos.close();</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;文件下载完毕！&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Main Thread</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">storePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://dldir1.qq.com/qqfile/qq/QQ7.9/16621/QQ7.9.exe&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;QQ7.9.exe&quot;</span>;</span><br><span class="line">        <span class="type">DownloadTest</span> <span class="variable">downloadTest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DownloadTest</span>(url, storePath, fileName);</span><br><span class="line"></span><br><span class="line">        downloadTest.download();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="多线程下载"><a href="#多线程下载" class="headerlink" title="多线程下载"></a>多线程下载</h3><h4 id="步骤分解-1"><a href="#步骤分解-1" class="headerlink" title="步骤分解"></a>步骤分解</h4><ol>
+<li>文件分块，与文件的起止下载位置</li>
+</ol>
+<blockquote>
+<p>1、文件分块。 文件分块大小（blockSize）&#x3D; （文件大小 +线程数 - 1 ）&#x2F; 线程数 ;<br>2、确定每一个线程所要下载的 文件的起始和结束位置。<br>现假设为每个线程分别编号：0，1， 2，3；则<br>第一个线程负责的下载位置是： 0<em>blockSize - (0+1)</em> blockSize -1，<br>第二个线程负责的下载位置是： 1* blockSize - (1+1)<em>blockSize -1，</em>​<em>以此类推第i个线程负责的下载位置是：i</em> blockSize - (i+1)<em>blockSize -1；</em>​<em>即线程（编号为id）下载开始位置 start &#x3D; id</em> block;<br>即线程（编号为id）下载结束位置 end &#x3D; (id+1)*block -1;</p>
+</blockquote>
+<ol start="2">
+<li>线程同步：使用CountDownLatch同步各线程的任务，只有所有任务都完成了，才算执行完毕。</li>
+</ol>
+<p>‍</p>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><p>核心代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.playgroud;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.RandomAccessFile;</span><br><span class="line"><span class="keyword">import</span> java.net.HttpURLConnection;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.IntStream;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 多线程下载</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DownloadMultiply</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下载的URL</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载路径</span></span><br><span class="line">    <span class="keyword">private</span> String storePath;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件名</span></span><br><span class="line">    <span class="keyword">private</span> String fileName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载的容量</span></span><br><span class="line">    <span class="keyword">private</span> Long fileReqLength;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下载的线程数</span></span><br><span class="line">    <span class="keyword">private</span> Integer threadNum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 线程同步器</span></span><br><span class="line">    <span class="keyword">private</span> CountDownLatch countDownLatch;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造函数</span></span><br><span class="line"><span class="comment">     * 1.参数设置：URL、文件保存路径、下载线程数</span></span><br><span class="line"><span class="comment">     * 2.获取下载的文件名、文件大小</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> storePath</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> threadNum</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DownloadMultiply</span><span class="params">(String url, String storePath, Integer threadNum)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.url = url;</span><br><span class="line">        <span class="built_in">this</span>.storePath = storePath;</span><br><span class="line">        <span class="built_in">this</span>.threadNum = threadNum;</span><br><span class="line">        <span class="built_in">this</span>.fileReqLength = getFileReqLength(<span class="built_in">this</span>.url);</span><br><span class="line">        <span class="built_in">this</span>.countDownLatch = <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(threadNum);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TODO 考虑获取不到文件名的情况</span></span><br><span class="line">        <span class="comment">// 获取文件名</span></span><br><span class="line">        <span class="built_in">this</span>.fileName = url.substring(url.lastIndexOf(<span class="string">&#x27;/&#x27;</span>) + <span class="number">1</span>, url</span><br><span class="line">                .contains(<span class="string">&quot;?&quot;</span>) ? url.lastIndexOf(<span class="string">&#x27;?&#x27;</span>) : url.length());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取下载的文件大小</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Long <span class="title function_">getFileReqLength</span><span class="params">(String url)</span> &#123;</span><br><span class="line">        <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">fileReqLength</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            downloadURL = <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">            connection = (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">            connection.connect();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取文件大小</span></span><br><span class="line">            fileReqLength = connection.getContentLengthLong();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;无效的URL链接: &quot;</span> + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fileReqLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件下载入口</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fileDownload</span><span class="params">()</span> &#123;</span><br><span class="line">        Long threadLength;</span><br><span class="line">        Long remainLength;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出初始化信息</span></span><br><span class="line">        System.out.println(<span class="string">&quot;连接中...&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (fileReqLength &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;连接文件服务器成功!&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;当前任务下载线程数:&quot;</span> + threadNum);</span><br><span class="line">            System.out.println(<span class="string">&quot;文件名为:&quot;</span> + fileName + <span class="string">&quot;,共&quot;</span> + (fileReqLength / <span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">&quot;MB&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;连接文件服务器失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断文件是否下载过:1.下载过且文件大小一致，则无需下载；</span></span><br><span class="line">        <span class="comment">// 2.如果没有下载过或者下载未完成，则继续下载，会影响各线程的下载长度</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">fileLocal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName);</span><br><span class="line">        <span class="type">Long</span> <span class="variable">fileLocalLength</span> <span class="operator">=</span> fileLocal.length();</span><br><span class="line">        <span class="keyword">if</span> (fileLocalLength == fileReqLength) &#123;</span><br><span class="line">            <span class="comment">// TODO md5文件一致性校验</span></span><br><span class="line">            System.out.println(<span class="string">&quot;文件已完成下载！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!fileLocal.exists()) &#123;</span><br><span class="line">                <span class="comment">// 若文件不存在则创建</span></span><br><span class="line">                remainLength = fileReqLength;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    fileLocal.createNewFile();</span><br><span class="line">                    System.out.println(<span class="string">&quot;文件开始下载...&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;下载文件创建失败:&quot;</span> + e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果存在则计算剩余的下载量</span></span><br><span class="line">                remainLength = fileReqLength - fileLocalLength;</span><br><span class="line"></span><br><span class="line">                System.out.println(<span class="string">&quot;文件剩余:&quot;</span> + (remainLength / <span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">&quot;MB&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;文件开始续传...&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 计算单个线程的下载量</span></span><br><span class="line">            <span class="comment">//threadLength = (remainLength % threadNum == 0 ? remainLength / threadNum : remainLength / (threadNum + 1));</span></span><br><span class="line">            threadLength = (remainLength + threadNum - <span class="number">1</span>) / threadNum;</span><br><span class="line">            System.out.println(<span class="string">&quot;单个线程下载量:&quot;</span> + (threadLength / <span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">&quot;Mb，即 &quot;</span> + threadLength + <span class="string">&quot; byte&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line">        IntStream.range(<span class="number">0</span>, threadNum).forEach(x -&gt; &#123;</span><br><span class="line"></span><br><span class="line">            executorService.submit(<span class="keyword">new</span> <span class="title class_">downloadThread</span>(x, threadLength, countDownLatch));</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            countDownLatch.await();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;线程同步异常:&quot;</span> + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        executorService.shutdown();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;文件下载完成!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 内部类，开启下载线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">downloadThread</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当前线程ID</span></span><br><span class="line">        <span class="keyword">private</span> Integer threadID;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件下载的起始位置</span></span><br><span class="line">        <span class="keyword">private</span> Long startPos;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件下载的结束位置</span></span><br><span class="line">        <span class="keyword">private</span> Long endPos;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件下载的长度</span></span><br><span class="line">        <span class="keyword">private</span> Long threadLength;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 线程同步器，运行完成后提交</span></span><br><span class="line">        <span class="keyword">private</span> CountDownLatch countDownLatch;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 构造函数，初始化文件下载的数据区域</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">downloadThread</span><span class="params">(Integer threadID, Long threadLength, CountDownLatch countDownLatch)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.threadID = threadID;</span><br><span class="line">            <span class="built_in">this</span>.threadLength = threadLength;</span><br><span class="line">            <span class="built_in">this</span>.countDownLatch = countDownLatch;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// TODO 未实现断点续传，仅能够多线程下载，断点续传需要创建临时文件记录上次下载的位置</span></span><br><span class="line">            <span class="comment">// 计算每个线程的下载位置</span></span><br><span class="line">            <span class="built_in">this</span>.startPos = threadID * threadLength;</span><br><span class="line">            <span class="built_in">this</span>.endPos = threadID * threadLength + threadLength - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;[线程&quot;</span> + threadID + <span class="string">&quot;] 从 &quot;</span> + startPos + <span class="string">&quot; ~ &quot;</span> + endPos);</span><br><span class="line"></span><br><span class="line">            <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 打开HTTP连接</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                downloadURL = <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">                connection = (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">                connection.setRequestProperty(<span class="string">&quot;Range&quot;</span>, <span class="string">&quot;bytes=&quot;</span> + startPos + <span class="string">&quot;-&quot;</span> + endPos);</span><br><span class="line">                connection.setConnectTimeout(<span class="number">100000</span>);</span><br><span class="line">                connection.connect();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;[线程&quot;</span> + threadID + <span class="string">&quot;] 无法访问URL链接: &quot;</span> + e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取文件</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">RandomAccessFile</span> <span class="variable">raf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName, <span class="string">&quot;rws&quot;</span>);</span><br><span class="line">                raf.seek(startPos);</span><br><span class="line"></span><br><span class="line">                <span class="type">int</span> length;</span><br><span class="line">                <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> connection.getInputStream();</span><br><span class="line">                <span class="keyword">while</span>((length = is.read(buffer)) != -<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    raf.write(buffer,<span class="number">0</span>,length);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                is.close();</span><br><span class="line">                raf.close();</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;[线程&quot;</span> + threadID + <span class="string">&quot;] 访问文件失败: &quot;</span> + e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.disconnect();</span><br><span class="line">            countDownLatch.countDown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>测试程序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">playground</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Main Thread</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">storePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://dldir1.qq.com/qqfile/qq/QQ7.9/16621/QQ7.9.exe&quot;</span>;</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">threadNum</span> <span class="operator">=</span> <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">DownloadMultiply</span> <span class="variable">downloadMultiply</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DownloadMultiply</span>(url, storePath,threadNum);</span><br><span class="line">        downloadMultiply.fileDownload();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="多线程断点续传-1"><a href="#多线程断点续传-1" class="headerlink" title="多线程断点续传"></a>多线程断点续传</h3><p>可以有两种实现形式：</p>
+<ol>
+<li>有多少个线程就生成多少个文件，各自记录下载的起止位置，最后全部合并为一个文件（尝试失败，多个文件要处理比较复杂）</li>
+<li>生成一个目标文件，生成一个（或根据线程数目）临时文件，在日志文件中记录各个线程的下载位置，则不需要合并文件，仅清除日志文件（推荐）</li>
+</ol>
+<h4 id="步骤分解-2"><a href="#步骤分解-2" class="headerlink" title="步骤分解"></a>步骤分解</h4><ul>
+<li><p>优雅结束进程，以便在临时文件中记录下载的进度、下载的线程数、下载大小等内容</p>
+<ul>
+<li>写入一行，就记录一次位置，这样就不需要考虑优雅结束进程的问题；但是会导致部分数据丢失</li>
+<li>一直写入，在接收到<code>interrupt</code>的时候，再记录；不会丢失数据，但是处理逻辑更复杂（尝试）</li>
+<li>使用<code>Properties</code>类来记录</li>
+</ul>
+</li>
+<li><p>文件合并（方式二）</p>
+</li>
+<li><p>文件一致性校验</p>
+</li>
+<li><p>迅雷链接的解析</p>
+<ul>
+<li>迅雷的编码规则为：原地址前面加”AA”，后面加”ZZ”，然后进行Base64编码，最后加上迅雷下载协议”Thunder:&#x2F;&#x2F;“组成完整的下载链接</li>
+</ul>
+</li>
+</ul>
+<p>‍</p>
+<p>实例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.playgroud;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.HttpURLConnection;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CopyOnWriteArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.IntStream;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 多线程断点续传</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 思路梳理</span></span><br><span class="line"><span class="comment"> * 1.判断文件是否存在</span></span><br><span class="line"><span class="comment"> * 1.1如果不存在则生成一个tmp文件，4个日志，分别记录每个线程的下载位置</span></span><br><span class="line"><span class="comment"> * 1.2如果tmp文件存在，则校验文件完整性，必须有4个日志文件，如果没有则清空任务并重新下载</span></span><br><span class="line"><span class="comment"> * 2.继续下载的位置 = id*block + （已下载的文件长度）</span></span><br><span class="line"><span class="comment"> * 3.下载截止的位置 = (id+1)*block - 1</span></span><br><span class="line"><span class="comment"> * 4.文件完整性校验</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 改进：Springboot 如果是把下载位置存到数据库，并且定时刷新，那么是否只需要一个tmp文件就可以解决？</span></span><br><span class="line"><span class="comment"> * 1.生成tmp文件，并且在数据库中生成4条记录，对应4个线程</span></span><br><span class="line"><span class="comment"> * 2.线程执行定时任务刷新文件的开始位置，此时截止位置仍然是固定的</span></span><br><span class="line"><span class="comment"> * 3.如果任务中断，则只需要重新寻址到数据库记录的开始位置，然后下载即可</span></span><br><span class="line"><span class="comment"> * 这样可以减少文件的个数，也能够降低任务中断带来的重新寻址问题</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DownloadMultiCon</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下载的URL</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载路径</span></span><br><span class="line">    <span class="keyword">private</span> String storePath;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件名</span></span><br><span class="line">    <span class="keyword">private</span> String fileName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 临时文件名</span></span><br><span class="line">    <span class="keyword">private</span> String fileTemp;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 文件下载的容量</span></span><br><span class="line">    <span class="keyword">private</span> Long fileReqLength;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下载的线程数</span></span><br><span class="line">    <span class="keyword">private</span> Integer threadNum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 线程同步器</span></span><br><span class="line">    <span class="keyword">private</span> CountDownLatch countDownLatch;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 线程ID集合，每次初始化都记录下载的线程id</span></span><br><span class="line">    <span class="keyword">private</span> CopyOnWriteArrayList&lt;Integer&gt; threadIDList;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">THREAD_NAME</span> <span class="operator">=</span> <span class="string">&quot;download-thread-&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">THREAD_TEMP_FILE</span> <span class="operator">=</span> <span class="string">&quot;download-file-&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">THREAD_TEMP_KEY</span> <span class="operator">=</span> <span class="string">&quot;download-thread-key-&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造函数</span></span><br><span class="line"><span class="comment">     * 1.参数设置：URL、文件保存路径、下载线程数</span></span><br><span class="line"><span class="comment">     * 2.获取下载的文件名、文件大小</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> storePath</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> threadNum</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DownloadMultiCon</span><span class="params">(String url, String storePath, Integer threadNum)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.url = url;</span><br><span class="line">        <span class="built_in">this</span>.storePath = storePath;</span><br><span class="line">        <span class="built_in">this</span>.threadNum = threadNum;</span><br><span class="line">        <span class="built_in">this</span>.fileReqLength = getFileReqLength(<span class="built_in">this</span>.url);</span><br><span class="line">        <span class="built_in">this</span>.countDownLatch = <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(threadNum + <span class="number">1</span>); <span class="comment">// 多一个守护线程负责中断下载线程</span></span><br><span class="line">        <span class="built_in">this</span>.threadIDList = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TODO 考虑获取不到文件名的情况</span></span><br><span class="line">        <span class="comment">// 获取文件名</span></span><br><span class="line">        <span class="built_in">this</span>.fileName = url.substring(url.lastIndexOf(<span class="string">&#x27;/&#x27;</span>) + <span class="number">1</span>, url</span><br><span class="line">                .contains(<span class="string">&quot;?&quot;</span>) ? url.lastIndexOf(<span class="string">&#x27;?&#x27;</span>) : url.length());</span><br><span class="line">        <span class="built_in">this</span>.fileTemp = fileName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取下载的文件大小</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Long <span class="title function_">getFileReqLength</span><span class="params">(String url)</span> &#123;</span><br><span class="line">        <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">fileReqLength</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            downloadURL = <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">            connection = (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">            connection.connect();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取文件大小</span></span><br><span class="line">            fileReqLength = connection.getContentLengthLong();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;无效的URL链接: &quot;</span> + e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fileReqLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 用户线程，开启下载线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">downloadThread</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当前线程ID</span></span><br><span class="line">        <span class="keyword">private</span> Integer threadID;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件下载的起始位置</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Long startPos;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件下载的结束位置</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Long endPos;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件下载的长度</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Long threadLength;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 线程同步器，运行完成后提交</span></span><br><span class="line">        <span class="keyword">private</span> CountDownLatch countDownLatch;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 线程同步的数组</span></span><br><span class="line">        <span class="keyword">private</span> CopyOnWriteArrayList&lt;Integer&gt; threadIDList;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 构造函数，初始化文件下载的数据区域</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">downloadThread</span><span class="params">(Integer threadID, CountDownLatch countDownLatch, CopyOnWriteArrayList&lt;Integer&gt; threadIDList, Long threadLength)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.threadID = threadID;</span><br><span class="line">            <span class="built_in">this</span>.countDownLatch = countDownLatch;</span><br><span class="line">            <span class="built_in">this</span>.threadIDList = threadIDList;</span><br><span class="line">            <span class="built_in">this</span>.threadLength = threadLength;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 计算每个线程的下载位置</span></span><br><span class="line">            <span class="built_in">this</span>.startPos = threadID * threadLength;</span><br><span class="line">            <span class="built_in">this</span>.endPos = ((threadID + <span class="number">1</span>) * threadLength) - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取当前线程id，并加入到集合中</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">threadLocalID</span> <span class="operator">=</span> (<span class="type">int</span>) Thread.currentThread().getId();</span><br><span class="line">            threadIDList.add(threadLocalID);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置线程名称，通过截取可以获得每个线程的threadID，以便记录下载进度</span></span><br><span class="line">            Thread.currentThread().setName(THREAD_NAME + threadID);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取properties文件，获得下载的位置</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">fileThreadName</span> <span class="operator">=</span> storePath + <span class="string">&quot;/&quot;</span> + THREAD_TEMP_FILE + threadID + <span class="string">&quot;.properties&quot;</span>;</span><br><span class="line">            <span class="type">File</span> <span class="variable">fileThread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(fileThreadName);</span><br><span class="line">            <span class="type">Properties</span> <span class="variable">prop</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(fileThread);</span><br><span class="line">                prop.load(fis);</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;获取线程文件 &quot;</span> + fileThreadName + <span class="string">&quot; 失败:&quot;</span> + e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果配置文件为空，则设置key，否则读取key</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">propKey</span> <span class="operator">=</span> THREAD_TEMP_KEY + threadID;</span><br><span class="line">            Long realStartPos;</span><br><span class="line">            <span class="keyword">if</span> (prop.size() == <span class="number">0</span>) &#123;</span><br><span class="line">                realStartPos = startPos;</span><br><span class="line">                prop.setProperty(propKey, String.valueOf(realStartPos));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                realStartPos = Long.valueOf(prop.getProperty(propKey));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取剩余长度</span></span><br><span class="line">            <span class="type">Long</span> <span class="variable">remainLength</span> <span class="operator">=</span> endPos - realStartPos;</span><br><span class="line">            System.out.println(<span class="string">&quot;[下载线程&quot;</span> + threadID + <span class="string">&quot;]开始任务，剩余 &quot;</span> + remainLength + <span class="string">&quot; byte&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获取下载范围</span></span><br><span class="line">            <span class="type">URL</span> <span class="variable">downloadURL</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">HttpURLConnection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                downloadURL = <span class="keyword">new</span> <span class="title class_">URL</span>(url);</span><br><span class="line">                connection = (HttpURLConnection) downloadURL.openConnection();</span><br><span class="line">                connection.setConnectTimeout(<span class="number">100000</span>);</span><br><span class="line">                connection.setRequestProperty(<span class="string">&quot;Range&quot;</span>, <span class="string">&quot;bytes=&quot;</span> + realStartPos + <span class="string">&quot;-&quot;</span> + endPos);</span><br><span class="line">                connection.connect();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;打开下载链接失败:&quot;</span> + e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 链接到本地文件</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">RandomAccessFile</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName, <span class="string">&quot;rws&quot;</span>);</span><br><span class="line">                file.seek(realStartPos);</span><br><span class="line"></span><br><span class="line">                <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> connection.getInputStream();</span><br><span class="line">                <span class="type">OutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(fileThreadName);</span><br><span class="line">                <span class="keyword">while</span>((length = is.read(buffer)) != -<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    file.write(buffer,<span class="number">0</span>,length);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 每次写入都更新下载的开始位置</span></span><br><span class="line">                    realStartPos += length;</span><br><span class="line">                    prop.setProperty(propKey, String.valueOf(realStartPos));</span><br><span class="line">                    prop.store(fos,Thread.currentThread().getName() + <span class="string">&quot; - Update&quot;</span> );</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 释放资源</span></span><br><span class="line">                is.close();</span><br><span class="line">                fos.close();</span><br><span class="line">                file.close();</span><br><span class="line">                connection.disconnect();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;链接本地文件失败:&quot;</span> + e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;[下载线程&quot;</span> + threadID + <span class="string">&quot;] 任务完成&quot;</span>);</span><br><span class="line">            countDownLatch.countDown();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 守护线程，负责处理临时文件：记录每个线程的下载位置</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">logDeamonThred</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;[守护线程] 开始运行&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 把守护线程添加到线程集合中</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">threadLocalID</span> <span class="operator">=</span> (<span class="type">int</span>) Thread.currentThread().getId();</span><br><span class="line">            threadIDList.add(threadLocalID);</span><br><span class="line"></span><br><span class="line">            <span class="type">Scanner</span> <span class="variable">userScan</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">            <span class="type">String</span> <span class="variable">userInput</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;下载任务进行中，输入exit暂停任务...&quot;</span>);</span><br><span class="line">                userInput = userScan.nextLine();</span><br><span class="line">            &#125; <span class="keyword">while</span> (!userInput.equals(<span class="string">&quot;exit&quot;</span>));</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;用户请求暂停任务!&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历线程ID，找到以后暂时挂起</span></span><br><span class="line">            Set&lt;Thread&gt; setOfThread = Thread.getAllStackTraces().keySet();</span><br><span class="line">            <span class="keyword">for</span> (Integer threadID : threadIDList) &#123;</span><br><span class="line">                <span class="keyword">for</span> (Thread thread : setOfThread) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (thread.getId() == threadID) &#123;</span><br><span class="line">                        thread.interrupt();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            userScan.close();</span><br><span class="line">            countDownLatch.countDown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件下载入口</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fileDownload</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Long</span> <span class="variable">threadLength</span> <span class="operator">=</span> fileReqLength / threadNum;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">remainLength</span> <span class="operator">=</span> <span class="number">0L</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出初始化信息</span></span><br><span class="line">        System.out.println(<span class="string">&quot;连接中...&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (fileReqLength.longValue() &gt; <span class="number">0L</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;连接文件服务器成功!&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;当前任务下载线程数:&quot;</span> + threadNum);</span><br><span class="line">            System.out.println(<span class="string">&quot;文件名为:&quot;</span> + fileName + <span class="string">&quot;,共&quot;</span> + (fileReqLength / <span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">&quot;MB&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;连接文件服务器失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断文件是否下载过:1.下载过且文件大小一致，则无需下载；</span></span><br><span class="line">        <span class="comment">// 2.如果没有下载过或者下载未完成，则继续下载</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">fileLocal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(storePath + <span class="string">&quot;/&quot;</span> + fileName);</span><br><span class="line">        <span class="type">Long</span> <span class="variable">fileLocalLength</span> <span class="operator">=</span> fileLocal.length();</span><br><span class="line">        <span class="keyword">if</span> (fileLocalLength.longValue() == fileReqLength.longValue()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件已经下载完成，无需下载！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fileLocalLength.longValue() &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 文件不存在则创建</span></span><br><span class="line">            <span class="keyword">if</span> (!fileLocal.exists()) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    fileLocal.createNewFile();</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 创建临时文件</span></span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; threadNum; i++) &#123;</span><br><span class="line">                        <span class="type">String</span> <span class="variable">fileThreadName</span> <span class="operator">=</span> storePath + <span class="string">&quot;/&quot;</span> + THREAD_TEMP_FILE + i + <span class="string">&quot;.properties&quot;</span>;</span><br><span class="line">                        <span class="type">File</span> <span class="variable">fileThread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(fileThreadName);</span><br><span class="line">                        <span class="keyword">if</span> (!fileThread.exists()) &#123;</span><br><span class="line">                            fileThread.createNewFile();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;文件创建失败:&quot;</span> + e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// TODO 考虑临时文件缺失的问题</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 开启守护线程</span></span><br><span class="line">            <span class="type">Thread</span> <span class="variable">logThread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">logDeamonThred</span>());</span><br><span class="line">            logThread.setDaemon(<span class="literal">true</span>);</span><br><span class="line">            logThread.start();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 开启多线程，并将线程保存在集合中</span></span><br><span class="line">            <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line">            IntStream.range(<span class="number">0</span>, threadNum).forEach(x -&gt; &#123;</span><br><span class="line"></span><br><span class="line">                executorService.submit(<span class="keyword">new</span> <span class="title class_">downloadThread</span>(x, countDownLatch, threadIDList, threadLength));</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                countDownLatch.await();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (</span><br><span class="line">                    InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            executorService.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TODO 清理临时文件</span></span><br><span class="line">        <span class="comment">// TODO 文件完整性校验</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;文件下载完成!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">playground</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Main Thread</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">storePath</span> <span class="operator">=</span> <span class="string">&quot;/Users/kalosora/Desktop/多线程下载&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://dldir1.qq.com/qqfile/qq/QQ7.9/16621/QQ7.9.exe&quot;</span>;</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">threadNum</span> <span class="operator">=</span> <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">DownloadMultiCon</span> <span class="variable">downloadMultiCon</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DownloadMultiCon</span>(url, storePath,threadNum);</span><br><span class="line">        downloadMultiCon.fileDownload();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h4 id="改进：Web项目"><a href="#改进：Web项目" class="headerlink" title="改进：Web项目"></a>改进：Web项目</h4><p>#TODO#</p>
+<ul>
+<li><p>下载速度、进度的显示</p>
+</li>
+<li><p>多个任务下，线程间速度的均摊</p>
+</li>
+<li><p>解析迅雷、BT链接</p>
+<ul>
+<li>迅雷的编码规则为：原地址前面加”AA”，后面加”ZZ”，然后进行Base64编码，最后加上迅雷下载协议”thunder:&#x2F;&#x2F;“组成完整的下载链接</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mpetazzoni/ttorrent">BitTorrent Java实现</a></li>
+</ul>
+</li>
+</ul>
+<p>‍</p>
+<h2 id="技术点总结"><a href="#技术点总结" class="headerlink" title="技术点总结"></a>技术点总结</h2><p>多线程断点续传</p>
+<ol>
+<li><p>断点续传需要提供的能力：</p>
+<ol>
+<li><code>RandomAccessFile</code>类提供随机文件读取与写入的能力</li>
+<li><code>File</code>类提供文件创建、计算长度的能力</li>
+<li><code>HttpURLConnection</code>类提供访问http请求、查找数据资源范围的能力</li>
+</ol>
+</li>
+<li><p>多线程下载需要的能力：</p>
+<ol>
+<li><p><code>ExecutorService</code>类帮助进行线程管理</p>
+</li>
+<li><p><code>CountDownLatch</code>类帮助同步子线程任务进度</p>
+</li>
+<li><p>相关公式帮助计算</p>
+<ol>
+<li>单个线程的块大小：blockSize &#x3D; （文件大小 +线程数 - 1 ）&#x2F; 线程数 ;</li>
+<li>下载的开始位置：start &#x3D; id* block;</li>
+<li>下载的结束位置：end &#x3D; (id+1)*block -1;</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>多线程断点续传综合：</p>
+<ol>
+<li><code>Properties</code>类提供日志文件的读写能力，存放各个线程下载的信息</li>
+</ol>
+</li>
+</ol>
+<p>‍</p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><p>断点续传相关</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bI5xYq3jUtp-sviKlzHtNg">断点续传原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Adelaide_Guo/article/details/77757132">断点续传与同步器的一个实例</a></p>
+<p>‍</p>
+<p>多线程相关</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fzy629442466/article/details/85601315">多线程下载最简单实例</a></p>
+<p>‍</p>
+<p>多线程断点续传</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/carlislelee/article/details/52688693">如何优雅结束java进程</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/niumoo/down-bit">断点续传完整实例-支持迅雷</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuanyb/p/12296815.html">多线程断点续传的简单实例</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/panhouye/p/6209635.html">多线程断点续传的详细讲解</a></p>
+<p>‍</p>
+<p>java如何实现BT下载</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/67773003">现成的JAVA BT库</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.meilongkui.com/archives/320">eclipse bittorrent</a></p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Core/" rel="tag"># Java Core</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/25/Java%E6%B3%9B%E5%9E%8B/" rel="next" title="Java 泛型">
+                <i class="fa fa-chevron-left"></i> Java 泛型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/" rel="prev" title="Oracle技术分享 - DAY 1">
+                Oracle技术分享 - DAY 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0"><span class="nav-number">1.</span> <span class="nav-text">多线程断点续传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E6%8B%86%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">步骤拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">下载文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.1.</span> <span class="nav-text">断点续传下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E5%88%86%E8%A7%A3"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">步骤分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.2.</span> <span class="nav-text">多线程下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E5%88%86%E8%A7%A3-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">步骤分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">多线程断点续传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E5%88%86%E8%A7%A3-2"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">步骤分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%EF%BC%9AWeb%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">改进：Web项目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E7%82%B9%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">技术点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="nav-number">1.4.</span> <span class="nav-text">参考来源</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

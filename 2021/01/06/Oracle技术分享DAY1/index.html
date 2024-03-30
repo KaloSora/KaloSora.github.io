@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Oracle," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Oracle技术分享 - DAY 1数据库版本 Oracle 19C 工具相关 Enterprise Manager Cloud Control （B&#x2F;S架构） SQL Developer SQL Plus  网页相关 文档中心：docs.oracle.com metalink帮助中心：support.oracle.com  手册相关 以下手册名字，均来自 docs.oracle.com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle技术分享 - DAY 1">
+<meta property="og:url" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="Oracle技术分享 - DAY 1数据库版本 Oracle 19C 工具相关 Enterprise Manager Cloud Control （B&#x2F;S架构） SQL Developer SQL Plus  网页相关 文档中心：docs.oracle.com metalink帮助中心：support.oracle.com  手册相关 以下手册名字，均来自 docs.oracle.com">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106143902-t2tovtv-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106144346-qkbwbsa-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106145800-ot0aj04-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106150452-3gta6ry-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106152015-3vvywa8-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106152942-r9guqf8-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109114722-sjc7bh9-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109114803-mnskv49-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109114846-rdn34od-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109115033-8hloqxd-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109115131-zb7n35l-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109115408-mn1dvwu-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120200-3r2tskq-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120249-7pjpxxm-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102412-3iqjzmy-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102551-w1krc1d-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102641-mftkw1d-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102923-7a5rfrk-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107110233-km60pzn-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107103057-tp3zaj0-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107103337-twtqz63-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107104008-bi1e9ai-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107104259-nidd29e-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107104919-rw55dvz-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107105030-a0nllmj-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107110644-s4amgnn-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107111220-nb8sesk-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120622-as3cfhr-image.png">
+<meta property="og:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120652-9li7bxf-image.png">
+<meta property="article:published_time" content="2021-01-06T11:54:22.000Z">
+<meta property="article:modified_time" content="2024-03-29T00:54:01.542Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106143902-t2tovtv-image.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/01/06/Oracle技术分享DAY1/"/>
+
+
+
+
+
+  <title>Oracle技术分享 - DAY 1 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Oracle技术分享 - DAY 1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-06T19:54:22+08:00">
+                2021-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,187 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Oracle技术分享-DAY-1"><a href="#Oracle技术分享-DAY-1" class="headerlink" title="Oracle技术分享 - DAY 1"></a>Oracle技术分享 - DAY 1</h1><p><strong>数据库版本 Oracle 19C</strong></p>
+<h2 id="工具相关"><a href="#工具相关" class="headerlink" title="工具相关"></a>工具相关</h2><ul>
+<li>Enterprise Manager Cloud Control （B&#x2F;S架构）</li>
+<li>SQL Developer</li>
+<li>SQL Plus</li>
+</ul>
+<h2 id="网页相关"><a href="#网页相关" class="headerlink" title="网页相关"></a>网页相关</h2><ul>
+<li>文档中心：docs.oracle.com</li>
+<li>metalink帮助中心：support.oracle.com</li>
+</ul>
+<h2 id="手册相关"><a href="#手册相关" class="headerlink" title="手册相关"></a>手册相关</h2><blockquote>
+<p>以下手册名字，均来自 docs.oracle.com</p>
+</blockquote>
+<p>运维</p>
+<ul>
+<li><code>Database Administrator&#39;s Guide</code> 数据库管理手册</li>
+<li><code>Database Reference</code> 数据库状态相关信息</li>
+</ul>
+<p>开发</p>
+<ul>
+<li><code>Database Development Guide</code>  数据库开发参考手册（重要）</li>
+<li><code>SQL Language Reference</code> SQL语言参考手册</li>
+<li><code>Database PL/SQL Packages and Types Reference</code> PLSQL程序包</li>
+<li><code>Oracle Database Data Warehousing Guide</code> 数据仓库参考手册</li>
+<li><code>Database PL/SQL Packages and Types Reference</code> Oracle标准PLSQL程序包参考手册</li>
+</ul>
+<p>数据库原理</p>
+<ul>
+<li><code>Database Concepts</code></li>
+</ul>
+<p>性能优化</p>
+<ul>
+<li><code>Database Performance Tuning Guide</code> 数据库性能优化指南</li>
+<li><code>SQL Tuning Guide</code> SQL调优指南</li>
+</ul>
+<h3 id="Database-Reference"><a href="#Database-Reference" class="headerlink" title="Database Reference"></a>Database Reference</h3><h4 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h4><p><strong>查询结果来自于磁盘</strong></p>
+<ul>
+<li><p>cdb_[table_name] (多租户环境下)</p>
+</li>
+<li><p>dba_[table_name]</p>
+</li>
+<li><p>all_[table_name]</p>
+</li>
+<li><p>user_[table_name]</p>
+</li>
+</ul>
+<h4 id="动态性能"><a href="#动态性能" class="headerlink" title="动态性能"></a>动态性能</h4><p><strong>查询结果来自于内存</strong></p>
+<ul>
+<li>v$[table_name]</li>
+</ul>
+<h4 id="初始化参数"><a href="#初始化参数" class="headerlink" title="初始化参数"></a>初始化参数</h4><h2 id="创建数据库实例"><a href="#创建数据库实例" class="headerlink" title="创建数据库实例"></a>创建数据库实例</h2><h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><p>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>添加Oracle环境变量，并保存退出</p>
+<p>【注意】可以使用 <code>shift + 双击z键</code> ，与<code>:wq</code> 等效</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106143902-t2tovtv-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>再次执行命令，使环境变量生效</p>
+<p>【注意】使用 <code>. + 空格</code> 等同于 <code>source</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. ./.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>最终结果如下图所示</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106144346-qkbwbsa-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h4 id="通过图形化界面创建"><a href="#通过图形化界面创建" class="headerlink" title="通过图形化界面创建"></a>通过图形化界面创建</h4><p>【注意】以下没有特别说明，均适用默认配置</p>
+<p>选中 <code>创建数据库</code> 并点击下一步</p>
+<p>选中 <code>高级配置</code></p>
+<p>来到如下图界面</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106145800-ot0aj04-image.png" alt="Oracle技术分享DAY1.png"></p>
+<ul>
+<li>一般用途或事务处理：指OLTP类型的业务，适用于高并发，事务量大的情况。</li>
+<li>数据仓库：对于分析、读取数据需求量大的情况，如运行报表等。</li>
+</ul>
+<p>选中<code>定制数据库</code>，并点击下一步</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106150452-3gta6ry-image.png" alt="Oracle技术分享DAY1.png"></p>
+<ul>
+<li>SID：数据库唯一标示</li>
+<li>创建为容器数据库：12C以后的多租户的新特性</li>
+</ul>
+<p>设置默认端口和监听</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106152015-3vvywa8-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>最终结果如下</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210106152942-r9guqf8-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h2 id="Oracle-内存数据库"><a href="#Oracle-内存数据库" class="headerlink" title="Oracle 内存数据库"></a>Oracle 内存数据库</h2><p><strong>Oracle Database In-Memory</strong></p>
+<blockquote>
+<p>在线实验室 <a target="_blank" rel="noopener" href="https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/home">https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/home</a></p>
+</blockquote>
+<p>选择DBA</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109114722-sjc7bh9-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>选择内存数据库</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109114803-mnskv49-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>点击 Reserve WorkShop</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109114846-rdn34od-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>启动puttyGen生成public key，然后复制到oracle表单中</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109115033-8hloqxd-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>等待环境加载</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109115131-zb7n35l-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>点击此处进入，获取环境信息</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109115408-mn1dvwu-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>环境信息如下，并把ip和username填入xshell</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120200-3r2tskq-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>然后在xshell中导入密钥，注意私钥必须为 <code>OpenSSH</code> 格式</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120249-7pjpxxm-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>‍</p>
+<h2 id="Oracle实验"><a href="#Oracle实验" class="headerlink" title="Oracle实验"></a>Oracle实验</h2><p>启动数据库实例，并查看实例状态</p>
+<blockquote>
+<p>select status from v$instance;</p>
+</blockquote>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102412-3iqjzmy-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>查看监听状态 &amp; 启动监听</p>
+<blockquote>
+<p>lsnrctl status</p>
+<p>lsnrctl start</p>
+</blockquote>
+<p>切换Oracle SID</p>
+<blockquote>
+<p>export ORACLE_SID&#x3D;TEST</p>
+</blockquote>
+<p>无需用户名&amp;密码进入数据库</p>
+<p>当使用Oracle用户组和Oracle用户安装数据库时，以最高系统权限进入数据库（操作系统权限验证）</p>
+<blockquote>
+<p>sqlplus &#x2F; as sysdba</p>
+</blockquote>
+<h3 id="使用SQL-Developer管理插件"><a href="#使用SQL-Developer管理插件" class="headerlink" title="使用SQL Developer管理插件"></a>使用SQL Developer管理插件</h3><h4 id="查看数据库状态"><a href="#查看数据库状态" class="headerlink" title="查看数据库状态"></a>查看数据库状态</h4><p>路径：查看 -&gt; DBA</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102551-w1krc1d-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>左下角会出现新的页签，点击绿色加号添加数据库</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102641-mftkw1d-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>查看数据库状态</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107102923-7a5rfrk-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>创建表空间</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107110233-km60pzn-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h4 id="查看数据库报告"><a href="#查看数据库报告" class="headerlink" title="查看数据库报告"></a>查看数据库报告</h4><p>路径：查看 -&gt; 报告</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107103057-tp3zaj0-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>以查看用户锁为例</p>
+<p>路径：数据字典报告 -&gt; 数据库管理 -&gt; 锁定 -&gt; 按用户统计的锁</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107103337-twtqz63-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h3 id="数据库文件"><a href="#数据库文件" class="headerlink" title="数据库文件"></a>数据库文件</h3><p>查看数据库文件，进入目录</p>
+<blockquote>
+<p>&#x2F;u01&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;</p>
+<p>ls</p>
+</blockquote>
+<p>测试环境如下图：</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107104008-bi1e9ai-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h5 id="控制文件"><a href="#控制文件" class="headerlink" title="控制文件"></a>控制文件</h5><p><code>control.ctl</code></p>
+<p>不同的环境，可能有多个控制文件，采用多路复用技术</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107104259-nidd29e-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h5 id="重做日志"><a href="#重做日志" class="headerlink" title="重做日志"></a>重做日志</h5><p><code>redo.log</code></p>
+<p>多组日志文件日志内容都相同，循环复入，写满切换。</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107104919-rw55dvz-image.png" alt="Oracle技术分享DAY1.png"></p>
+<h5 id="数据文件"><a href="#数据文件" class="headerlink" title="数据文件"></a>数据文件</h5><p>以 <code>dbf</code> 结尾</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107105030-a0nllmj-image.png" alt="Oracle技术分享DAY1.png"></p>
+<blockquote>
+<p>逻辑结构</p>
+<p>块 -&gt; 区 -&gt; 段 -&gt; 表空间 -&gt; 数据库</p>
+<p>段：存放数据的对象，如表段、索引段等</p>
+<p>块：Oracle数据库存储的最小单元，默认大小为8k</p>
+</blockquote>
+<h5 id="参数文件"><a href="#参数文件" class="headerlink" title="参数文件"></a>参数文件</h5><p>进入Oracle安装目录下的 <code>dbs</code> 目录</p>
+<p>以实验环境为例</p>
+<blockquote>
+<p>cd &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;19.3.0&#x2F;dbhome_1&#x2F;dbs</p>
+</blockquote>
+<p>参数文件如下图</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107110644-s4amgnn-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>在Oracle启动实例时，会先启动进程加载参数文件，然后根据参数加载实例</p>
+<p>【注意】服务器参数文件必须为spfile[SID].ora，其中SID必须一致</p>
+<p>查看数据库实例，可以根据下划线结尾，获取SID</p>
+<blockquote>
+<p>ps -ef | grep smon</p>
+</blockquote>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210107111220-nb8sesk-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>此时可以知道，SID&#x3D;TEST</p>
+<p><strong>服务名和SID的区别？</strong></p>
+<p>SID是数据库实例的唯一识别号。如果是ORACLE RAC下，多个实例就会有多个SID。而SERVER_NAME是数据库实例的名称，用于标示外部系统，我数据库叫”SERVICE_NAME”。对于外部系统而言，既可以用SID进行连接，也可以用SERVER_NAME进行连接。同一个实例下，SID和SERVER_NAME是唯一对应的。</p>
+<h3 id="停库指令"><a href="#停库指令" class="headerlink" title="停库指令"></a>停库指令</h3><p>1.立即停止</p>
+<blockquote>
+<p>shutdown immediate</p>
+</blockquote>
+<p>2.内存断电停止</p>
+<blockquote>
+<p>shutdown abort</p>
+</blockquote>
+<p>这种停止方式会导致数据不一致。</p>
+<p>内存数据库、SQL调优</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.Oracle学习工具</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120622-as3cfhr-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>2.Oracle体系结构</p>
+<p><img src="/2021/01/06/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY1/20210109120652-9li7bxf-image.png" alt="Oracle技术分享DAY1.png"></p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/28/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0/" rel="next" title="Java 多线程断点续传">
+                <i class="fa fa-chevron-left"></i> Java 多线程断点续传
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/07/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY2/" rel="prev" title="Oracle技术分享 - DAY 2">
+                Oracle技术分享 - DAY 2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB-DAY-1"><span class="nav-number">1.</span> <span class="nav-text">Oracle技术分享 - DAY 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.</span> <span class="nav-text">工具相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E7%9B%B8%E5%85%B3"><span class="nav-number">1.2.</span> <span class="nav-text">网页相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%8C%E7%9B%B8%E5%85%B3"><span class="nav-number">1.3.</span> <span class="nav-text">手册相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Database-Reference"><span class="nav-number">1.3.1.</span> <span class="nav-text">Database Reference</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">数据字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%80%A7%E8%83%BD"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">动态性能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">初始化参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.4.</span> <span class="nav-text">创建数据库实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">设置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E5%88%9B%E5%BB%BA"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">通过图形化界面创建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle-%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">Oracle 内存数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.6.</span> <span class="nav-text">Oracle实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SQL-Developer%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6"><span class="nav-number">1.6.1.</span> <span class="nav-text">使用SQL Developer管理插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">查看数据库状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%A5%E5%91%8A"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">查看数据库报告</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.2.</span> <span class="nav-text">数据库文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.2.0.1.</span> <span class="nav-text">控制文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E5%81%9A%E6%97%A5%E5%BF%97"><span class="nav-number">1.6.2.0.2.</span> <span class="nav-text">重做日志</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.2.0.3.</span> <span class="nav-text">数据文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.2.0.4.</span> <span class="nav-text">参数文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E5%BA%93%E6%8C%87%E4%BB%A4"><span class="nav-number">1.6.3.</span> <span class="nav-text">停库指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

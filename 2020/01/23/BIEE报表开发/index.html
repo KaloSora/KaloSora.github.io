@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DATAWARE HOUSE," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="BIEE Client 报表开发以开发”库存账龄报表”为例SRC 层元数据先打开 erp 的报表 package，找到所有需要的报表12345mtl_system_items_b           msi,mtl_safety_stocks            ms,mtl_onhand_quantities_detail moq,mtl_material_transactions    mm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIEE Client报表开发">
+<meta property="og:url" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="BIEE Client 报表开发以开发”库存账龄报表”为例SRC 层元数据先打开 erp 的报表 package，找到所有需要的报表12345mtl_system_items_b           msi,mtl_safety_stocks            ms,mtl_onhand_quantities_detail moq,mtl_material_transactions    mm">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091055-1sjn1mw-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091108-ukhqfd1-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091346-bgv7dty-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091357-99julig-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091419-1hcj9re-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091431-pytxbod-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091507-vju1spg-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091522-mlrxxep-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091528-t5z3ryn-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091537-77mvupl-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091629-gi6s3qi-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091927-3olk5hl-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091936-afswmar-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092146-fkkxbyl-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092453-czoqr5l-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092610-zcj308z-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092642-xffd4m5-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092649-n9qb531-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092702-e35ftl6-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092712-bmhlmwp-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092723-htx7w3h-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092735-2bivfmh-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092747-cgyjccb-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092753-wbtt0xp-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092804-eg7uvlr-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092816-jbyqz93-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092828-ofkrki2-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092846-wss5x0s-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092856-y2hsuz2-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092907-ubusmxx-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092917-tddmoss-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092926-pj7vvwc-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092934-rgi5q7r-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092945-sflgpox-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093001-jytkhem-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093203-a674zaz-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093209-cfcsfoe-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093436-g07egw4-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093237-zy0ioag-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093519-03y0bzw-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093525-vjg8yvh-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093534-mknope5-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093543-jf5d20v-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093554-o94lrdz-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093626-jnnszl3-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093633-vyuk2cs-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093640-cvvek5p-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093649-ykuxn2n-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093701-b02knsy-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093717-3au5muj-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093724-jx4h5k5-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093731-jm6m6mr-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093741-x1da03q-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093746-dfwkn3d-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093819-ne3cja5-image.png">
+<meta property="og:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093837-zco6gaw-image.png">
+<meta property="article:published_time" content="2020-01-23T12:18:43.000Z">
+<meta property="article:modified_time" content="2024-03-29T00:33:08.199Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="DATAWARE HOUSE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091055-1sjn1mw-image.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/01/23/BIEE报表开发/"/>
+
+
+
+
+
+  <title>BIEE Client报表开发 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BIEE Client报表开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T20:18:43+08:00">
+                2020-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ORACLE-BIEE/" itemprop="url" rel="index">
+                    <span itemprop="name">ORACLE BIEE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,703 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  29 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="BIEE-Client-报表开发"><a href="#BIEE-Client-报表开发" class="headerlink" title="BIEE Client 报表开发"></a>BIEE Client 报表开发</h1><h2 id="以开发”库存账龄报表”为例"><a href="#以开发”库存账龄报表”为例" class="headerlink" title="以开发”库存账龄报表”为例"></a>以开发”库存账龄报表”为例</h2><h3 id="SRC-层元数据"><a href="#SRC-层元数据" class="headerlink" title="SRC 层元数据"></a>SRC 层元数据</h3><h5 id="先打开-erp-的报表-package，找到所有需要的报表"><a href="#先打开-erp-的报表-package，找到所有需要的报表" class="headerlink" title="先打开 erp 的报表 package，找到所有需要的报表"></a>先打开 erp 的报表 package，找到所有需要的报表</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mtl_system_items_b           msi,</span><br><span class="line">mtl_safety_stocks            ms,</span><br><span class="line">mtl_onhand_quantities_detail moq,</span><br><span class="line">mtl_material_transactions    mmt,</span><br><span class="line">mtl_transaction_lot_numbers  mtln</span><br></pre></td></tr></table></figure>
+
+<h5 id="在-SRC-层复制相同的一份表结构，命名为-S-XXXXX。这里是在-BI-SRC-用户下创建如下表"><a href="#在-SRC-层复制相同的一份表结构，命名为-S-XXXXX。这里是在-BI-SRC-用户下创建如下表" class="headerlink" title="在 SRC 层复制相同的一份表结构，命名为 S_XXXXX。这里是在 BI_SRC 用户下创建如下表"></a>在 SRC 层复制相同的一份表结构，命名为 S_XXXXX。这里是在 BI_SRC 用户下创建如下表</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BI_SRC.s_mtl_system_items_b           msi,</span><br><span class="line">BI_SRC.s_mtl_safety_stocks            ms,</span><br><span class="line">BI_SRC.s_mtl_onhand_quantities_detail moq,</span><br><span class="line">BI_SRC.s_mtl_material_transactions    mmt,</span><br><span class="line">BI_SRC.mtl_transaction_lot_numbers    mtln</span><br></pre></td></tr></table></figure>
+
+<h6 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h6><p>以 mtl_safety_stocks 为例，找到基表 inv.mtl_safety_stocks，右键-&gt; 编辑-&gt; 列-&gt; 查看 SQL</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091055-1sjn1mw-image.png" alt="image.png"></p>
+<p>复制 create table 语句<img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091108-ukhqfd1-image.png" alt="image.png"></p>
+<p>对应的 SQL 语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 修改后的语句</span></span><br><span class="line"><span class="comment">-- 修改表名</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> BI_SRC.S_MTL_SAFETY_STOCKS</span><br><span class="line">(</span><br><span class="line">  inventory_item_id      NUMBER <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  organization_id        NUMBER <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  effectivity_date       <span class="type">DATE</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  last_update_date       <span class="type">DATE</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  last_updated_by        NUMBER <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  creation_date          <span class="type">DATE</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  created_by             NUMBER <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  last_update_login      NUMBER,</span><br><span class="line">  safety_stock_code      NUMBER,</span><br><span class="line">  safety_stock_quantity  NUMBER <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">  safety_stock_percent   NUMBER,</span><br><span class="line">  service_level          NUMBER,</span><br><span class="line">  attribute_category     VARCHAR2(<span class="number">30</span>),</span><br><span class="line">  attribute1             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute2             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute3             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute4             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute5             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute6             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute7             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute8             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute9             VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute10            VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute11            VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute12            VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute13            VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute14            VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  attribute15            VARCHAR2(<span class="number">150</span>),</span><br><span class="line">  request_id             NUMBER,</span><br><span class="line">  program_application_id NUMBER,</span><br><span class="line">  program_id             NUMBER,</span><br><span class="line">  program_update_date    <span class="type">DATE</span>,</span><br><span class="line">  forecast_designator    VARCHAR2(<span class="number">10</span>),</span><br><span class="line">  project_id             NUMBER,</span><br><span class="line">  task_id                NUMBER,</span><br><span class="line">  <span class="comment">--新增修改日期字段</span></span><br><span class="line">  UPDATE_DT              <span class="type">DATE</span></span><br><span class="line">)</span><br><span class="line">tablespace BI_SRC_DAT   <span class="comment">--修改表空间</span></span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">10</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">128</span>K</span><br><span class="line">    next <span class="number">128</span>K</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">    pctincrease <span class="number">0</span></span><br><span class="line">  );</span><br><span class="line"><span class="comment">-- 修改索引名称</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> index BI_SRC.S_MTL_SAFETY_STOCKS_U1 <span class="keyword">on</span> BI_SRC.S_MTL_SAFETY_STOCKS (INVENTORY_ITEM_ID, ORGANIZATION_ID, EFFECTIVITY_DATE, PROJECT_ID, TASK_ID)</span><br><span class="line">  tablespace BI_SRC_DIX  <span class="comment">--修改索引空间</span></span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">11</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">128</span>K</span><br><span class="line">    next <span class="number">128</span>K</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">    pctincrease <span class="number">0</span></span><br><span class="line">  )</span><br><span class="line">  NOLOGGING;</span><br></pre></td></tr></table></figure>
+
+<p>打开 kettle，新建一个转换，配置好 EBS 数据库和 SRC 数据库信息</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091346-bgv7dty-image.png" alt="image.png"></p>
+<p>在”核心对象-&gt; 输入”选好“表输入”，在”核心对象-&gt; 输出”选好“表输出”。在表输入按住 shift 拖动到表输出，会有中间的蓝色线，把它们连起来</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091357-99julig-image.png" alt="image.png"></p>
+<p>双击“表输出”配置表输出信息【注：这里勾选裁剪表，会导致全量同步】</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091419-1hcj9re-image.png" alt="image.png"></p>
+<p>右键原有的 ebs 基表-&gt; 描述，如 INV.MTL_SAFETY_STOCKS，选择“逗号分隔复制”</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091431-pytxbod-image.png" alt="image.png"></p>
+<p>整理以后如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> inventory_item_id,</span><br><span class="line">       organization_id,</span><br><span class="line">       effectivity_date,</span><br><span class="line">       last_update_date,</span><br><span class="line">       last_updated_by,</span><br><span class="line">       creation_date,</span><br><span class="line">       created_by,</span><br><span class="line">       last_update_login,</span><br><span class="line">       safety_stock_code,</span><br><span class="line">       safety_stock_quantity,</span><br><span class="line">       safety_stock_percent,</span><br><span class="line">       service_level,</span><br><span class="line">       attribute_category,</span><br><span class="line">       attribute1,</span><br><span class="line">       attribute2,</span><br><span class="line">       attribute3,</span><br><span class="line">       attribute4,</span><br><span class="line">       attribute5,</span><br><span class="line">       attribute6,</span><br><span class="line">       attribute7,</span><br><span class="line">       attribute8,</span><br><span class="line">       attribute9,</span><br><span class="line">       attribute10,</span><br><span class="line">       attribute11,</span><br><span class="line">       attribute12,</span><br><span class="line">       attribute13,</span><br><span class="line">       attribute14,</span><br><span class="line">       attribute15,</span><br><span class="line">       request_id,</span><br><span class="line">       program_application_id,</span><br><span class="line">       program_id,</span><br><span class="line">       program_update_date,</span><br><span class="line">       forecast_designator,</span><br><span class="line">       project_id,</span><br><span class="line">       task_id</span><br><span class="line">  <span class="keyword">FROM</span> INV.MTL_SAFETY_STOCKS</span><br></pre></td></tr></table></figure>
+
+<p>然后双击“表输入”配置表输入信息，把整理好的代码粘贴进去</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091507-vju1spg-image.png" alt="image.png"></p>
+<p>保存该转换，命名为 S_MTL_SAFETY_STOCKS</p>
+<p>运行该转换，如果报错查看”日志”，这里提示表或视图不存在，把表输出配置改一下即可</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091522-mlrxxep-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091528-t5z3ryn-image.png" alt="image.png"></p>
+<p>确认结果</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091537-77mvupl-image.png" alt="image.png"></p>
+<p><strong>同一个报表的其他基表按照此方法先同步数据到 BI_SRC 层即可</strong></p>
+<h3 id="DIM-层维度表"><a href="#DIM-层维度表" class="headerlink" title="DIM 层维度表"></a>DIM 层维度表</h3><p>这一层一般存放分析使用的维度表</p>
+<p>新建库存组织、货位、子库存、物料的维度。这四张表要先同步基表到 BI_SRC 层，这里不再赘述</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inv.mtl_secondary_inventories</span><br><span class="line">inv.mtl_item_locations</span><br><span class="line">Inv.mtl_system_items_b  </span><br><span class="line">HR.HR_ALL_ORGANIZATION_UNITS  </span><br><span class="line"></span><br><span class="line"><span class="comment">--由于这个报表是库存账龄表，还需要一张账龄区间的维度表</span></span><br><span class="line">BI_DIM.DIM_AGE  </span><br></pre></td></tr></table></figure>
+
+<p>根据实际业务需求划分账龄区间</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091629-gi6s3qi-image.png" alt="image.png"></p>
+<p>账龄维度表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Create table</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> BI_DIM.DIM_AGE</span><br><span class="line">(</span><br><span class="line">  age_wid  NUMBER(<span class="number">10</span>),</span><br><span class="line">  age_name VARCHAR2(<span class="number">100</span>),</span><br><span class="line">  age_low  NUMBER,</span><br><span class="line">  age_high NUMBER</span><br><span class="line">)</span><br><span class="line">tablespace BI_DW_DAT</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">1</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">64</span>K</span><br><span class="line">    next <span class="number">1</span>M</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">  )</span><br><span class="line">nologging;</span><br><span class="line"><span class="comment">-- Add comments to the table </span></span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">table</span> BI_DIM.DIM_AGE</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;账龄段;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建维度存储过程，这里以货位为例</p>
+<p>编写所需的字段 SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t.inventory_location_id,</span><br><span class="line">           t.segment1 <span class="operator">||</span> <span class="string">&#x27;.&#x27;</span> <span class="operator">||</span> t.segment2 <span class="operator">||</span> <span class="string">&#x27;.&#x27;</span> <span class="operator">||</span> t.segment3,</span><br><span class="line">           t.description,</span><br><span class="line">           t.segment1,</span><br><span class="line">           t.segment2,</span><br><span class="line">           t.segment3,</span><br><span class="line">           t.organization_id,</span><br><span class="line">           t.inventory_item_id,</span><br><span class="line">           t.subinventory_code</span><br><span class="line">      <span class="keyword">FROM</span> bi_src.s_mtl_item_locations t</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据 SQL，在 BI_DIM 层创建维度表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Create table</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> DIM_ITEM_LOCATION</span><br><span class="line">(</span><br><span class="line">  location_wid          NUMBER(<span class="number">10</span>),</span><br><span class="line">  inventory_location_id NUMBER,</span><br><span class="line">  locator_name          VARCHAR2(<span class="number">255</span>),</span><br><span class="line">  locator_desc          VARCHAR2(<span class="number">500</span>),</span><br><span class="line">  segment1              VARCHAR2(<span class="number">255</span>),</span><br><span class="line">  segment2              VARCHAR2(<span class="number">255</span>),</span><br><span class="line">  segment3              VARCHAR2(<span class="number">255</span>),</span><br><span class="line">  organization_id       NUMBER,</span><br><span class="line">  inventory_item_id     NUMBER,</span><br><span class="line">  subinventory_code     VARCHAR2(<span class="number">255</span>),</span><br><span class="line">  effective_from_dt     <span class="type">DATE</span>,</span><br><span class="line">  effective_to_dt       <span class="type">DATE</span>,</span><br><span class="line">  delete_flg            <span class="type">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">  current_flg           <span class="type">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">  w_insert_dt           <span class="type">DATE</span>,</span><br><span class="line">  w_update_dt           <span class="type">DATE</span>,</span><br><span class="line">  datasource_num_id     NUMBER,</span><br><span class="line">  etl_proc_id           VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  etl_proc_name         VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  integration_id        VARCHAR2(<span class="number">500</span>),</span><br><span class="line">  x_custom              VARCHAR2(<span class="number">50</span>)</span><br><span class="line">)</span><br><span class="line">tablespace BI_DW_DAT</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">1</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">64</span>K</span><br><span class="line">    next <span class="number">1</span>M</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">  )</span><br><span class="line">nologging;</span><br><span class="line"><span class="comment">-- Add comments to the table </span></span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">table</span> DIM_ITEM_LOCATION</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;物料货位维;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建存储过程</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE <span class="keyword">PROCEDURE</span> SP_DIM_ITEM_LOCATION(P_START_DAY <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                                 P_END_DAY   <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                                 P_PROC_ID   <span class="keyword">IN</span> NUMBER) <span class="keyword">IS</span></span><br><span class="line">  V_START_DAY  NUMBER(<span class="number">10</span>) :<span class="operator">=</span> P_START_DAY;</span><br><span class="line">  V_END_DAY    NUMBER(<span class="number">10</span>) :<span class="operator">=</span> P_END_DAY;</span><br><span class="line">  V_PROC_ID    NUMBER(<span class="number">8</span>) :<span class="operator">=</span> P_PROC_ID;</span><br><span class="line">  V_MAX_ROWNUM NUMBER(<span class="number">10</span>);</span><br><span class="line">  V_START_TIME <span class="type">TIMESTAMP</span>; <span class="comment">--开始时间</span></span><br><span class="line">  V_END_TIME   <span class="type">TIMESTAMP</span>; <span class="comment">--结束时间</span></span><br><span class="line">  L_LOG        BI_DW.W_ETL_LOG<span class="operator">%</span>ROWTYPE; <span class="comment">--日志表游标</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="comment">--记录程序开始时间</span></span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">INTO</span> V_START_TIME <span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line">  <span class="comment">--记录日志</span></span><br><span class="line">  L_LOG.PROC_NAME       :<span class="operator">=</span> <span class="string">&#x27;SP_DIM_ITEM_LOCATION&#x27;</span>; <span class="comment">--过程名称</span></span><br><span class="line">  L_LOG.TABLE_TYPE      :<span class="operator">=</span> <span class="string">&#x27;D&#x27;</span>; <span class="comment">--表类型</span></span><br><span class="line">  L_LOG.TABLE_NAME      :<span class="operator">=</span> <span class="string">&#x27;DIM_ITEM_LOCATION&#x27;</span>; <span class="comment">--表名称</span></span><br><span class="line">  L_LOG.MEASURE_ID      :<span class="operator">=</span> <span class="keyword">NULL</span>;</span><br><span class="line">  L_LOG.ETL_INTERVAL    :<span class="operator">=</span> V_START_DAY <span class="operator">||</span> <span class="string">&#x27;~&#x27;</span> <span class="operator">||</span> V_END_DAY; <span class="comment">--抽数区间</span></span><br><span class="line">  L_LOG.PROC_ID         :<span class="operator">=</span> V_PROC_ID; <span class="comment">--过程D</span></span><br><span class="line">  L_LOG.START_TIME      :<span class="operator">=</span> V_START_TIME; <span class="comment">--开始时间</span></span><br><span class="line">  L_LOG.ETL_RECORD_LOAD :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--涉及记录数</span></span><br><span class="line">  L_LOG.ETL_RECORD_INS  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--实际插入的记录数</span></span><br><span class="line">  L_LOG.ETL_RECORD_UPD  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--更新的记录数，如果该存储过程有更新部分，则不等于零</span></span><br><span class="line">  L_LOG.ETL_RECORD_DEL  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--插入前清理目标时的删除记录数</span></span><br><span class="line">  <span class="comment">--加载记录数</span></span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>) <span class="keyword">INTO</span> L_LOG.ETL_RECORD_LOAD <span class="keyword">FROM</span> DIM_ITEM_LOCATION T;</span><br><span class="line">  <span class="comment">--取目前最大OW_WID</span></span><br><span class="line">  <span class="keyword">SELECT</span> NVL(<span class="built_in">MAX</span>(T.Location_Wid), <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">INTO</span> V_MAX_ROWNUM</span><br><span class="line">    <span class="keyword">FROM</span> DIM_ITEM_LOCATION T;</span><br><span class="line"></span><br><span class="line">  <span class="comment">--插入1记录数</span></span><br><span class="line">  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> DIM_ITEM_LOCATION</span><br><span class="line">    (location_wid,</span><br><span class="line">     inventory_location_id,</span><br><span class="line">     locator_name,</span><br><span class="line">     locator_desc,</span><br><span class="line">     segment1,</span><br><span class="line">     segment2,</span><br><span class="line">     segment3,</span><br><span class="line">     organization_id,</span><br><span class="line">     inventory_item_id,</span><br><span class="line">     subinventory_code,</span><br><span class="line">     effective_from_dt,</span><br><span class="line">     effective_to_dt,</span><br><span class="line">     delete_flg,</span><br><span class="line">     current_flg,</span><br><span class="line">     w_insert_dt,</span><br><span class="line">     w_update_dt,</span><br><span class="line">     datasource_num_id,</span><br><span class="line">     etl_proc_id,</span><br><span class="line">     etl_proc_name,</span><br><span class="line">     integration_id,</span><br><span class="line">     x_custom)</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="number">-1</span>,</span><br><span class="line">           <span class="number">-1</span>,</span><br><span class="line">           <span class="string">&#x27;未知,</span></span><br><span class="line"><span class="string">           &#x27;</span>未知,</span><br><span class="line">           <span class="string">&#x27;未知,</span></span><br><span class="line"><span class="string">           &#x27;</span>未知,</span><br><span class="line">           <span class="string">&#x27;未知,</span></span><br><span class="line"><span class="string">           -1,</span></span><br><span class="line"><span class="string">           -1,</span></span><br><span class="line"><span class="string">           &#x27;</span>未知,</span><br><span class="line">           TO_DATE(<span class="string">&#x27;19000101&#x27;</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>),</span><br><span class="line">           TO_DATE(<span class="string">&#x27;99990101&#x27;</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>),</span><br><span class="line">           <span class="string">&#x27;N&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;Y&#x27;</span>,</span><br><span class="line">           SYSDATE,</span><br><span class="line">           SYSDATE,</span><br><span class="line">           <span class="number">9</span>,</span><br><span class="line">           V_PROC_ID,</span><br><span class="line">           L_LOG.PROC_NAME,</span><br><span class="line">           <span class="number">-1</span>,</span><br><span class="line">           <span class="number">-1</span></span><br><span class="line">      <span class="keyword">FROM</span> DUAL</span><br><span class="line">     <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line">     (<span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> DIM_ITEM_LOCATION T1 <span class="keyword">WHERE</span> T1.Location_Wid <span class="operator">=</span> <span class="number">-1</span>);</span><br><span class="line">  <span class="keyword">COMMIT</span>;</span><br><span class="line">  <span class="comment">--INTEGRATION_ID不一样的插入</span></span><br><span class="line">  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> DIM_ITEM_LOCATION</span><br><span class="line">    (location_wid,</span><br><span class="line">     inventory_location_id,</span><br><span class="line">     locator_name,</span><br><span class="line">     locator_desc,</span><br><span class="line">     segment1,</span><br><span class="line">     segment2,</span><br><span class="line">     segment3,</span><br><span class="line">     organization_id,</span><br><span class="line">     inventory_item_id,</span><br><span class="line">     subinventory_code,</span><br><span class="line">     effective_from_dt,</span><br><span class="line">     effective_to_dt,</span><br><span class="line">     delete_flg,</span><br><span class="line">     current_flg,</span><br><span class="line">     w_insert_dt,</span><br><span class="line">     w_update_dt,</span><br><span class="line">     datasource_num_id,</span><br><span class="line">     etl_proc_id,</span><br><span class="line">     etl_proc_name,</span><br><span class="line">     integration_id)</span><br><span class="line">    <span class="keyword">SELECT</span> ROWNUM <span class="operator">+</span> V_MAX_ROWNUM <span class="keyword">AS</span> LOCATION_WID,</span><br><span class="line">           t.inventory_location_id,</span><br><span class="line">           t.segment1 <span class="operator">||</span> <span class="string">&#x27;.&#x27;</span> <span class="operator">||</span> t.segment2 <span class="operator">||</span> <span class="string">&#x27;.&#x27;</span> <span class="operator">||</span> t.segment3,</span><br><span class="line">           t.description,</span><br><span class="line">           t.segment1,</span><br><span class="line">           t.segment2,</span><br><span class="line">           t.segment3,</span><br><span class="line">           t.organization_id,</span><br><span class="line">           t.inventory_item_id,</span><br><span class="line">           t.subinventory_code,</span><br><span class="line">           TO_DATE(<span class="string">&#x27;19000101&#x27;</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>) <span class="keyword">AS</span> EFFECTIVE_FROM_DT,</span><br><span class="line">           TO_DATE(<span class="string">&#x27;99990101&#x27;</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>) <span class="keyword">AS</span> EFFECTIVE_TO_DT,</span><br><span class="line">           <span class="string">&#x27;N&#x27;</span> <span class="keyword">AS</span> DELETE_FLG,</span><br><span class="line">           <span class="string">&#x27;T&#x27;</span> <span class="keyword">AS</span> CURRENT_FLG,</span><br><span class="line">           SYSDATE <span class="keyword">AS</span> W_INSERT_DT,</span><br><span class="line">           SYSDATE <span class="keyword">AS</span> W_UPDATE_DT,</span><br><span class="line">           <span class="number">1</span> <span class="keyword">AS</span> DATASOURCE_NUM_ID,</span><br><span class="line">           V_PROC_ID <span class="keyword">AS</span> ETL_PROC_ID,</span><br><span class="line">           L_LOG.PROC_NAME ETL_PROC_NAME,</span><br><span class="line">           t.inventory_location_id</span><br><span class="line">      <span class="keyword">FROM</span> bi_src.s_mtl_item_locations t</span><br><span class="line">     <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">              <span class="keyword">FROM</span> DIM_ITEM_LOCATION T1</span><br><span class="line">             <span class="keyword">WHERE</span> T1.Location_Wid <span class="operator">=</span> t.inventory_location_id);</span><br><span class="line"></span><br><span class="line">  <span class="comment">--插入记录数</span></span><br><span class="line">  L_LOG.ETL_RECORD_INS :<span class="operator">=</span> <span class="keyword">SQL</span><span class="operator">%</span>ROWCOUNT <span class="operator">+</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">COMMIT</span>;</span><br><span class="line">  <span class="comment">--缓慢变化处理</span></span><br><span class="line">  <span class="comment">--更新旧记录</span></span><br><span class="line">  <span class="keyword">UPDATE</span> DIM_ITEM_LOCATION T</span><br><span class="line">     <span class="keyword">SET</span> T.EFFECTIVE_TO_DT <span class="operator">=</span> TO_DATE(V_END_DAY, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span><br><span class="line">         T.CURRENT_FLG     <span class="operator">=</span> <span class="string">&#x27;N&#x27;</span></span><br><span class="line">   <span class="keyword">WHERE</span> T.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;Y&#x27;</span></span><br><span class="line">     <span class="keyword">AND</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="string">&#x27;X&#x27;</span></span><br><span class="line">            <span class="keyword">FROM</span> DIM_ITEM_LOCATION T1</span><br><span class="line">           <span class="keyword">WHERE</span> T1.Location_Wid <span class="operator">=</span> T.Location_Wid</span><br><span class="line">             <span class="keyword">AND</span> T1.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;T&#x27;</span>);</span><br><span class="line">  <span class="keyword">COMMIT</span>;</span><br><span class="line">  <span class="comment">--更新新记录</span></span><br><span class="line">  <span class="keyword">UPDATE</span> DIM_ITEM_LOCATION T</span><br><span class="line">     <span class="keyword">SET</span> T.EFFECTIVE_FROM_DT <span class="operator">=</span> TO_DATE(V_END_DAY, <span class="string">&#x27;YYYYMMDD&#x27;</span>)</span><br><span class="line">   <span class="keyword">WHERE</span> T.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;T&#x27;</span></span><br><span class="line">     <span class="keyword">AND</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="string">&#x27;X&#x27;</span></span><br><span class="line">            <span class="keyword">FROM</span> DIM_ITEM_LOCATION T1</span><br><span class="line">           <span class="keyword">WHERE</span> T1.Location_Wid <span class="operator">=</span> T.Location_Wid</span><br><span class="line">             <span class="keyword">AND</span> T1.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;N&#x27;</span>);</span><br><span class="line">  <span class="keyword">COMMIT</span>;</span><br><span class="line">  <span class="comment">--更新新记录</span></span><br><span class="line">  <span class="keyword">UPDATE</span> DIM_ITEM_LOCATION T</span><br><span class="line">     <span class="keyword">SET</span> T.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;Y&#x27;</span></span><br><span class="line">   <span class="keyword">WHERE</span> T.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;T&#x27;</span>;</span><br><span class="line">  <span class="keyword">COMMIT</span>;</span><br><span class="line">  <span class="comment">--程序结束时间</span></span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">INTO</span> V_END_TIME <span class="keyword">FROM</span> DUAL;</span><br><span class="line">  <span class="comment">--执行时间</span></span><br><span class="line">  <span class="keyword">SELECT</span> TRUNC(TO_NUMBER(TO_CHAR(V_END_TIME, <span class="string">&#x27;YYYYMMDDHH24MISSXFF&#x27;</span>)), <span class="number">2</span>) <span class="operator">-</span></span><br><span class="line">         TRUNC(TO_NUMBER(TO_CHAR(V_START_TIME, <span class="string">&#x27;YYYYMMDDHH24MISSXFF&#x27;</span>)), <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">INTO</span> L_LOG.ETL_DURATION</span><br><span class="line">    <span class="keyword">FROM</span> DUAL;</span><br><span class="line">  L_LOG.END_TIME   :<span class="operator">=</span> V_END_TIME;</span><br><span class="line">  L_LOG.ETL_STATUS :<span class="operator">=</span> <span class="string">&#x27;SUCCESS&#x27;</span>;</span><br><span class="line">  <span class="comment">--调用执行日志</span></span><br><span class="line">  BI_DW.SP_W_ETL_LOG(L_LOG);</span><br><span class="line">EXCEPTION</span><br><span class="line">  <span class="keyword">WHEN</span> OTHERS <span class="keyword">THEN</span></span><br><span class="line">    <span class="keyword">ROLLBACK</span>;</span><br><span class="line">    L_LOG.ETL_STATUS :<span class="operator">=</span> <span class="string">&#x27;FAILURE&#x27;</span>;</span><br><span class="line">    L_LOG.ERR_MSG    :<span class="operator">=</span> SUBSTR(SQLERRM, <span class="number">1</span>, <span class="number">2000</span>);</span><br><span class="line">    BI_DW.SP_W_ETL_LOG(L_LOG);</span><br><span class="line"><span class="keyword">END</span> SP_DIM_ITEM_LOCATION;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关于缓慢变化处理：</strong></p>
+<p>简单举个例子：张三 2020 年 5 月之前，在运营部做销售。到了 2020 年 6 月 1 日，张三到项目部做销售。那么体现在数据的变化上，就应该是张三，有两个成本中心。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">姓名  启用日期从      启用日期至   成本中心  成本中心编码  角色id</span><br><span class="line">张三  <span class="number">1973</span>        <span class="operator">-</span> <span class="number">2020</span><span class="number">-04</span><span class="number">-30</span>  运营部    <span class="number">1013</span>        <span class="number">1198</span></span><br><span class="line">张三  <span class="number">2020</span><span class="number">-05</span><span class="number">-01</span>  <span class="operator">-</span> Now         项目部    <span class="number">1015</span>        <span class="number">1198</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是说，在数据库里面应该有两条记录，并且项目部的这条记录是当前正在使用的记录。在核算张三业绩的时候，应该以 2020-05-01 为分界点，分属于不同的两个部门。从数据库角度来说，缓慢变化也可以理解为记录每一次的变动。</p>
+<p>在 DIM 层启用缓慢变化，关键字段是 integration_id，这个字段必须是整个数据库中唯一的。在这个例子中，查询运营部的 integration_id 应该是 11981013，查询项目部的 integration_id 应该是 11981015。在这里 integration_id 是角色 id 和成本中心编码的组合，因为只有这两个字段的组合才能够保证记录的唯一性。</p>
+<p>在启用了缓慢变化以后，下列的 Location_Wid 都要改成 integration_id</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--缓慢变化处理</span></span><br><span class="line">  <span class="comment">--更新旧记录的失效日期</span></span><br><span class="line">  <span class="keyword">UPDATE</span> DIM_ITEM_LOCATION T</span><br><span class="line">     <span class="keyword">SET</span> T.EFFECTIVE_TO_DT <span class="operator">=</span> TO_DATE(V_END_DAY, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span><br><span class="line">         T.CURRENT_FLG     <span class="operator">=</span> <span class="string">&#x27;N&#x27;</span></span><br><span class="line">   <span class="keyword">WHERE</span> T.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;Y&#x27;</span></span><br><span class="line">     <span class="keyword">AND</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="string">&#x27;X&#x27;</span></span><br><span class="line">            <span class="keyword">FROM</span> DIM_ITEM_LOCATION T1</span><br><span class="line">           <span class="keyword">WHERE</span> T1.Location_Wid <span class="operator">=</span> T.Location_Wid  <span class="comment">--integration_id</span></span><br><span class="line">             <span class="keyword">AND</span> T1.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;T&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">--更新新记录的启用日期</span></span><br><span class="line">  <span class="keyword">UPDATE</span> DIM_ITEM_LOCATION T</span><br><span class="line">     <span class="keyword">SET</span> T.EFFECTIVE_FROM_DT <span class="operator">=</span> TO_DATE(V_END_DAY, <span class="string">&#x27;YYYYMMDD&#x27;</span>)</span><br><span class="line">   <span class="keyword">WHERE</span> T.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;T&#x27;</span></span><br><span class="line">     <span class="keyword">AND</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="string">&#x27;X&#x27;</span></span><br><span class="line">            <span class="keyword">FROM</span> DIM_ITEM_LOCATION T1</span><br><span class="line">           <span class="keyword">WHERE</span> T1.Location_Wid <span class="operator">=</span> T.Location_Wid</span><br><span class="line">             <span class="keyword">AND</span> T1.CURRENT_FLG <span class="operator">=</span> <span class="string">&#x27;N&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>关于维度字段：一般是指用于分析的字段，或者说是 erp 过滤数据的参数</p>
+<p>设置 kettle 运行存储过程</p>
+<p>设置变量，这里的变量个数和类型要与存储过程一致</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091927-3olk5hl-image.png" alt="image.png"></p>
+<p>设置存储过程，这里的参数名称，要同“获取变量”</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023091936-afswmar-image.png" alt="image.png"></p>
+<p><strong>点击运行，到数据库查看结果即可。剩下的货位、物料维度也是如此，但是物料维度建议添加标准成本和实际成本。</strong></p>
+<h3 id="DW-层事实表"><a href="#DW-层事实表" class="headerlink" title="DW 层事实表"></a>DW 层事实表</h3><p>写出报表的 SQL 脚本</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> hou.organization_name,</span><br><span class="line">       hou.organization_short_code,</span><br><span class="line">       msi.segment1 item_number,</span><br><span class="line">       msi.DESCRIPTION item_desc,</span><br><span class="line">       msi.PRIMARY_UOM_CODE,</span><br><span class="line">       moq.SUBINVENTORY_CODE,</span><br><span class="line">       dil.locator_name,</span><br><span class="line">       moq.LOT_NUMBER,</span><br><span class="line">       NVL(ms.SAFETY_STOCK_QUANTITY, <span class="number">0</span>) safety_stock,</span><br><span class="line">       nvl(moq.TRANSACTION_QUANTITY, <span class="number">0</span>) onhand_qty,</span><br><span class="line">       hou.organization_wid,</span><br><span class="line">       di.inventory_wid,</span><br><span class="line">       dil.location_wid,</span><br><span class="line">       dim.item_wid</span><br><span class="line">  <span class="keyword">FROM</span> BI_SRC.S_mtl_system_items_b           msi,</span><br><span class="line">       BI_SRC.S_mtl_safety_stocks            ms,</span><br><span class="line">       BI_SRC.S_mtl_onhand_quantities_detail moq,</span><br><span class="line">       BI_DIM.DIM_ORGANIZATION_UNITS         hou,</span><br><span class="line">       BI_DIM.DIM_INVENTORIES                di,</span><br><span class="line">       BI_DIM.DIM_ITEM_LOCATION              dil,</span><br><span class="line">       BI_DIM.DIM_ITEM                       dim</span><br><span class="line"> <span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">AND</span> ms.INVENTORY_ITEM_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.INVENTORY_ITEM_ID</span><br><span class="line">   <span class="keyword">AND</span> ms.ORGANIZATION_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.ORGANIZATION_ID</span><br><span class="line">   <span class="keyword">AND</span> moq.INVENTORY_ITEM_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.INVENTORY_ITEM_ID</span><br><span class="line">   <span class="keyword">AND</span> moq.ORGANIZATION_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.ORGANIZATION_ID</span><br><span class="line">   <span class="keyword">AND</span> hou.organization_id <span class="operator">=</span> msi.organization_id</span><br><span class="line">   <span class="keyword">AND</span> di.secondary_inventory_name <span class="operator">=</span> nvl(moq.SUBINVENTORY_CODE,<span class="number">-1</span>)</span><br><span class="line">   <span class="keyword">AND</span> di.organization_id <span class="operator">=</span> nvl(moq.organization_id,<span class="number">-1</span>)</span><br><span class="line">   <span class="keyword">AND</span> dil.inventory_location_id <span class="operator">=</span> nvl(moq.locator_id,<span class="number">-1</span>)</span><br><span class="line">   <span class="keyword">AND</span> dim.item_id <span class="operator">=</span> msi.INVENTORY_ITEM_ID</span><br><span class="line">   <span class="keyword">AND</span> dim.organization_id <span class="operator">=</span> msi.organization_id</span><br><span class="line">   <span class="keyword">AND</span> moq.SUBINVENTORY_CODE <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;%结算&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>根据所需字段，创建 dw 事实表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Create table</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> DW_INV_AGACCOUNT</span><br><span class="line">(</span><br><span class="line">  organization_name       VARCHAR2(<span class="number">100</span>),</span><br><span class="line">  organization_short_code VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  item_number             VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  item_desc               VARCHAR2(<span class="number">255</span>),</span><br><span class="line">  primary_uom_code        VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  subinventory_code       VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  locator_name            VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  lot_number              VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  safety_stock            NUMBER,</span><br><span class="line">  onhand_qty              NUMBER,</span><br><span class="line">  transaction_date        <span class="type">DATE</span>,</span><br><span class="line">  organization_wid        NUMBER,</span><br><span class="line">  inventory_wid           NUMBER,</span><br><span class="line">  location_wid            NUMBER,</span><br><span class="line">  item_wid                NUMBER,</span><br><span class="line">  w_insert_dt             <span class="type">DATE</span>,</span><br><span class="line">  w_update_dt             <span class="type">DATE</span>,</span><br><span class="line">  datasource_num_id       NUMBER,</span><br><span class="line">  etl_proc_id             VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  etl_proc_name           VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  line_id                 VARCHAR2(<span class="number">100</span>)</span><br><span class="line">)</span><br><span class="line">tablespace BI_DW_DAT</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">1</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">64</span>K</span><br><span class="line">    next <span class="number">1</span>M</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">  )</span><br><span class="line">nologging;</span><br><span class="line"><span class="comment">-- Add comments to the table </span></span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">table</span> DW_INV_AGACCOUNT</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;库存物料明细;</span></span><br><span class="line"><span class="string">-- Add comments to the columns </span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.organization_name</span></span><br><span class="line"><span class="string">  is &#x27;</span>库存组织名称;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.organization_short_code</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;库存组织代码;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.item_number</span></span><br><span class="line"><span class="string">  is &#x27;</span>物料编码;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.item_desc</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;物料描述;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.primary_uom_code</span></span><br><span class="line"><span class="string">  is &#x27;</span>单位;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.subinventory_code</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;子库存;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.locator_name</span></span><br><span class="line"><span class="string">  is &#x27;</span>货位名称;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.lot_number</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;批次号;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.safety_stock</span></span><br><span class="line"><span class="string">  is &#x27;</span>安全库存;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.onhand_qty</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;现有量;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.transaction_date</span></span><br><span class="line"><span class="string">  is &#x27;</span>事务处理日期;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.w_insert_dt</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;插入时间;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.w_update_dt</span></span><br><span class="line"><span class="string">  is &#x27;</span>更新时间;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> DW_INV_AGACCOUNT.datasource_num_id</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;数据来源;</span></span><br><span class="line"><span class="string">comment on column DW_INV_AGACCOUNT.etl_proc_name</span></span><br><span class="line"><span class="string">  is &#x27;</span>ETL程序;</span><br></pre></td></tr></table></figure>
+
+<p>创建 dw 层存储过程，传输库存明细数据</p>
+<p>package 定义：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE PACKAGE PKG_DW_INV_AGACCOUNT <span class="keyword">IS</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">--获取事务处理日期</span></span><br><span class="line">  <span class="keyword">FUNCTION</span> get_transaction_date(p_lot_control_code <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                p_organization_id  <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                p_item_id          <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                p_lot_number       <span class="keyword">IN</span> VARCHAR2) <span class="keyword">RETURN</span> <span class="type">DATE</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">-- Author  : LYH</span></span><br><span class="line">  <span class="comment">-- Created : 2020-5-27 上午1:21:01</span></span><br><span class="line">  <span class="comment">-- Purpose : 库存明细</span></span><br><span class="line">  <span class="keyword">PROCEDURE</span> SP_DW_INV_AGACCOUNT(P_START_DAY <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_END_DAY   <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_PROC_ID   <span class="keyword">IN</span> NUMBER);</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> PKG_DW_INV_AGACCOUNT;</span><br></pre></td></tr></table></figure>
+
+<p>package 内容：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE PACKAGE BODY PKG_DW_INV_AGACCOUNT <span class="keyword">IS</span></span><br><span class="line">  <span class="comment">--获取事务处理日期</span></span><br><span class="line">  <span class="keyword">FUNCTION</span> get_transaction_date(p_lot_control_code <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                p_organization_id  <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                p_item_id          <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                p_lot_number       <span class="keyword">IN</span> VARCHAR2) <span class="keyword">RETURN</span> <span class="type">DATE</span> <span class="keyword">IS</span></span><br><span class="line">    l_transaction_date <span class="type">DATE</span>;</span><br><span class="line">  <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment">--不启用批次控制</span></span><br><span class="line">    IF p_lot_control_code <span class="operator">=</span> <span class="number">1</span> <span class="keyword">THEN</span></span><br><span class="line">      <span class="keyword">SELECT</span> t.TRANSACTION_DATE</span><br><span class="line">        <span class="keyword">INTO</span> l_transaction_date</span><br><span class="line">        <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> mmt.INVENTORY_ITEM_ID,</span><br><span class="line">                     mmt.ORGANIZATION_ID,</span><br><span class="line">                     mmt.TRANSACTION_DATE</span><br><span class="line">                <span class="keyword">FROM</span> BI_SRC.S_mtl_material_transactions mmt</span><br><span class="line">               <span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">                 <span class="keyword">AND</span> p_item_id <span class="operator">=</span> mmt.INVENTORY_ITEM_ID</span><br><span class="line">                 <span class="keyword">AND</span> p_organization_id <span class="operator">=</span> mmt.ORGANIZATION_ID</span><br><span class="line">               <span class="keyword">ORDER</span> <span class="keyword">BY</span> mmt.TRANSACTION_DATE <span class="keyword">ASC</span>) t <span class="comment">-- 批次控制来判断msi.Lot_Control_Code</span></span><br><span class="line">       <span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">         <span class="keyword">AND</span> ROWNUM <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">ELSE</span></span><br><span class="line">      <span class="comment">--启用批次控制</span></span><br><span class="line">      <span class="keyword">SELECT</span> t.TRANSACTION_DATE</span><br><span class="line">        <span class="keyword">INTO</span> l_transaction_date</span><br><span class="line">        <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> mmt.INVENTORY_ITEM_ID,</span><br><span class="line">                     mmt.ORGANIZATION_ID,</span><br><span class="line">                     mmt.TRANSACTION_DATE,</span><br><span class="line">                     mtln.LOT_NUMBER</span><br><span class="line">                <span class="keyword">FROM</span> BI_SRC.S_mtl_material_transactions   mmt,</span><br><span class="line">                     BI_SRC.S_mtl_transaction_lot_numbers mtln</span><br><span class="line">               <span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">                 <span class="keyword">AND</span> mmt.TRANSACTION_ID <span class="operator">=</span> mtln.TRANSACTION_ID</span><br><span class="line">                 <span class="keyword">AND</span> mtln.lot_number <span class="operator">=</span> p_lot_number</span><br><span class="line">                 <span class="keyword">AND</span> p_item_id <span class="operator">=</span> mmt.INVENTORY_ITEM_ID</span><br><span class="line">                 <span class="keyword">AND</span> p_organization_id <span class="operator">=</span> mmt.ORGANIZATION_ID</span><br><span class="line">               <span class="keyword">ORDER</span> <span class="keyword">BY</span> mmt.TRANSACTION_DATE <span class="keyword">ASC</span>) t <span class="comment">-- 批次控制来判断msi.Lot_Control_Code</span></span><br><span class="line">       <span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">         <span class="keyword">AND</span> ROWNUM <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">RETURN</span> l_transaction_date;</span><br><span class="line">  EXCEPTION</span><br><span class="line">    <span class="keyword">WHEN</span> OTHERS <span class="keyword">THEN</span></span><br><span class="line">      <span class="keyword">RETURN</span> <span class="keyword">NULL</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">END</span> get_transaction_date;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">PROCEDURE</span> SP_DW_INV_AGACCOUNT(P_START_DAY <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_END_DAY   <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_PROC_ID   <span class="keyword">IN</span> NUMBER) <span class="keyword">IS</span></span><br><span class="line">    V_START_DAY  NUMBER(<span class="number">10</span>) :<span class="operator">=</span> P_START_DAY;</span><br><span class="line">    V_END_DAY    NUMBER(<span class="number">10</span>) :<span class="operator">=</span> P_END_DAY;</span><br><span class="line">    V_PROC_ID    NUMBER(<span class="number">8</span>) :<span class="operator">=</span> P_PROC_ID;</span><br><span class="line">    V_START_TIME <span class="type">TIMESTAMP</span>; <span class="comment">--开始时间</span></span><br><span class="line">    V_END_TIME   <span class="type">TIMESTAMP</span>; <span class="comment">--结束时间</span></span><br><span class="line">    L_LOG        BI_DW.W_ETL_LOG<span class="operator">%</span>ROWTYPE; <span class="comment">--日志表游标</span></span><br><span class="line">  <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment">--记录程序开始时间</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">INTO</span> V_START_TIME <span class="keyword">FROM</span> DUAL;</span><br><span class="line">    <span class="comment">--记录日志</span></span><br><span class="line">    L_LOG.PROC_NAME       :<span class="operator">=</span> <span class="string">&#x27;SP_DW_INV_AGACCOUNT&#x27;</span>; <span class="comment">--过程名称</span></span><br><span class="line">    L_LOG.TABLE_TYPE      :<span class="operator">=</span> <span class="string">&#x27;F&#x27;</span>; <span class="comment">--表类型</span></span><br><span class="line">    L_LOG.TABLE_NAME      :<span class="operator">=</span> <span class="string">&#x27;DW_INV_AGACCOUNT&#x27;</span>; <span class="comment">--表名称</span></span><br><span class="line">    L_LOG.MEASURE_ID      :<span class="operator">=</span> <span class="keyword">NULL</span>;</span><br><span class="line">    L_LOG.ETL_INTERVAL    :<span class="operator">=</span> V_START_DAY <span class="operator">||</span> <span class="string">&#x27;~&#x27;</span> <span class="operator">||</span> V_END_DAY; <span class="comment">--抽数区间</span></span><br><span class="line">    L_LOG.PROC_ID         :<span class="operator">=</span> V_PROC_ID; <span class="comment">--过程D</span></span><br><span class="line">    L_LOG.START_TIME      :<span class="operator">=</span> V_START_TIME; <span class="comment">--开始时间</span></span><br><span class="line">    L_LOG.ETL_RECORD_LOAD :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--涉及记录数</span></span><br><span class="line">    L_LOG.ETL_RECORD_INS  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--实际插入的记录数</span></span><br><span class="line">    L_LOG.ETL_RECORD_UPD  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--更新的记录数，如果该存储过程有更新部分，则不等于零</span></span><br><span class="line">    L_LOG.ETL_RECORD_DEL  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--插入前清理目标时的删除记录数</span></span><br><span class="line">    <span class="comment">--加载记录数</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>) <span class="keyword">INTO</span> L_LOG.ETL_RECORD_LOAD <span class="keyword">FROM</span> DW_INV_AGACCOUNT T;</span><br><span class="line">    <span class="comment">--删除记录</span></span><br><span class="line">    <span class="comment">/*DELETE DW_INV_AGACCOUNT F</span></span><br><span class="line"><span class="comment">     WHERE F.DAY_WID &gt;= V_START_DAY</span></span><br><span class="line"><span class="comment">       AND F.DAY_WID &lt;= V_END_DAY;</span></span><br><span class="line"><span class="comment">    COMMIT;*/</span></span><br><span class="line">    <span class="keyword">EXECUTE</span> IMMEDIATE <span class="string">&#x27;TRUNCATE TABLE DW_INV_AGACCOUNT&#x27;</span>;</span><br><span class="line">    <span class="comment">--加载数据</span></span><br><span class="line">    <span class="keyword">INSERT</span> <span class="keyword">INTO</span> DW_INV_AGACCOUNT</span><br><span class="line">      (organization_name,</span><br><span class="line">       organization_short_code,</span><br><span class="line">       item_number,</span><br><span class="line">       item_desc,</span><br><span class="line">       primary_uom_code,</span><br><span class="line">       subinventory_code,</span><br><span class="line">       locator_name,</span><br><span class="line">       lot_number,</span><br><span class="line">       safety_stock,</span><br><span class="line">       onhand_qty,</span><br><span class="line">       transaction_date,</span><br><span class="line">       organization_wid,</span><br><span class="line">       inventory_wid,</span><br><span class="line">       location_wid,</span><br><span class="line">       item_wid,</span><br><span class="line">       w_insert_dt,</span><br><span class="line">       w_update_dt,</span><br><span class="line">       datasource_num_id,</span><br><span class="line">       etl_proc_id,</span><br><span class="line">       etl_proc_name,</span><br><span class="line">       line_id)</span><br><span class="line">      <span class="keyword">SELECT</span> organization_name,</span><br><span class="line">             organization_short_code,</span><br><span class="line">             item_number,</span><br><span class="line">             item_desc,</span><br><span class="line">             PRIMARY_UOM_CODE,</span><br><span class="line">             SUBINVENTORY_CODE,</span><br><span class="line">             locator_name,</span><br><span class="line">             LOT_NUMBER,</span><br><span class="line">             safety_stock,</span><br><span class="line">             onhand_qty,</span><br><span class="line">             transaction_date,</span><br><span class="line">             organization_wid,</span><br><span class="line">             inventory_wid,</span><br><span class="line">             location_wid,</span><br><span class="line">             item_wid,</span><br><span class="line">             SYSDATE <span class="keyword">AS</span> W_INSERT_DT,</span><br><span class="line">             SYSDATE <span class="keyword">AS</span> W_UPDATE_DT,</span><br><span class="line">             <span class="number">1</span> <span class="keyword">AS</span> DATASOURCE_NUM_ID,</span><br><span class="line">             V_PROC_ID,</span><br><span class="line">             L_LOG.PROC_NAME,</span><br><span class="line">             inventory_item_id <span class="operator">||</span> organization_id <span class="operator">||</span> subinventory_code <span class="operator">||</span></span><br><span class="line">             nvl(lot_number, <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> hou.organization_name,</span><br><span class="line">                     hou.organization_short_code,</span><br><span class="line">                     msi.segment1 item_number,</span><br><span class="line">                     msi.DESCRIPTION item_desc,</span><br><span class="line">                     msi.PRIMARY_UOM_CODE,</span><br><span class="line">                     moq.SUBINVENTORY_CODE,</span><br><span class="line">                     dil.locator_name,</span><br><span class="line">                     moq.LOT_NUMBER,</span><br><span class="line">                     NVL(ms.SAFETY_STOCK_QUANTITY, <span class="number">0</span>) safety_stock,</span><br><span class="line">                     nvl(moq.TRANSACTION_QUANTITY, <span class="number">0</span>) onhand_qty,</span><br><span class="line">                     hou.organization_wid,</span><br><span class="line">                     di.inventory_wid,</span><br><span class="line">                     dil.location_wid,</span><br><span class="line">                     dim.item_wid,</span><br><span class="line">                     msi.inventory_item_id,</span><br><span class="line">                     msi.organization_id,</span><br><span class="line">                     get_transaction_date(msi.lot_control_code,</span><br><span class="line">                                          msi.organization_id,</span><br><span class="line">                                          msi.inventory_item_id,</span><br><span class="line">                                          moq.lot_number) transaction_date</span><br><span class="line">                <span class="keyword">FROM</span> BI_SRC.S_mtl_system_items_b           msi,</span><br><span class="line">                     BI_SRC.S_mtl_safety_stocks            ms,</span><br><span class="line">                     BI_SRC.S_mtl_onhand_quantities_detail moq,</span><br><span class="line">                     BI_DIM.DIM_ORGANIZATION_UNITS         hou,</span><br><span class="line">                     BI_DIM.DIM_INVENTORIES                di,</span><br><span class="line">                     BI_DIM.DIM_ITEM_LOCATION              dil,</span><br><span class="line">                     BI_DIM.DIM_ITEM                       dim</span><br><span class="line">               <span class="keyword">WHERE</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">                 <span class="keyword">AND</span> ms.INVENTORY_ITEM_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.INVENTORY_ITEM_ID</span><br><span class="line">                 <span class="keyword">AND</span> ms.ORGANIZATION_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.ORGANIZATION_ID</span><br><span class="line">                 <span class="keyword">AND</span> moq.INVENTORY_ITEM_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.INVENTORY_ITEM_ID</span><br><span class="line">                 <span class="keyword">AND</span> moq.ORGANIZATION_ID(<span class="operator">+</span>) <span class="operator">=</span> msi.ORGANIZATION_ID</span><br><span class="line">                 <span class="keyword">AND</span> hou.organization_id <span class="operator">=</span> msi.organization_id</span><br><span class="line">                 <span class="keyword">AND</span> di.secondary_inventory_name <span class="operator">=</span></span><br><span class="line">                     nvl(moq.SUBINVENTORY_CODE, <span class="number">-1</span>)</span><br><span class="line">                 <span class="keyword">AND</span> di.organization_id <span class="operator">=</span> nvl(moq.organization_id, <span class="number">-1</span>)</span><br><span class="line">                 <span class="keyword">AND</span> dil.inventory_location_id <span class="operator">=</span> nvl(moq.locator_id, <span class="number">-1</span>)</span><br><span class="line">                 <span class="keyword">AND</span> dim.item_id <span class="operator">=</span> msi.INVENTORY_ITEM_ID</span><br><span class="line">                 <span class="keyword">AND</span> dim.organization_id <span class="operator">=</span> msi.organization_id</span><br><span class="line">                 <span class="keyword">AND</span> moq.SUBINVENTORY_CODE <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">&#x27;%结算&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">    L_LOG.ETL_RECORD_INS :<span class="operator">=</span> L_LOG.ETL_RECORD_INS <span class="operator">+</span> <span class="keyword">SQL</span><span class="operator">%</span>ROWCOUNT;</span><br><span class="line">    <span class="keyword">COMMIT</span>;</span><br><span class="line">    <span class="comment">--程序结束时间</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">INTO</span> V_END_TIME <span class="keyword">FROM</span> DUAL;</span><br><span class="line">    <span class="comment">--执行时间</span></span><br><span class="line">    <span class="keyword">SELECT</span> TRUNC(TO_NUMBER(TO_CHAR(V_END_TIME, <span class="string">&#x27;YYYYMMDDHH24MISSXFF&#x27;</span>)), <span class="number">2</span>) <span class="operator">-</span></span><br><span class="line">           TRUNC(TO_NUMBER(TO_CHAR(V_START_TIME, <span class="string">&#x27;YYYYMMDDHH24MISSXFF&#x27;</span>)), <span class="number">2</span>)</span><br><span class="line">      <span class="keyword">INTO</span> L_LOG.ETL_DURATION</span><br><span class="line">      <span class="keyword">FROM</span> DUAL;</span><br><span class="line">    L_LOG.END_TIME   :<span class="operator">=</span> V_END_TIME;</span><br><span class="line">    L_LOG.ETL_STATUS :<span class="operator">=</span> <span class="string">&#x27;SUCCESS&#x27;</span>;</span><br><span class="line">    <span class="comment">--调用执行日志</span></span><br><span class="line">    BI_DW.SP_W_ETL_LOG(L_LOG);</span><br><span class="line">  EXCEPTION</span><br><span class="line">    <span class="keyword">WHEN</span> OTHERS <span class="keyword">THEN</span></span><br><span class="line">      <span class="keyword">ROLLBACK</span>;</span><br><span class="line">      L_LOG.ETL_STATUS :<span class="operator">=</span> <span class="string">&#x27;FAILURE&#x27;</span>;</span><br><span class="line">      L_LOG.ERR_MSG    :<span class="operator">=</span> SUBSTR(SQLERRM, <span class="number">1</span>, <span class="number">2000</span>);</span><br><span class="line">      BI_DW.SP_W_ETL_LOG(L_LOG);</span><br><span class="line">  <span class="keyword">END</span> SP_DW_INV_AGACCOUNT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> PKG_DW_INV_AGACCOUNT;</span><br></pre></td></tr></table></figure>
+
+<p>kettle 定义、运行</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092146-fkkxbyl-image.png" alt="image.png"></p>
+<h3 id="DM-层分析表"><a href="#DM-层分析表" class="headerlink" title="DM 层分析表"></a>DM 层分析表</h3><p>编写 SQL 语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t.organization_wid,</span><br><span class="line">       t.inventory_wid,</span><br><span class="line">       t.location_wid,</span><br><span class="line">       t.item_wid,</span><br><span class="line">       round(<span class="built_in">SUM</span>(<span class="keyword">CASE</span></span><br><span class="line">             <span class="keyword">WHEN</span> SYSDATE <span class="operator">-</span> TRUNC(t.transaction_date) <span class="operator">&gt;</span> DA.AGE_LOW <span class="keyword">AND</span></span><br><span class="line">                  SYSDATE <span class="operator">-</span> TRUNC(t.transaction_date) <span class="operator">&lt;=</span> DA.AGE_HIGH <span class="keyword">THEN</span></span><br><span class="line">              SYSDATE <span class="operator">-</span> TRUNC(t.transaction_date)</span><br><span class="line">             <span class="keyword">ELSE</span></span><br><span class="line">              <span class="number">0</span></span><br><span class="line">           <span class="keyword">END</span>),<span class="number">2</span>) 账龄</span><br><span class="line">  <span class="keyword">FROM</span> bi_dw.DW_INV_AGACCOUNT t, BI_DIM.DIM_AGE DA</span><br><span class="line"> <span class="keyword">GROUP</span> <span class="keyword">BY</span> t.organization_wid, t.inventory_wid, t.location_wid, t.item_wid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>创建 dm 层数据表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Create table</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> BI_DM.DM_INV_AGACCOUNT</span><br><span class="line">(</span><br><span class="line">  day_wid            NUMBER(<span class="number">10</span>),</span><br><span class="line">  organization_wid   NUMBER,</span><br><span class="line">  inventory_wid      NUMBER,</span><br><span class="line">  location_wid       NUMBER,</span><br><span class="line">  item_wid           NUMBER,</span><br><span class="line">  age_wid            NUMBER(<span class="number">15</span>),</span><br><span class="line">  age_account        NUMBER,</span><br><span class="line">  w_insert_dt        <span class="type">DATE</span>,</span><br><span class="line">  w_update_dt        <span class="type">DATE</span>,</span><br><span class="line">  datasource_num_id  NUMBER,</span><br><span class="line">  etl_proc_id        VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  etl_proc_name      VARCHAR2(<span class="number">50</span>)</span><br><span class="line">)</span><br><span class="line">tablespace BI_DM_DAT</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">1</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">64</span>K</span><br><span class="line">    next <span class="number">1</span>M</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">  )</span><br><span class="line">nologging;</span><br><span class="line"><span class="comment">-- Add comments to the table </span></span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">table</span> BI_DM.DM_INV_AGACCOUNT</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;库存账龄;</span></span><br><span class="line"><span class="string">-- Add comments to the columns </span></span><br><span class="line"><span class="string">comment on column BI_DM.DM_INV_AGACCOUNT.day_wid</span></span><br><span class="line"><span class="string">  is &#x27;</span>日期;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> BI_DM.DM_INV_AGACCOUNT.organization_wid</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;库存组织;</span></span><br><span class="line"><span class="string">comment on column BI_DM.DM_INV_AGACCOUNT.inventory_wid</span></span><br><span class="line"><span class="string">  is &#x27;</span>子库存;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> BI_DM.DM_INV_AGACCOUNT.location_wid</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;货位;</span></span><br><span class="line"><span class="string">comment on column BI_DM.DM_INV_AGACCOUNT.item_wid</span></span><br><span class="line"><span class="string">  is &#x27;</span>物料;</span><br><span class="line">comment <span class="keyword">on</span> <span class="keyword">column</span> BI_DM.DM_INV_AGACCOUNT.age_wid</span><br><span class="line">  <span class="keyword">is</span> <span class="string">&#x27;账龄段;</span></span><br><span class="line"><span class="string">comment on column BI_DM.DM_INV_AGACCOUNT.age_account</span></span><br><span class="line"><span class="string">  is &#x27;</span>账龄;</span><br><span class="line"><span class="comment">-- Create/Recreate indexes </span></span><br><span class="line"><span class="keyword">create</span> index BI_DM.DM_INV_AGACCOUNT_N1 <span class="keyword">on</span> BI_DM.DM_INV_AGACCOUNT (DAY_WID)</span><br><span class="line">  tablespace BI_DM_DIX</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  initrans <span class="number">2</span></span><br><span class="line">  maxtrans <span class="number">255</span></span><br><span class="line">  storage</span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">64</span>K</span><br><span class="line">    next <span class="number">1</span>M</span><br><span class="line">    minextents <span class="number">1</span></span><br><span class="line">    maxextents unlimited</span><br><span class="line">  )</span><br><span class="line">  nologging;</span><br></pre></td></tr></table></figure>
+
+<p>创建 dm 层 package</p>
+<p>package 定义：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE PACKAGE PKG_DM_INV_AGACCOUNT <span class="keyword">IS</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">-- Author  : KALOSORA</span></span><br><span class="line">  <span class="comment">-- Created : 2020-5-29 上午:42:34</span></span><br><span class="line">  <span class="comment">-- Purpose : 客户余额账龄</span></span><br><span class="line">  <span class="keyword">PROCEDURE</span> SP_DM_INV_AGACCOUNT(P_START_DAY <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_END_DAY   <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_PROC_ID   <span class="keyword">IN</span> NUMBER);</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> PKG_DM_INV_AGACCOUNT;</span><br></pre></td></tr></table></figure>
+
+<p>package 内容：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE PACKAGE BODY PKG_DM_INV_AGACCOUNT <span class="keyword">IS</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">-- Author  : KALOSORA</span></span><br><span class="line">  <span class="comment">-- Created : 2020-5-29 上午:42:34</span></span><br><span class="line">  <span class="comment">-- Purpose : 客户余额账龄</span></span><br><span class="line">  <span class="keyword">PROCEDURE</span> SP_DM_INV_AGACCOUNT(P_START_DAY <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_END_DAY   <span class="keyword">IN</span> NUMBER,</span><br><span class="line">                                P_PROC_ID   <span class="keyword">IN</span> NUMBER) <span class="keyword">IS</span></span><br><span class="line">    V_START_DAY  NUMBER(<span class="number">10</span>) :<span class="operator">=</span> P_START_DAY;</span><br><span class="line">    V_END_DAY    NUMBER(<span class="number">10</span>) :<span class="operator">=</span> P_END_DAY;</span><br><span class="line">    V_PROC_ID    NUMBER(<span class="number">8</span>) :<span class="operator">=</span> P_PROC_ID;</span><br><span class="line">    V_START_TIME <span class="type">TIMESTAMP</span>; <span class="comment">--开始时间</span></span><br><span class="line">    V_END_TIME   <span class="type">TIMESTAMP</span>; <span class="comment">--结束时间</span></span><br><span class="line">    L_LOG        BI_DW.W_ETL_LOG<span class="operator">%</span>ROWTYPE; <span class="comment">--日志表游标</span></span><br><span class="line">  <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment">--记录程序开始时间</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">INTO</span> V_START_TIME <span class="keyword">FROM</span> DUAL;</span><br><span class="line">    <span class="comment">--记录日志</span></span><br><span class="line">    L_LOG.PROC_NAME       :<span class="operator">=</span> <span class="string">&#x27;SP_DM_INV_AGACCOUNT&#x27;</span>; <span class="comment">--过程名称</span></span><br><span class="line">    L_LOG.TABLE_TYPE      :<span class="operator">=</span> <span class="string">&#x27;F&#x27;</span>; <span class="comment">--表类型</span></span><br><span class="line">    L_LOG.TABLE_NAME      :<span class="operator">=</span> <span class="string">&#x27;DM_INV_AGACCOUNT&#x27;</span>; <span class="comment">--表名称</span></span><br><span class="line">    L_LOG.MEASURE_ID      :<span class="operator">=</span> <span class="keyword">NULL</span>;</span><br><span class="line">    L_LOG.ETL_INTERVAL    :<span class="operator">=</span> V_START_DAY <span class="operator">||</span> <span class="string">&#x27;~&#x27;</span> <span class="operator">||</span> V_END_DAY; <span class="comment">--抽数区间</span></span><br><span class="line">    L_LOG.PROC_ID         :<span class="operator">=</span> V_PROC_ID; <span class="comment">--过程D</span></span><br><span class="line">    L_LOG.START_TIME      :<span class="operator">=</span> V_START_TIME; <span class="comment">--开始时间</span></span><br><span class="line">    L_LOG.ETL_RECORD_LOAD :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--涉及记录数</span></span><br><span class="line">    L_LOG.ETL_RECORD_INS  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--实际插入的记录数</span></span><br><span class="line">    L_LOG.ETL_RECORD_UPD  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--更新的记录数，如果该存储过程有更新部分，则不等于零</span></span><br><span class="line">    L_LOG.ETL_RECORD_DEL  :<span class="operator">=</span> <span class="number">0</span>; <span class="comment">--插入前清理目标时的删除记录数</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">FOR</span> C <span class="keyword">IN</span> (<span class="keyword">SELECT</span> DAY_WID</span><br><span class="line">                <span class="keyword">FROM</span> BI_DIM.DIM_DAY</span><br><span class="line">               <span class="keyword">WHERE</span> DAY_WID <span class="operator">&gt;=</span></span><br><span class="line">                     TO_CHAR(ADD_MONTHS(TO_DATE(V_START_DAY, <span class="string">&#x27;YYYYMMDD&#x27;</span>), <span class="number">-1</span>),</span><br><span class="line">                             <span class="string">&#x27;YYYYMMDD&#x27;</span>)</span><br><span class="line">                 <span class="keyword">AND</span> DAY_WID <span class="operator">&lt;=</span> V_END_DAY</span><br><span class="line">               <span class="keyword">ORDER</span> <span class="keyword">BY</span> DAY_WID) LOOP</span><br><span class="line">      <span class="comment">--删除记录</span></span><br><span class="line">      <span class="keyword">DELETE</span> DM_INV_AGACCOUNT F <span class="keyword">WHERE</span> F.DAY_WID <span class="operator">=</span> C.DAY_WID;</span><br><span class="line">      <span class="keyword">COMMIT</span>;</span><br><span class="line">      <span class="comment">--加载数据</span></span><br><span class="line">      <span class="comment">--账龄</span></span><br><span class="line">      <span class="keyword">INSERT</span> <span class="keyword">INTO</span> DM_INV_AGACCOUNT</span><br><span class="line">        (day_wid,</span><br><span class="line">         organization_wid,</span><br><span class="line">         inventory_wid,</span><br><span class="line">         location_wid,</span><br><span class="line">         item_wid,</span><br><span class="line">         age_wid,</span><br><span class="line">         age_account,</span><br><span class="line">         w_insert_dt,</span><br><span class="line">         w_update_dt,</span><br><span class="line">         datasource_num_id,</span><br><span class="line">         etl_proc_id,</span><br><span class="line">         etl_proc_name)</span><br><span class="line">        <span class="keyword">SELECT</span> C.DAY_WID,</span><br><span class="line">               t.organization_wid,</span><br><span class="line">               t.inventory_wid,</span><br><span class="line">               t.location_wid,</span><br><span class="line">               t.item_wid,</span><br><span class="line">               DA.AGE_WID,</span><br><span class="line">               round(<span class="built_in">SUM</span>(<span class="keyword">CASE</span></span><br><span class="line">                           <span class="keyword">WHEN</span> SYSDATE <span class="operator">-</span> TRUNC(t.transaction_date) <span class="operator">&gt;</span> DA.AGE_LOW <span class="keyword">AND</span></span><br><span class="line">                                SYSDATE <span class="operator">-</span> TRUNC(t.transaction_date) <span class="operator">&lt;=</span> DA.AGE_HIGH <span class="keyword">THEN</span></span><br><span class="line">                            SYSDATE <span class="operator">-</span> TRUNC(t.transaction_date)</span><br><span class="line">                           <span class="keyword">ELSE</span></span><br><span class="line">                            <span class="number">0</span></span><br><span class="line">                         <span class="keyword">END</span>),</span><br><span class="line">                     <span class="number">2</span>),</span><br><span class="line">               SYSDATE,</span><br><span class="line">               SYSDATE,</span><br><span class="line">               <span class="number">1</span>,</span><br><span class="line">               V_PROC_ID,</span><br><span class="line">               L_LOG.PROC_NAME</span><br><span class="line">          <span class="keyword">FROM</span> bi_dw.DW_INV_AGACCOUNT t, BI_DIM.DIM_AGE DA</span><br><span class="line">         <span class="keyword">WHERE</span> trunc(t.transaction_date) <span class="operator">&lt;=</span></span><br><span class="line">               TO_DATE(C.DAY_WID, <span class="string">&#x27;YYYYMMDD&#x27;</span>)</span><br><span class="line">           <span class="keyword">AND</span> DA.AGE_WID <span class="operator">&lt;&gt;</span> <span class="number">0</span></span><br><span class="line">         <span class="keyword">GROUP</span> <span class="keyword">BY</span> t.organization_wid,</span><br><span class="line">                  t.inventory_wid,</span><br><span class="line">                  t.location_wid,</span><br><span class="line">                  t.item_wid,</span><br><span class="line">                  DA.AGE_WID</span><br><span class="line">        <span class="comment">--HAVING SUM(F.AMOUNT) &lt;&gt; 0</span></span><br><span class="line">        ;</span><br><span class="line">      L_LOG.ETL_RECORD_INS :<span class="operator">=</span> L_LOG.ETL_RECORD_INS <span class="operator">+</span> <span class="keyword">SQL</span><span class="operator">%</span>ROWCOUNT;</span><br><span class="line">      <span class="keyword">COMMIT</span>;</span><br><span class="line">    <span class="keyword">END</span> LOOP;</span><br><span class="line">    <span class="comment">--程序结束时间</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">INTO</span> V_END_TIME <span class="keyword">FROM</span> DUAL;</span><br><span class="line">    <span class="comment">--执行时间</span></span><br><span class="line">    <span class="keyword">SELECT</span> TRUNC(TO_NUMBER(TO_CHAR(V_END_TIME, <span class="string">&#x27;YYYYMMDDHH24MISSXFF&#x27;</span>)), <span class="number">2</span>) <span class="operator">-</span></span><br><span class="line">           TRUNC(TO_NUMBER(TO_CHAR(V_START_TIME, <span class="string">&#x27;YYYYMMDDHH24MISSXFF&#x27;</span>)), <span class="number">2</span>)</span><br><span class="line">      <span class="keyword">INTO</span> L_LOG.ETL_DURATION</span><br><span class="line">      <span class="keyword">FROM</span> DUAL;</span><br><span class="line">    L_LOG.END_TIME   :<span class="operator">=</span> V_END_TIME;</span><br><span class="line">    L_LOG.ETL_STATUS :<span class="operator">=</span> <span class="string">&#x27;SUCCESS&#x27;</span>;</span><br><span class="line">    <span class="comment">--调用执行日志</span></span><br><span class="line">    BI_DW.SP_W_ETL_LOG(L_LOG);</span><br><span class="line">  EXCEPTION</span><br><span class="line">    <span class="keyword">WHEN</span> OTHERS <span class="keyword">THEN</span></span><br><span class="line">      <span class="keyword">ROLLBACK</span>;</span><br><span class="line">      L_LOG.ETL_STATUS :<span class="operator">=</span> <span class="string">&#x27;FAILURE&#x27;</span>;</span><br><span class="line">      L_LOG.ERR_MSG    :<span class="operator">=</span> SUBSTR(SQLERRM, <span class="number">1</span>, <span class="number">2000</span>);</span><br><span class="line">      BI_DW.SP_W_ETL_LOG(L_LOG);</span><br><span class="line">  <span class="keyword">END</span> SP_DM_INV_AGACCOUNT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> PKG_DM_INV_AGACCOUNT;</span><br></pre></td></tr></table></figure>
+
+<h3 id="BIEE-视图层开发"><a href="#BIEE-视图层开发" class="headerlink" title="BIEE 视图层开发"></a>BIEE 视图层开发</h3><p>登录到 biee 服务器，下载 rpd 文件用离线模式打开(加快运行速度)，找到文件 GJ_BI.rpd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/biee/Oracle/Middleware/Config/user_projects/domains/bi/bidata/service_instances/ssi/metadata/datamodel/customizations/</span><br></pre></td></tr></table></figure>
+
+<p>新建数据库，新建链接池</p>
+<p>12c 数据库属性设置</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092453-czoqr5l-image.png" alt="image.png"></p>
+<p>链接池属性设置</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092610-zcj308z-image.png" alt="image.png"></p>
+<p>切换到 BI_QUERY 用户，先为数据表创建同义词</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE SYNONYM DIM_INVENTORIESFOR <span class="keyword">FOR</span> BI_DIM.DIM_INVENTORIES;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE SYNONYM DIM_ITEM  <span class="keyword">FOR</span> BI_DIM.DIM_ITEM;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE SYNONYM DIM_ITEM_LOCATION <span class="keyword">FOR</span> BI_DIM.DIM_ITEM_LOCATION;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE SYNONYM DIM_ORGANIZATION_UNITS <span class="keyword">FOR</span> BI_DIM.DIM_ORGANIZATION_UNITS;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> SYNONYM dw_inv_agaccount <span class="keyword">FOR</span> bi_dw.dw_inv_agaccount;</span><br></pre></td></tr></table></figure>
+
+<p>连接池，右键，导入数据表</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092642-xffd4m5-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092649-n9qb531-image.png" alt="image.png"></p>
+<p>创建物理层事实表</p>
+<p>对需要创建的表，右键-》新建对象-》别名</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092702-e35ftl6-image.png" alt="image.png"></p>
+<p>输入名称，保持一致</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092712-bmhlmwp-image.png" alt="image.png"></p>
+<p>物理层创建完毕</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092723-htx7w3h-image.png" alt="image.png"></p>
+<p>同理，dw 表也要创建别名</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092735-2bivfmh-image.png" alt="image.png"></p>
+<p>选中维度和事实表，右键，物理图表-》仅所选对象。然后关联主键 id</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092747-cgyjccb-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092753-wbtt0xp-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092804-eg7uvlr-image.png" alt="image.png"></p>
+<p>修改事实表&#x2F;维度表的表名称</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092816-jbyqz93-image.png" alt="image.png"></p>
+<p>修改字段名称，删除维度和事实表中不需要的字段</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092828-ofkrki2-image.png" alt="image.png"></p>
+<p>维度修改后</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092846-wss5x0s-image.png" alt="image.png"></p>
+<p>事实表修改后</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092856-y2hsuz2-image.png" alt="image.png"></p>
+<p>5.3 创建逻辑维</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092907-ubusmxx-image.png" alt="image.png"></p>
+<p>修改维度的名称和字段名，并且删除不需要的字段</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092917-tddmoss-image.png" alt="image.png"></p>
+<p>双击维度 detail 层，设置显示的主键</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092926-pj7vvwc-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092934-rgi5q7r-image.png" alt="image.png"></p>
+<p>注意：时间维度要做如下操作</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023092945-sflgpox-image.png" alt="image.png"></p>
+<p><strong>以上，其他维度也是如此</strong></p>
+<p>拖动数据到展示层</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093001-jytkhem-image.png" alt="image.png"></p>
+<p>上传 rpd 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/biee/Oracle/Middleware/Config/user_projects/domains/bi/bidata/service_instances/ssi/metadata/datamodel/customizations</span><br></pre></td></tr></table></figure>
+
+<p>上传命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[oracle@OBIEE ~]$ cd /u01/biee/Oracle/Middleware/Config/user_projects/domains/bi/bidata/service_instances/ssi/metadata/datamodel/customizations[oracle@OBIEE customizations]$ /u01/biee/Oracle/Middleware/Config/user_projects/domains/bi/bitools/bin/datamodel.sh uploadrpd -u weblogic -p bieetest2019 -i liverpd.rpd -w Admin123 -S biee-test -SI ssi</span><br></pre></td></tr></table></figure>
+
+<h3 id="BIEE-前端设置"><a href="#BIEE-前端设置" class="headerlink" title="BIEE 前端设置"></a>BIEE 前端设置</h3><p>新建分析 -》 右上角新建，分析</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093203-a674zaz-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093209-cfcsfoe-image.png" alt="image.png"></p>
+<p>选择相应的主题后，把事实表中的列拖动到“所选列中”，然后选择对应的主题区域进行保存</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093436-g07egw4-image.png" alt="image.png"></p>
+<p>新建仪表盘提示，并选择主题区域</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093237-zy0ioag-image.png" alt="image.png"></p>
+<p>选择列提示</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093519-03y0bzw-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093525-vjg8yvh-image.png" alt="image.png"></p>
+<p>新建仪表盘</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093534-mknope5-image.png" alt="image.png"></p>
+<p>把仪表盘提示和分析，分别拖入到仪表盘中</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093543-jf5d20v-image.png" alt="image.png"></p>
+<p>回到 编辑分析 页面，切换到 标准 选项卡，添加筛选器，使得仪表盘提示能够正常过滤数据</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093554-o94lrdz-image.png" alt="image.png"></p>
+<p>选择要过滤的列</p>
+<p>注意：仪表盘中，提示的数据源要和筛选器中的数据源相同。</p>
+<p>如果仪表盘提示使用的是 维表 那么筛选器也要使用 维表</p>
+<p>如果仪表盘提示使用的是 事实表 那么筛选器也要使用 事实表</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093626-jnnszl3-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093633-vyuk2cs-image.png" alt="image.png"></p>
+<p>完成效果如下，注意关键字段的来源，有的来源于维表，用于过滤数据</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093640-cvvek5p-image.png" alt="image.png"></p>
+<p>提示也必须来源于维表</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093649-ykuxn2n-image.png" alt="image.png"></p>
+<p>注意：如果报表无法充满整个屏幕，要编辑分析，选择内容分页即可</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093701-b02knsy-image.png" alt="image.png"></p>
+<p>注意：设置字段相同也显示</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093717-3au5muj-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093724-jx4h5k5-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093731-jm6m6mr-image.png" alt="image.png"></p>
+<p>注意：设置打印</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093741-x1da03q-image.png" alt="image.png"></p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093746-dfwkn3d-image.png" alt="image.png"></p>
+<p>设置 biee 的数据显示为最大行数-配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/biee/Oracle/Middleware/Config/user_projects/domains/bi/config/fmwconfig/biconfig/OBIPS/instanceconfig.xml</span><br></pre></td></tr></table></figure>
+
+<p>修改完后要重启 biee 应用</p>
+<p>同时还要修改 Oracle EM 上的最大行数</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093819-ne3cja5-image.png" alt="image.png"></p>
+<p>BIEE 添加用户 -&gt; 登陆到 Oracle WEBLOGIC CONSOLE</p>
+<p><img src="/2020/01/23/BIEE%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91/20201023093837-zco6gaw-image.png" alt="image.png"></p>
+<h3 id="数据仓库设计"><a href="#数据仓库设计" class="headerlink" title="数据仓库设计"></a>数据仓库设计</h3><p>数据仓库设计</p>
+<ul>
+<li>ODS 元数据 （BI_SRC 层）</li>
+<li>DIM  维度层（BI_DIM 层，贯穿 DW 和 DM 层）</li>
+<li>DW   数据仓库层（BI_DW 层），展示报表明细数据</li>
+<li>DM   数据集市层（BI_DM 层）基于 BI_DW 层的数据，生成新的表，主要用于计算帐龄、余额的数据，根据不同的指标来展现聚合的数据</li>
+</ul>
+<p>命名规范</p>
+<p>书目</p>
+<ul>
+<li>数据仓库工具箱-——维度建模权威指南</li>
+<li>《Hadoop 构建数据仓库实践》</li>
+</ul>
+<p>数据层——ETL 工具的 kettle</p>
+<p>新建 kettle 转换</p>
+<p>选择表输入和表输出</p>
+<p>根据需要设置增量同步</p>
+<p>新建 job，把多个 kettle 文件连在一起；job 设置定时同步</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DATAWARE-HOUSE/" rel="tag"># DATAWARE HOUSE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/23/BIEE%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" rel="next" title="BIEE开发代码相关">
+                <i class="fa fa-chevron-left"></i> BIEE开发代码相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/19/%E4%BB%8EBIEE%E7%9C%8B%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="prev" title="从BIEE 12看数据仓库">
+                从BIEE 12看数据仓库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BIEE-Client-%E6%8A%A5%E8%A1%A8%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">BIEE Client 报表开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E5%BC%80%E5%8F%91%E2%80%9D%E5%BA%93%E5%AD%98%E8%B4%A6%E9%BE%84%E6%8A%A5%E8%A1%A8%E2%80%9D%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">以开发”库存账龄报表”为例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SRC-%E5%B1%82%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">SRC 层元数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%88%E6%89%93%E5%BC%80-erp-%E7%9A%84%E6%8A%A5%E8%A1%A8-package%EF%BC%8C%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E9%9C%80%E8%A6%81%E7%9A%84%E6%8A%A5%E8%A1%A8"><span class="nav-number">1.1.1.0.1.</span> <span class="nav-text">先打开 erp 的报表 package，找到所有需要的报表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8-SRC-%E5%B1%82%E5%A4%8D%E5%88%B6%E7%9B%B8%E5%90%8C%E7%9A%84%E4%B8%80%E4%BB%BD%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%8C%E5%91%BD%E5%90%8D%E4%B8%BA-S-XXXXX%E3%80%82%E8%BF%99%E9%87%8C%E6%98%AF%E5%9C%A8-BI-SRC-%E7%94%A8%E6%88%B7%E4%B8%8B%E5%88%9B%E5%BB%BA%E5%A6%82%E4%B8%8B%E8%A1%A8"><span class="nav-number">1.1.1.0.2.</span> <span class="nav-text">在 SRC 层复制相同的一份表结构，命名为 S_XXXXX。这里是在 BI_SRC 用户下创建如下表</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.0.2.1.</span> <span class="nav-text">创建方式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DIM-%E5%B1%82%E7%BB%B4%E5%BA%A6%E8%A1%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">DIM 层维度表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DW-%E5%B1%82%E4%BA%8B%E5%AE%9E%E8%A1%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">DW 层事实表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DM-%E5%B1%82%E5%88%86%E6%9E%90%E8%A1%A8"><span class="nav-number">1.1.4.</span> <span class="nav-text">DM 层分析表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIEE-%E8%A7%86%E5%9B%BE%E5%B1%82%E5%BC%80%E5%8F%91"><span class="nav-number">1.1.5.</span> <span class="nav-text">BIEE 视图层开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIEE-%E5%89%8D%E7%AB%AF%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.1.6.</span> <span class="nav-text">BIEE 前端设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.7.</span> <span class="nav-text">数据仓库设计</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

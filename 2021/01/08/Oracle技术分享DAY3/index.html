@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Oracle," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Oracle技术分享 - DAY 3容器数据库【注意】容器数据库（多租户结构）为19c新特性 查看容器数据库（PDB，pluggable database，即可插拔数据库）  show pdbs;  执行结果   PDB$SEED：种子数据库，是克隆的模版容器数据库  启动PDB  alter pluggable database pdb open;  启动结果  进入容器数据库  alter s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle技术分享 - DAY 3">
+<meta property="og:url" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="Oracle技术分享 - DAY 3容器数据库【注意】容器数据库（多租户结构）为19c新特性 查看容器数据库（PDB，pluggable database，即可插拔数据库）  show pdbs;  执行结果   PDB$SEED：种子数据库，是克隆的模版容器数据库  启动PDB  alter pluggable database pdb open;  启动结果  进入容器数据库  alter s">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104034-j1u0pxb-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104323-mlrgqjo-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104524-bxbwmt1-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104912-ec6r1n5-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108113704-iwnd7y5-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108113428-blv9yjj-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108135557-7i7j601-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108144306-bu3f899-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108144612-gk5uivt-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108145531-j8qynfz-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108150004-b9ymlhy-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107144303-q5mxlcl-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107150651-e24lbrr-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151223-xwmrbzy-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151748-0hv2l22-image.png">
+<meta property="og:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108103708-6hwelcf-image.png">
+<meta property="article:published_time" content="2021-01-08T13:34:18.000Z">
+<meta property="article:modified_time" content="2024-03-29T13:47:44.546Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104034-j1u0pxb-image.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/01/08/Oracle技术分享DAY3/"/>
+
+
+
+
+
+  <title>Oracle技术分享 - DAY 3 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Oracle技术分享 - DAY 3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-08T21:34:18+08:00">
+                2021-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,858 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Oracle技术分享-DAY-3"><a href="#Oracle技术分享-DAY-3" class="headerlink" title="Oracle技术分享 - DAY 3"></a>Oracle技术分享 - DAY 3</h1><h2 id="容器数据库"><a href="#容器数据库" class="headerlink" title="容器数据库"></a>容器数据库</h2><p>【注意】容器数据库（多租户结构）为19c新特性</p>
+<p>查看容器数据库（PDB，pluggable database，即可插拔数据库）</p>
+<blockquote>
+<p>show pdbs;</p>
+</blockquote>
+<p>执行结果</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104034-j1u0pxb-image.png" alt="image.png"></p>
+<ul>
+<li>PDB$SEED：种子数据库，是克隆的模版容器数据库</li>
+</ul>
+<p>启动PDB</p>
+<blockquote>
+<p>alter pluggable database pdb open;</p>
+</blockquote>
+<p>启动结果</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104323-mlrgqjo-image.png" alt="image.png"></p>
+<p>进入容器数据库</p>
+<blockquote>
+<p>alter session set container&#x3D;pdb;</p>
+</blockquote>
+<p>查看当前容器</p>
+<blockquote>
+<p>show con_name</p>
+</blockquote>
+<p>结果：</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104524-bxbwmt1-image.png" alt="image.png"></p>
+<p>切换到容器数据库，查看示例数据库</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108104912-ec6r1n5-image.png" alt="image.png"></p>
+<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="SQL执行顺序"><a href="#SQL执行顺序" class="headerlink" title="SQL执行顺序"></a>SQL执行顺序</h3><p>示例sql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    employee_id,</span><br><span class="line">    last_name,</span><br><span class="line">    first_name,</span><br><span class="line">    department_name</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees    e,</span><br><span class="line">    departments  d</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">        e.department_id <span class="operator">=</span> d.department_id</span><br><span class="line">    <span class="keyword">AND</span> last_name <span class="keyword">LIKE</span> <span class="string">&#x27;%T%&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">    last_name;</span><br></pre></td></tr></table></figure>
+
+<p>from -&gt; where -&gt; select -&gt; order by</p>
+<p>从结果集中筛选结果，并选取结果列，最后排序</p>
+<h2 id="SQL解释计划"><a href="#SQL解释计划" class="headerlink" title="SQL解释计划"></a>SQL解释计划</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>读取原则：从上往下读，从里往外读，靠上边的和靠里边的先执行</p>
+<ul>
+<li>rowid：oracle生成的物理地址</li>
+<li>FULL SCAN：全扫描</li>
+<li>UNIQUE SCAN：索引扫描（索引都是有序存放，需要消耗存储空间，保存的是不同的rowid）</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>【注意】从sql developer上看可能显示会好一些</p>
+<p>sql developer的解释计划示例</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108113704-iwnd7y5-image.png" alt="image.png"></p>
+<p>plsql developer的解释计划示例</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108113428-blv9yjj-image.png" alt="image.png"></p>
+<ul>
+<li><p>Rows：解释计划结果集预估行数</p>
+</li>
+<li><p>Cost：解释计划步骤的系统开销</p>
+</li>
+<li><p>ORACLE多表关联查询的方式</p>
+<ul>
+<li>NESTED  LOOPS ：嵌套循环连接，CBO下的优化器，oracle会自动评估外层循环的基表，即自动评估左连接的基表</li>
+<li>HASH JOIN：为id生成hash值，把hash值相同的数据关联（10g以后），适合大表之间的连接</li>
+<li>Sorted Merge：排序后两表合并</li>
+</ul>
+</li>
+</ul>
+<h5 id="STEP1-保证信息一致"><a href="#STEP1-保证信息一致" class="headerlink" title="STEP1 保证信息一致"></a>STEP1 保证信息一致</h5><p><strong>要确保解释计划出来的数据，与数据库中实际的数据一致。</strong></p>
+<p>查看表的统计信息</p>
+<blockquote>
+<p>SELECT table_name, num_rows, blocks FROM user_tables;</p>
+</blockquote>
+<p>oracle每日晚上22：00 - 凌晨2：00自动收集，oracle的执行计划会根据收集的统计信息来评估解释计划。</p>
+<p>对于新建的数据表，由于没有收集统计信息，在解释计划中的 Rows 可能跟实际新建的表不符合，此时要主动收集一下数据库的信息。</p>
+<p>【注意】统计信息的收集尽量不要与业务时间冲突，非常消耗性能。</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108135557-7i7j601-image.png" alt="image.png"></p>
+<p>收集统计信息</p>
+<blockquote>
+<p>exec dbms_stats.gather_table_status(‘HR’,’Employees’);</p>
+</blockquote>
+<p>【注意】如果由于统计不准，导致选错执行计划，会导致查询变得非常缓慢。</p>
+<p>【注意】12c以后：执行sql的时候有一次改变执行计划的可能性，可能会把嵌套循环连接变成 Hash Join。在执行前会扫描索引并收集一次信息，根据查询的结果和解释计划进行比较，如果差异较大则会改变执行计划。</p>
+<h5 id="STEP2-优化工具"><a href="#STEP2-优化工具" class="headerlink" title="STEP2 优化工具"></a>STEP2 优化工具</h5><h6 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h6><ul>
+<li><p>ORACLE STA优化脚本</p>
+<ul>
+<li>语句改写</li>
+<li>收集表信息</li>
+<li>修改执行计划</li>
+<li>构建分区表</li>
+<li>构建索引</li>
+<li>构建物化视图</li>
+</ul>
+</li>
+<li><p>AWR报告</p>
+</li>
+<li><p>SQL Developer</p>
+</li>
+</ul>
+<h6 id="ORACLE-STA"><a href="#ORACLE-STA" class="headerlink" title="ORACLE STA"></a>ORACLE STA</h6><p>查找sql的id，该查询会从内存中获取近期执行的sql语句</p>
+<blockquote>
+<p>SELECT * FROM v$sql WHERE sql_test LIKE ‘%%’;</p>
+</blockquote>
+<p>结果如下：</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108144306-bu3f899-image.png" alt="image.png"></p>
+<p>使用STA工具优化</p>
+<blockquote>
+<p>@?&#x2F;rdbms&#x2F;admin&#x2F;sqltrpt.sql</p>
+</blockquote>
+<p>结果如下，会显示近期15条最消耗性能的sql</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108144612-gk5uivt-image.png" alt="image.png"></p>
+<p>此时输入sql的id，则可以生成优化建议，并且可以看到改正后的执行计划</p>
+<p>#TODO# 建议实际操作一下</p>
+<h6 id="SQL-Developer"><a href="#SQL-Developer" class="headerlink" title="SQL Developer"></a>SQL Developer</h6><p>1.自动诊断</p>
+<p>路径：查看 -&gt; DBA -&gt; 性能 -&gt; 自动数据库诊断监视器</p>
+<p>每小时会自动生成性能诊断报告</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108145531-j8qynfz-image.png" alt="image.png"></p>
+<p>2.实时监控</p>
+<p>路径：查看 -&gt; DBA -&gt; 优化 -&gt; 实时SQL监视</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108150004-b9ymlhy-image.png" alt="image.png"></p>
+<h6 id="AWR报告部分"><a href="#AWR报告部分" class="headerlink" title="AWR报告部分"></a>AWR报告部分</h6><p>找到 <code>ADDM Reports</code></p>
+<h6 id="Cloud-Control"><a href="#Cloud-Control" class="headerlink" title="Cloud Control"></a>Cloud Control</h6><p><strong>Oracle Enterprise Manager Cloud Control</strong></p>
+<p>可视化的oracle数据库管理系统，见虚拟机2</p>
+<p>‍</p>
+<h2 id="Oracle性能分析"><a href="#Oracle性能分析" class="headerlink" title="Oracle性能分析"></a>Oracle性能分析</h2><h3 id="AWR报告"><a href="#AWR报告" class="headerlink" title="AWR报告"></a>AWR报告</h3><p>通过SQL Developer可视化生成报告；抑或是采用命令方式生成。</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107144303-q5mxlcl-image.png" alt="image.png"></p>
+<p>命令方式</p>
+<blockquote>
+<p>@?&#x2F;rdbms&#x2F;admin&#x2F;awrrpt.sql</p>
+</blockquote>
+<p>‍</p>
+<p>简单的性能分析</p>
+<ul>
+<li><p>Report Summary</p>
+<ul>
+<li>确定系统类型：分析&#x2F;交易 类型</li>
+<li>Redo Size （Per Second）：Redo量小，可能是分析类型的系统；如果大的话可能是交易类型的系统</li>
+<li>Logical read（从内存里取数称为逻辑度）：如果量大，则可能为大量的select查询</li>
+<li>Transactions：每秒事务数</li>
+</ul>
+</li>
+<li><p>SQL ordered by Elapsed Time</p>
+<ul>
+<li>Elapsed Time：在报告生成时间内执行总时间，等于执行次数 * 每秒执行时间</li>
+<li>Executions：执行次数</li>
+<li>Elapsed Time per Exec（s）：每秒执行时间</li>
+<li>SQL Id：SQL查询id，不同的库是一样的。生成方式：把SQL转换成ASCII码，然后针对ASCII码生成hash码。</li>
+</ul>
+</li>
+<li><p>SQL ordered by Gets</p>
+<ul>
+<li>逻辑读</li>
+<li>Buffer Gets：逻辑读总时间</li>
+<li>Executions：执行次数</li>
+<li>Gets per Exec：单次逻辑读时间</li>
+</ul>
+</li>
+<li><p>SQL ordered by Reads</p>
+<ul>
+<li>物理读</li>
+</ul>
+</li>
+<li><p>Top 5 Evnets</p>
+<ul>
+<li>最消耗性能的5个事件</li>
+</ul>
+</li>
+</ul>
+<h3 id="通过SQL-Developer优化"><a href="#通过SQL-Developer优化" class="headerlink" title="通过SQL Developer优化"></a>通过SQL Developer优化</h3><p>查看实时SQL监视</p>
+<p>路径：查看 -&gt; DBA</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107150651-e24lbrr-image.png" alt="image.png"></p>
+<p>查看SQL顶级报告</p>
+<p>路径：查看 -&gt; 报告 -&gt; 数据字典报告 -&gt; 数据库管理 -&gt; 顶级SQL</p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151223-xwmrbzy-image.png" alt="image.png"></p>
+<h3 id="SQL-优化手册"><a href="#SQL-优化手册" class="headerlink" title="SQL 优化手册"></a>SQL 优化手册</h3><p><strong>SQL Tuning Guide</strong></p>
+<p><strong>Database Performance Tuning Guide</strong></p>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210107151748-0hv2l22-image.png" alt="image.png"></p>
+<ul>
+<li><p>Shared Pool Check，即软解析，存放常用解析后的结果</p>
+</li>
+<li><p>Soft Parse，即软解析，如果软解析过大，可能会出现在 <code>Shared Pool Check</code> 中出现资源争抢，超出资源限制的请求将进入队列等待。</p>
+</li>
+<li><p>Hard Parse，即硬解析，语句首次执行，消耗CPU</p>
+<ul>
+<li>OLAP（分析类型事务），实现硬解析，不要有软解析</li>
+<li>OLTP（处理类型事务），尽可能多地实现软解析</li>
+<li>尽可能在写SQL的时候，保证大小写，因为SQL语句是通过ASCII码生成hashCode来判断是否实现软解析，而大小写的ASCII码不同，会导致硬解析。</li>
+</ul>
+</li>
+<li><p>Optimization，即优化器，当sql进入硬解析的时候，优化器会判断是走索引还是全表扫描。</p>
+<ul>
+<li><p>RBO，即rule-based optimizer，指基于规则的优化</p>
+</li>
+<li><p>CBO，即cost-based optimizer，指基于开销的优化，需要考虑诸多因素的成本，给出最符合条件的sql结果（10g以后，CBO为默认优化模式）</p>
+<ul>
+<li>CPU</li>
+<li>IO</li>
+<li>内存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>查看优化器</p>
+<blockquote>
+<p>show parameter optimizer</p>
+</blockquote>
+<p><img src="/2021/01/08/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY3/20210108103708-6hwelcf-image.png" alt="image.png"></p>
+<p>修改优化器模式</p>
+<blockquote>
+<p>alter system set optimizer_mode &#x3D; ‘rule’</p>
+</blockquote>
+<p>‍</p>
+<h4 id="软解析与硬解析实例"><a href="#软解析与硬解析实例" class="headerlink" title="软解析与硬解析实例"></a>软解析与硬解析实例</h4><p>实例1：</p>
+<blockquote>
+<p>select count(*) from test1;  –硬解析</p>
+<p>select count(*) from TEST1;  –修改表名再次执行，也是硬解析</p>
+</blockquote>
+<p>实例2：</p>
+<p>使用绑定变量，则多次执行也会被判断为软解析</p>
+<blockquote>
+<p>select count(*) from TEST1 where id&#x3D; :x ;  –使用绑定变量</p>
+</blockquote>
+<p>实例3：</p>
+<p>分析型系统，少有软解析。<strong>如果是分析型数据检索大量数据，尽量全表扫描，不要走索引；如果是检索少量数据，走索引速度会更快。</strong></p>
+<p>分析类型的数据是倾斜的，查找的数据是不定的，不均匀的。如果采用绑定变量的方式，实现软解析，那么面对倾斜数据时，根据软解析复用执行计划，针对应该走索引和全表扫描的查询，都执行同样的执行计划显然是不合理的。</p>
+<p>降低分析型系统（如数据仓库等）响应时间的方法：</p>
+<ul>
+<li><p>使物理读变为逻辑读</p>
+</li>
+<li><p>使用更好的压缩技术</p>
+</li>
+<li><p>使用更好的并行查询技术，使用大量的进程并行查询</p>
+</li>
+<li><p>更换硬盘，提高IO速度</p>
+</li>
+<li><p>更好的扫描算法</p>
+</li>
+<li><p>Oracle In-Memory Database内存数据库会自动删除索引，更适合于分析类型。</p>
+</li>
+</ul>
+<p>#TODO# 实践的方法？如：AWR报告分析、SQL优化技巧实战</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/07/Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%ABDAY2/" rel="next" title="Oracle技术分享 - DAY 2">
+                <i class="fa fa-chevron-left"></i> Oracle技术分享 - DAY 2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/12/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86/" rel="prev" title="Oracle数据库管理">
+                Oracle数据库管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB-DAY-3"><span class="nav-number">1.</span> <span class="nav-text">Oracle技术分享 - DAY 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">容器数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">SQL优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">SQL执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E8%A7%A3%E9%87%8A%E8%AE%A1%E5%88%92"><span class="nav-number">1.3.</span> <span class="nav-text">SQL解释计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP1-%E4%BF%9D%E8%AF%81%E4%BF%A1%E6%81%AF%E4%B8%80%E8%87%B4"><span class="nav-number">1.3.2.0.1.</span> <span class="nav-text">STEP1 保证信息一致</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP2-%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="nav-number">1.3.2.0.2.</span> <span class="nav-text">STEP2 优化工具</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%A6%82%E8%A7%88"><span class="nav-number">1.3.2.0.2.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ORACLE-STA"><span class="nav-number">1.3.2.0.2.2.</span> <span class="nav-text">ORACLE STA</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#SQL-Developer"><span class="nav-number">1.3.2.0.2.3.</span> <span class="nav-text">SQL Developer</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#AWR%E6%8A%A5%E5%91%8A%E9%83%A8%E5%88%86"><span class="nav-number">1.3.2.0.2.4.</span> <span class="nav-text">AWR报告部分</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Cloud-Control"><span class="nav-number">1.3.2.0.2.5.</span> <span class="nav-text">Cloud Control</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="nav-number">1.4.</span> <span class="nav-text">Oracle性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AWR%E6%8A%A5%E5%91%8A"><span class="nav-number">1.4.1.</span> <span class="nav-text">AWR报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87SQL-Developer%E4%BC%98%E5%8C%96"><span class="nav-number">1.4.2.</span> <span class="nav-text">通过SQL Developer优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-%E4%BC%98%E5%8C%96%E6%89%8B%E5%86%8C"><span class="nav-number">1.4.3.</span> <span class="nav-text">SQL 优化手册</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E8%A7%A3%E6%9E%90%E4%B8%8E%E7%A1%AC%E8%A7%A3%E6%9E%90%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">软解析与硬解析实例</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

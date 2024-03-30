@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java Core," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java8-11的新特性Java8Lambda &amp; Functional Interface123456789101112131415161718@FunctionalInterfacepublic interface Runnable &#123;    public abstract void run();&#125;public class LambdaExamples &#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java8-11的新特性">
+<meta property="og:url" content="http://example.com/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="Java8-11的新特性Java8Lambda &amp; Functional Interface123456789101112131415161718@FunctionalInterfacepublic interface Runnable &#123;    public abstract void run();&#125;public class LambdaExamples &#123;">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/836941f89ea9634e9e7ee5506d989903-20210407221013-6a1s7eu.png">
+<meta property="article:published_time" content="2021-04-07T06:54:17.000Z">
+<meta property="article:modified_time" content="2024-03-29T14:06:58.236Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="Java Core">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/836941f89ea9634e9e7ee5506d989903-20210407221013-6a1s7eu.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/04/07/Java8-11的新特性/"/>
+
+
+
+
+
+  <title>Java8-11的新特性 | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java8-11的新特性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-07T14:54:17+08:00">
+                2021-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,663 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java8-11的新特性"><a href="#Java8-11的新特性" class="headerlink" title="Java8-11的新特性"></a>Java8-11的新特性</h1><h2 id="Java8"><a href="#Java8" class="headerlink" title="Java8"></a>Java8</h2><h3 id="Lambda-Functional-Interface"><a href="#Lambda-Functional-Interface" class="headerlink" title="Lambda &amp; Functional Interface"></a>Lambda &amp; Functional Interface</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LambdaExamples</span> &#123;</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>误区：</p>
+<ul>
+<li>认为的：通过匿名函数生成Runnable对象，传递给Thread</li>
+<li>事实上：内部优化直接调用了匿名函数（invokedynamic指令)</li>
+</ul>
+<h3 id="方法引用-操作符"><a href="#方法引用-操作符" class="headerlink" title="方法引用::操作符"></a>方法引用<code>::</code>操作符</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodReference</span> &#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">var</span> <span class="variable">val</span> <span class="operator">=</span> List.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).stream()</span><br><span class="line">                .map(Object::toString)</span><br><span class="line">                .map(Integer::<span class="keyword">new</span>)</span><br><span class="line">                .reduce((a,b)-&gt;a+b);</span><br><span class="line">            </span><br><span class="line">        System.out.println(val);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h3><p>一个Monad。 函数式、流计算重磅炸弹，<strong>见之前讲流和Monad部分</strong> 。</p>
+<h3 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional<T></T></h3><p>一个Monad。 流计算必备工具，减少空值检查。另一个还没有支持，但比较重要的Monad是Try。这个在实现AOP框架的程序中，我们已经使用到了。<strong>见之前讲流和Monad部分</strong></p>
+<h3 id="接口的方法-static-default-private"><a href="#接口的方法-static-default-private" class="headerlink" title="接口的方法(static, default, private)"></a>接口的方法(static, default, private)</h3><ul>
+<li>static(java 8)</li>
+<li>default(java 8)</li>
+<li>private(java 9)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Stream</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">BaseStream</span>&lt;T, Stream&lt;T&gt;&gt; &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 每个Stream Monad都有这个方法</span></span><br><span class="line">   <span class="keyword">default</span> Stream&lt;T&gt; <span class="title function_">takeWhile</span><span class="params">(Predicate&lt;? <span class="built_in">super</span> T&gt; predicate)</span> &#123;</span><br><span class="line">   ...</span><br><span class="line">       foo(); <span class="comment">// 可以调用</span></span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 可以通过Stream.empty()构造空的流</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span>&lt;T&gt; Stream&lt;T&gt; <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">    ...   </span><br><span class="line">   &#125;</span><br><span class="line">  </span><br><span class="line">   <span class="comment">// 不是源代码中的程序</span></span><br><span class="line">   <span class="keyword">private</span> <span class="title function_">foo</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java-8-Nashorn-JavaScript"><a href="#Java-8-Nashorn-JavaScript" class="headerlink" title="Java 8 Nashorn JavaScript"></a>Java 8 Nashorn JavaScript</h3><p>在Java8中增加，在Java11中标记为Deprecated， 在Java15中移出的新特性。支持javascriptES5语法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test_engine</span><span class="params">()</span> <span class="keyword">throws</span> ScriptException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">jscode</span> <span class="operator">=</span> <span class="string">&quot; [1,2,3].map(function(x)&#123;return x + 1;&#125;).join(&#x27;-&#x27;);&quot;</span>;</span><br><span class="line">    <span class="type">ScriptEngineManager</span> <span class="variable">scriptEngineManager</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ScriptEngineManager</span>();</span><br><span class="line">    <span class="type">ScriptEngine</span> <span class="variable">nashorn</span> <span class="operator">=</span> scriptEngineManager.getEngineByName(<span class="string">&quot;nashorn&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> nashorn.eval(jscode);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    System.out.println(result);</span><br><span class="line">    <span class="comment">// 2-3-4</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>脚本这么多专门选JS没有优势。</strong></p>
+<h3 id="本地化日期处理升级"><a href="#本地化日期处理升级" class="headerlink" title="本地化日期处理升级"></a>本地化日期处理升级</h3><p>提供了Local和Zoned两种处理日期的方式，在新的API中不再允许mutable的操作（非线程安全）；另外对时区采取更好的处理方法：如果用户的系统不考虑国际化，那么就用Local的日期，如果考虑国际化，可以构造带时区的DateTime。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test_date</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">// 2022年2月22日</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">date</span> <span class="operator">=</span> LocalDate.of(<span class="number">2022</span>, <span class="number">2</span>, <span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 10:55:59</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">time</span> <span class="operator">=</span> LocalTime.of(<span class="number">10</span>, <span class="number">55</span>, <span class="number">59</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当前时间</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">datetime</span> <span class="operator">=</span> LocalDateTime.of(date, time);</span><br><span class="line"></span><br><span class="line">    <span class="type">var</span> <span class="variable">zoneDT</span> <span class="operator">=</span> ZonedDateTime.of(datetime, ZoneId.of(<span class="string">&quot;Asia/Shanghai&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置了Base64工具"><a href="#内置了Base64工具" class="headerlink" title="内置了Base64工具"></a>内置了Base64工具</h3><p>tips： 对0~255之间的字符，Base64编码是以4个可见字符去描述3个字符。会增加数据的体积，但是因为所有字符都可以读，用Base64编码描述的字符串，在URL、XML中都不会被转义。</p>
+<p>Base64.Decoder和Base64.Encoder类。</p>
+<h2 id="Java9新特性"><a href="#Java9新特性" class="headerlink" title="Java9新特性"></a>Java9新特性</h2><h3 id="模块系统"><a href="#模块系统" class="headerlink" title="模块系统"></a>模块系统</h3><p>因为和底层原理知识结合紧密，在ClassLoader部分介绍。</p>
+<h3 id="交互式编程环境-JShell"><a href="#交互式编程环境-JShell" class="headerlink" title="交互式编程环境(JShell)"></a>交互式编程环境(JShell)</h3><p><img src="/2021/04/07/Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/836941f89ea9634e9e7ee5506d989903-20210407221013-6a1s7eu.png" alt="image-20210219120607478"></p>
+<p>除了上图中的能力，也提供API，可以动态的eval程序。</p>
+<h3 id="新的HTTP-2-0-Clinet"><a href="#新的HTTP-2-0-Clinet" class="headerlink" title="新的HTTP 2.0 Clinet"></a>新的HTTP 2.0 Clinet</h3><p>主要针对旧Client，提供Buidler，方便用户设置header和参数。</p>
+<p>另外支持HTTP2.0，HTTP2.0兼容HTTP1.1的能力，主要是从性能角度进行了调优。理解HTTP2.0主要是这几个特性：</p>
+<ul>
+<li>多个HTTP 请求&#x2F;返回在一个TCP请求上多路复用（客户端要负责实现多路复用）</li>
+<li>头部压缩算法（客户端要负责解压）</li>
+<li>Server Push：服务器可能会给客户端额外的文件（浏览器要负责识别，并缓存这些文件，客户端不一定要实现）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">HttpClient</span> <span class="variable">httpClient</span> </span><br><span class="line">                <span class="operator">=</span> HttpClient.newHttpClient(); </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="type">HttpRequest</span> <span class="variable">httpRequest</span> </span><br><span class="line">    <span class="operator">=</span> HttpRequest </span><br><span class="line">    .newBuilder() </span><br><span class="line">    .headers(<span class="string">&quot;x-key&quot;</span>, <span class="string">&quot;123456&quot;</span>, <span class="string">&quot;x-name&quot;</span>, <span class="string">&quot;something&quot;</span>)</span><br><span class="line">    .uri(<span class="keyword">new</span> <span class="title class_">URI</span>(<span class="string">&quot;https://www.baidu.com&quot;</span>)) </span><br><span class="line">    .GET() </span><br><span class="line">    .build(); </span><br><span class="line"></span><br><span class="line">HttpResponse&lt;String&gt; response </span><br><span class="line">    = httpClient.send( </span><br><span class="line">    httpRequest, </span><br><span class="line">    HttpResponse.BodyHandler.asString()); </span><br><span class="line"></span><br><span class="line">System.out.println(response.statusCode());</span><br><span class="line">System.out.println(response.body());</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="改进了Javadoc"><a href="#改进了Javadoc" class="headerlink" title="改进了Javadoc"></a>改进了Javadoc</h3><p>大家平时读的很多Java的文档（特别是官方的文档），就是用Javadoc生成的。 所以这也是Java文档——比较难读的原因之一。 写程序的人注释往往是为了让内部人员读懂，而文档是面向外部人员。</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javadoc -d foo -html5 MyHelloWorld.java</span><br></pre></td></tr></table></figure>
+
+<p>可以生成符合HTML5标准的网页。</p>
+<h3 id="支持multirelease-jar包"><a href="#支持multirelease-jar包" class="headerlink" title="支持multirelease jar包"></a>支持multirelease jar包</h3><p>项目目录结构可以这样安排，不同的版本的程序在不同的目录下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|-java</span><br><span class="line">|   └──java8</span><br><span class="line">|       └── hello</span><br><span class="line">|           └── xxx.java</span><br><span class="line">|   └──java9</span><br><span class="line">|       └── hello</span><br><span class="line">|           └── xxx.java</span><br></pre></td></tr></table></figure>
+
+<p>然后可以通过<code>javac</code>** **编译成不同版本的class文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac --release 9 java8/hello/xxx.java</span><br><span class="line">javac --release 8 java9/hello/xxx.java</span><br></pre></td></tr></table></figure>
+
+<p>最后用<code>jar</code>** <strong>可以产生不同版本的</strong>​**<code>jar</code>** **包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar -c -f xxx.jar -C java8 . --release 9 -C java9.</span><br></pre></td></tr></table></figure>
+
+<p>这样<code>xxx.jar</code>** **中会同时有java8和java9的程序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp test.jar hello <span class="comment">// 不同java版本访问不同的类</span></span><br></pre></td></tr></table></figure>
+
+<p>这个功能的意义是什么？</p>
+<p>Java升级太快了，多版本同时发布，让程序的提供者可以兼容不同用户的需求。</p>
+<h3 id="集合的工厂方法"><a href="#集合的工厂方法" class="headerlink" title="集合的工厂方法"></a>集合的工厂方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">set</span> <span class="operator">=</span> Set.of(<span class="string">&quot;Apple&quot;</span>, <span class="string">&quot;Google&quot;</span>);</span><br><span class="line"><span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> List.of(<span class="string">&quot;...&quot;</span>, <span class="string">&quot;abc&quot;</span>, <span class="number">1</span>); <span class="comment">// 报错，思考为什么？</span></span><br><span class="line"><span class="type">var</span> <span class="variable">map</span> <span class="operator">=</span> Map.of(<span class="string">&quot;String&quot;</span>, <span class="number">5</span>, <span class="string">&quot;Integer&quot;</span>, <span class="number">6</span>); </span><br></pre></td></tr></table></figure>
+
+<h3 id="增加ProcessHandler"><a href="#增加ProcessHandler" class="headerlink" title="增加ProcessHandler"></a>增加ProcessHandler</h3><p>增加了一个ProcessHandler用于查看某个特定进程的信息：启动时间、关联参数等等。目前是加强对进程的支持。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ProcessBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProcessBuilder</span>(<span class="string">&quot;ls -l&quot;</span>);</span><br><span class="line"><span class="type">Process</span> <span class="variable">p</span> <span class="operator">=</span> builder.start();</span><br><span class="line">ProcessHandle.<span class="type">Info</span> <span class="variable">info</span> <span class="operator">=</span> p.info();</span><br><span class="line"></span><br><span class="line"><span class="comment">// start time</span></span><br><span class="line">info.startInstance();</span><br><span class="line"></span><br><span class="line"><span class="comment">// arguments</span></span><br><span class="line">info.arguments();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stream-API增加了方法"><a href="#Stream-API增加了方法" class="headerlink" title="Stream API增加了方法"></a>Stream API增加了方法</h3><p>为了方便操作，提供了更多的Stream API。</p>
+<ul>
+<li>takeWhile<br>字面意思：take while x !&#x3D; 7 is hold ， 中文意思：在x !&#x3D; 7的时候，拿，否则停下来</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">0</span>).takeWhile(x -&gt; x != <span class="number">7</span>)</span><br><span class="line">   .collect(Collectors.toList());</span><br><span class="line"><span class="comment">// [2,1,3]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dropWhile<br>字面意思： drop while x!&#x3D;7 is hold， 中文意思：在x!&#x3D;7的时候，丢弃，否则停下来</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">0</span>).dropWhile(x -&gt; x!=<span class="number">7</span>)</span><br><span class="line">  .collect(Collectors.toList());</span><br><span class="line"><span class="comment">//[7, 4, 6, 8, 0]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>iterate</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> Stream.iterate(</span><br><span class="line">     <span class="number">10</span>,  <span class="comment">// 初始值</span></span><br><span class="line">     x -&gt; x &lt; <span class="number">100</span>, <span class="comment">// 终结断言</span></span><br><span class="line">     x-&gt;x+<span class="number">2</span> <span class="comment">// 递推函数</span></span><br><span class="line"> ).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line"><span class="comment">// [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>另外一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; Stream.iterate(<span class="string">&quot;i&quot;</span>, x -&gt; x.length() &lt; <span class="number">20</span>, x-&gt;x+<span class="string">&quot;i&quot;</span>).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//[i, ii, iii, iiii, iiiii, iiiiii, iiiiiii, iiiiiiii, iiiiiiiii, iiiiiiiiii, iiiiiiiiiii, iiiiiiiiiiii, iiiiiiiiiiiii, iiiiiiiiiiiiii, iiiiiiiiiiiiiii, iiiiiiiiiiiiiiii, iiiiiiiiiiiiiiiii, iiiiiiiiiiiiiiiiii, iiiiiiiiiiiiiiiiiii]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ofNullable</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.ofNullable(<span class="literal">null</span>); <span class="comment">// Stream.empty()</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="钻石操作符语法优化"><a href="#钻石操作符语法优化" class="headerlink" title="&lt;&gt;钻石操作符语法优化"></a>&lt;&gt;钻石操作符语法优化</h3><p>允许匿名类使用钻石操作符。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Iterable&lt;Integer&gt; it = <span class="keyword">new</span> <span class="title class_">Iterable</span>&lt;&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;Integer&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="CompletableFuture改进"><a href="#CompletableFuture改进" class="headerlink" title="CompletableFuture改进"></a>CompletableFuture改进</h3><p>CompletableFuture是java异步计算能力的核心，代表一个需要在未来被计算出来的的值。</p>
+<p>在 Java9中针对已有能力，对CompletableFuture进行了提升。</p>
+<h4 id="增加completeOnTimeout方法"><a href="#增加completeOnTimeout方法" class="headerlink" title="增加completeOnTimeout方法"></a>增加completeOnTimeout方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">future</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CompletableFuture</span>&lt;&gt;();</span><br><span class="line">    Executors.newCachedThreadPool().submit(() -&gt; &#123;</span><br><span class="line">        <span class="comment">//Thread.sleep(1000);</span></span><br><span class="line">        <span class="comment">// future.complete(&quot;Hello&quot;);</span></span><br><span class="line">        <span class="comment">// 等价于 </span></span><br><span class="line">        <span class="comment">// completeOnTimeout是Java9新语法</span></span><br><span class="line">        future.completeOnTimeout(<span class="string">&quot;Hello&quot;</span>, <span class="number">1000</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// sync. method blocking...</span></span><br><span class="line">    <span class="type">var</span> <span class="variable">value</span> <span class="operator">=</span> future.get();</span><br><span class="line">    System.out.println(value);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="增加直接成功-失败的future工厂方法"><a href="#增加直接成功-失败的future工厂方法" class="headerlink" title="增加直接成功&#x2F;失败的future工厂方法"></a>增加直接成功&#x2F;失败的future工厂方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">successFuture</span> <span class="operator">=</span> CompletableFuture.completedFuture(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    <span class="type">var</span> <span class="variable">failFuture</span> <span class="operator">=</span> CompletableFuture.failedFuture(<span class="keyword">new</span> <span class="title class_">InterruptedException</span>());</span><br><span class="line"></span><br><span class="line">    System.out.println(successFuture.get()); <span class="comment">// hello</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(failFuture.isCompletedExceptionally()) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;error&quot;</span>); <span class="comment">// print</span></span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(failFuture.get()); <span class="comment">// Exception</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>更多参考并发部分有一节对Future的专项突破课程</strong></p>
+<h3 id="try-with-resources的改进"><a href="#try-with-resources的改进" class="headerlink" title="try-with-resources的改进"></a>try-with-resources的改进</h3><p>Java中的一部分资源对象会继承于Closeable接口，这就可以使用<code>try-with-resources</code>** **能力。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">InputStream</span> <span class="keyword">implements</span> <span class="title class_">Closeable</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要使用的话：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException, IOException &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">fin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;somefile&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span>(fin) &#123; <span class="comment">// AutoClose</span></span><br><span class="line">        fin.read();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面直接对某个实现了Closeable的对象进行try，并且主动触发close能力， 是Java9的一个优化。</p>
+<h2 id="Java-10"><a href="#Java-10" class="headerlink" title="Java 10"></a>Java 10</h2><h3 id="局部变量类型推断"><a href="#局部变量类型推断" class="headerlink" title="局部变量类型推断"></a>局部变量类型推断</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Integer&gt;();</span><br><span class="line"><span class="comment">// list is LinkedList&lt;Integer&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="type">var</span> <span class="variable">o</span> <span class="operator">=</span> Stream.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="comment">// o is Stream&lt;Integer&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JDK代码仓库整理"><a href="#JDK代码仓库整理" class="headerlink" title="JDK代码仓库整理"></a>JDK代码仓库整理</h3><p>所有JDK代码不再使用8个仓库存储：root、corba、hotspot、jaxp、jaxws、jdk、langtools、nashorn。</p>
+<p>统一成为1个仓库。</p>
+<p>主要是解决原子提交的问题：1个功能可能需要更新多个代码仓库。</p>
+<h3 id="G1增加并行能力"><a href="#G1增加并行能力" class="headerlink" title="G1增加并行能力"></a>G1增加并行能力</h3><p>在mark-sweep-compact的GC算法上，再增加<strong>并行</strong> 能力。</p>
+<p>见JVM GC部分</p>
+<h3 id="优化：应用程序数据共享（Application-Data-Sharing"><a href="#优化：应用程序数据共享（Application-Data-Sharing" class="headerlink" title="优化：应用程序数据共享（Application Data Sharing)"></a>优化：应用程序数据共享（Application Data Sharing)</h3><p>ADS： 允许多个JVM实例共享共同用到的类，这些类以共享内存的形式存在。这样对于运行了多个JVM的机器，可以节省内存空间以及类的加载速度。</p>
+<h3 id="计划移除JNI头生成工具"><a href="#计划移除JNI头生成工具" class="headerlink" title="计划移除JNI头生成工具"></a>计划移除JNI头生成工具</h3><p>JNI（Java Native Interface)是Java程序和Native(C, C++)程序沟通的接口。 一个Java类，如果要Native调用，通常是在Android开发当中，需要生成一个C&#x2F;C++的头文件。之前可以用javah来生成，现在用javah工具生成的时候，会有一行warning。</p>
+<p>以后JNI的能力会被Panama项目替代，一个专门为非java语言提供接口的库。</p>
+<h3 id="增加实验性的Graal编译器"><a href="#增加实验性的Graal编译器" class="headerlink" title="增加实验性的Graal编译器"></a>增加实验性的Graal编译器</h3><p>可以配置参数开启：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-XX：+ UnlockExperimentalVMOptions -XX：+ UseJVMCICompiler</span></span><br></pre></td></tr></table></figure>
+
+<p>Graal是一款同时支持JIT和AOT的编译器。</p>
+<ul>
+<li>JIT(Just in Time)一边编译一边执行，执行完第一次之后，下一次不需要编译</li>
+<li>AOT(Ahead of Time)，类似C&#x2F;C++那样，先编译成机器码，再执行。 注意，是机器码，越过了JVM的bytecode。</li>
+</ul>
+<p>目前还是实验阶段，不建议用作生产。已经发现了不少的Bug，等待进一步的修复。</p>
+<h2 id="Java-11"><a href="#Java-11" class="headerlink" title="Java 11"></a>Java 11</h2><h3 id="引入NestedMembers概念"><a href="#引入NestedMembers概念" class="headerlink" title="引入NestedMembers概念"></a>引入NestedMembers概念</h3><p>嵌套类和它的父亲作为一组NestedMembers，可以互相访问元数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Nested</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;123&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">B</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">bar</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException &#123;</span><br><span class="line">            System.out.println(A.class.getDeclaredField(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">B</span>();</span><br><span class="line">        b.bar();</span><br><span class="line">        <span class="comment">// name </span></span><br><span class="line"></span><br><span class="line">        System.out.println(Arrays.toString(A.class.getNestMembers()));</span><br><span class="line">        <span class="comment">// [Nested, A, B]</span></span><br><span class="line">    </span><br><span class="line">        System.out.println(A.class.getNestHost());</span><br><span class="line">        <span class="comment">// Nested</span></span><br><span class="line">    </span><br><span class="line">        System.out.println(Arrays.toString(B.class.getNestMembers()));</span><br><span class="line">        <span class="comment">// [Nested, A, B]</span></span><br><span class="line">    </span><br><span class="line">        System.out.println(B.class.getNestHost());</span><br><span class="line">        <span class="comment">// Nested</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="增加无操作GC回收器-Epsilon"><a href="#增加无操作GC回收器-Epsilon" class="headerlink" title="增加无操作GC回收器:Epsilon"></a>增加无操作GC回收器:Epsilon</h3><p>Epsilon不会进行垃圾回收操作，是的，你没有看错， 它不进行GC。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="variable constant_">XX</span><span class="symbol">:+UseEpsilonGC</span></span><br></pre></td></tr></table></figure>
+
+<p>Epsilon虽然不GC，但是仍然承担着内存分配的工作。（Java 的 GC也是Java的内存管理工具，更多见GC部分）</p>
+<p>有点：</p>
+<ul>
+<li>对于开发者明确知道不需要GC的程序有助于减少延迟</li>
+<li>对于性能测试、压力测试场景，可以忽略GC带来的延迟</li>
+</ul>
+<h3 id="Lambda优化：允许使用-var定义匿名函数形参"><a href="#Lambda优化：允许使用-var定义匿名函数形参" class="headerlink" title="Lambda优化：允许使用 var定义匿名函数形参"></a>Lambda优化：允许使用 var定义匿名函数形参</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> My&#123;&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">    Predicate&lt;String&gt; predicate = (<span class="meta">@My</span> <span class="keyword">var</span> a) -&gt; <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化：增加字符串能处理函数"><a href="#优化：增加字符串能处理函数" class="headerlink" title="优化：增加字符串能处理函数"></a>优化：增加字符串能处理函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot; &quot;</span>.isBlank();                <span class="comment">// true</span></span><br><span class="line"><span class="string">&quot; Foo Bar &quot;</span>.strip();          <span class="comment">// &quot;Foo Bar&quot;</span></span><br><span class="line"><span class="string">&quot; Foo Bar &quot;</span>.stripTrailing();  <span class="comment">// &quot; Foo Bar&quot;</span></span><br><span class="line"><span class="string">&quot; Foo Bar &quot;</span>.stripLeading();   <span class="comment">// &quot;Foo Bar &quot;</span></span><br><span class="line"><span class="string">&quot;Java&quot;</span>.repeat(<span class="number">3</span>);             <span class="comment">// &quot;JavaJavaJava&quot;</span></span><br><span class="line"><span class="string">&quot;A\nB\nC&quot;</span>.lines().count();    <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Core/" rel="tag"># Java Core</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/06/Java%E5%8F%8D%E5%B0%84/" rel="next" title="Java反射 & 注解学习总结">
+                <i class="fa fa-chevron-left"></i> Java反射 & 注解学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/26/Java%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AF%BC%E5%85%A5excel%E6%95%B0%E6%8D%AE/" rel="prev" title="Java 多线程导入excel数据">
+                Java 多线程导入excel数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java8-11%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">Java8-11的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java8"><span class="nav-number">1.1.</span> <span class="nav-text">Java8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda-Functional-Interface"><span class="nav-number">1.1.1.</span> <span class="nav-text">Lambda &amp; Functional Interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.1.2.</span> <span class="nav-text">方法引用::操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream"><span class="nav-number">1.1.3.</span> <span class="nav-text">Stream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optional"><span class="nav-number">1.1.4.</span> <span class="nav-text">Optional</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%96%B9%E6%B3%95-static-default-private"><span class="nav-number">1.1.5.</span> <span class="nav-text">接口的方法(static, default, private)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-8-Nashorn-JavaScript"><span class="nav-number">1.1.6.</span> <span class="nav-text">Java 8 Nashorn JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86%E5%8D%87%E7%BA%A7"><span class="nav-number">1.1.7.</span> <span class="nav-text">本地化日期处理升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E4%BA%86Base64%E5%B7%A5%E5%85%B7"><span class="nav-number">1.1.8.</span> <span class="nav-text">内置了Base64工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java9%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">Java9新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">模块系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83-JShell"><span class="nav-number">1.2.2.</span> <span class="nav-text">交互式编程环境(JShell)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%9A%84HTTP-2-0-Clinet"><span class="nav-number">1.2.3.</span> <span class="nav-text">新的HTTP 2.0 Clinet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E4%BA%86Javadoc"><span class="nav-number">1.2.4.</span> <span class="nav-text">改进了Javadoc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81multirelease-jar%E5%8C%85"><span class="nav-number">1.2.5.</span> <span class="nav-text">支持multirelease jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.6.</span> <span class="nav-text">集合的工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0ProcessHandler"><span class="nav-number">1.2.7.</span> <span class="nav-text">增加ProcessHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-API%E5%A2%9E%E5%8A%A0%E4%BA%86%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.8.</span> <span class="nav-text">Stream API增加了方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%BB%E7%9F%B3%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%AD%E6%B3%95%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.9.</span> <span class="nav-text">&lt;&gt;钻石操作符语法优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletableFuture%E6%94%B9%E8%BF%9B"><span class="nav-number">1.2.10.</span> <span class="nav-text">CompletableFuture改进</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0completeOnTimeout%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.10.1.</span> <span class="nav-text">增加completeOnTimeout方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E7%9B%B4%E6%8E%A5%E6%88%90%E5%8A%9F-%E5%A4%B1%E8%B4%A5%E7%9A%84future%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.10.2.</span> <span class="nav-text">增加直接成功&#x2F;失败的future工厂方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try-with-resources%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">1.2.11.</span> <span class="nav-text">try-with-resources的改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-10"><span class="nav-number">1.3.</span> <span class="nav-text">Java 10</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">局部变量类型推断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E6%95%B4%E7%90%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">JDK代码仓库整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1%E5%A2%9E%E5%8A%A0%E5%B9%B6%E8%A1%8C%E8%83%BD%E5%8A%9B"><span class="nav-number">1.3.3.</span> <span class="nav-text">G1增加并行能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB%EF%BC%88Application-Data-Sharing"><span class="nav-number">1.3.4.</span> <span class="nav-text">优化：应用程序数据共享（Application Data Sharing)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E7%A7%BB%E9%99%A4JNI%E5%A4%B4%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7"><span class="nav-number">1.3.5.</span> <span class="nav-text">计划移除JNI头生成工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E5%AE%9E%E9%AA%8C%E6%80%A7%E7%9A%84Graal%E7%BC%96%E8%AF%91%E5%99%A8"><span class="nav-number">1.3.6.</span> <span class="nav-text">增加实验性的Graal编译器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-11"><span class="nav-number">1.4.</span> <span class="nav-text">Java 11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5NestedMembers%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.1.</span> <span class="nav-text">引入NestedMembers概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E6%97%A0%E6%93%8D%E4%BD%9CGC%E5%9B%9E%E6%94%B6%E5%99%A8-Epsilon"><span class="nav-number">1.4.2.</span> <span class="nav-text">增加无操作GC回收器:Epsilon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda%E4%BC%98%E5%8C%96%EF%BC%9A%E5%85%81%E8%AE%B8%E4%BD%BF%E7%94%A8-var%E5%AE%9A%E4%B9%89%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82"><span class="nav-number">1.4.3.</span> <span class="nav-text">Lambda优化：允许使用 var定义匿名函数形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A%E5%A2%9E%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%83%BD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.4.</span> <span class="nav-text">优化：增加字符串能处理函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>
