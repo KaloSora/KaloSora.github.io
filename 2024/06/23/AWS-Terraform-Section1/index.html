@@ -90,6 +90,23 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621083744-cph8xt3.png">
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617213010-g7rnt9g.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240629153340-5rpwr4n.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617213642-gi9trte.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617214824-h3zyfo9.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617215049-jdiqpkh.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617215341-n63hg26.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621082633-pze0qoe.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621082734-ltw8n4d.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621082909-kl5bllb.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621083520-o2agtmi.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621084141-ejuxa61.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621090125-g8a8waj.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621090308-ajssusd.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240627084650-6jzruh4.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240627084208-hc9n0md.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240627084312-2xv492o.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621083744-cph8xt3.png">
+<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617213010-g7rnt9g.png">
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617213642-gi9trte.png">
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617214824-h3zyfo9.png">
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240617215049-jdiqpkh.png">
@@ -102,7 +119,7 @@
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621090125-g8a8waj.png">
 <meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section1/image-20240621090308-ajssusd.png">
 <meta property="article:published_time" content="2024-06-23T03:13:21.000Z">
-<meta property="article:modified_time" content="2024-06-23T03:17:34.883Z">
+<meta property="article:modified_time" content="2024-06-30T02:31:47.218Z">
 <meta property="article:author" content="KaloSora">
 <meta property="article:tag" content="AWS">
 <meta name="twitter:card" content="summary">
@@ -399,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  646 字
+                  1,363 字
                 </span>
               
 
@@ -415,7 +432,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -442,9 +459,9 @@
 <p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621083744-cph8xt3.png" alt="image">​</p>
 <p>Terraform主要是用于架构的编排，譬如创建EC2，设置VPC，安装docker等，而且其中的顺序必须要遵循一定的顺序。</p>
 <p>另一个IaC工具是Ansible。Ansible可以用来配置基础设置、部署应用、安装和更新应用等</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617213010-g7rnt9g.png" alt="image">​</p>
-<p>‍</p>
 <p>Terraform创建并测试完后，可以精确自动化地复制更多的环境。</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617213010-g7rnt9g.png" alt="image">​</p>
+<p>‍<img src="/2024/06/23/AWS-Terraform-Section1/image-20240629153340-5rpwr4n.png" alt="image">​</p>
 <p>‍</p>
 <h2 id="安装Terraform"><a href="#安装Terraform" class="headerlink" title="安装Terraform"></a>安装Terraform</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install terraform</span><br></pre></td></tr></table></figure>
 
@@ -505,7 +522,85 @@
 <p>可以看到新文件生成</p>
 <p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621090308-ajssusd.png" alt="image">​</p>
 <p>‍</p>
-<h2 id="Terraform常用命令"><a href="#Terraform常用命令" class="headerlink" title="Terraform常用命令"></a>Terraform常用命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">terraform init       # 初始化terraform文件</span><br><span class="line"></span><br><span class="line">terraform plan       # 比对当前环境与tf文件的差异</span><br><span class="line"></span><br><span class="line">terraform apply      # 将tf文件的设置应用到aws</span><br><span class="line"></span><br><span class="line">terraform destroy -target [resource_type] [resource_name]  # 删除资源 </span><br><span class="line"></span><br><span class="line">terraform apply -auto-approve  # 无需二次确认，立即应用tf配置文件</span><br><span class="line"></span><br><span class="line">terraform destroy    # 删除全部基础设施</span><br></pre></td></tr></table></figure>
+<h3 id="查看terraform状态"><a href="#查看terraform状态" class="headerlink" title="查看terraform状态"></a>查看terraform状态</h3><p>执行 terraaform state，以生成<code>tfstate</code>​文件</p>
+<p>该文件可以记录当前terraform资源的状态列表</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240627084650-6jzruh4.png" alt="image">​</p>
+<p>‍</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240627084208-hc9n0md.png" alt="image">​</p>
+<p>‍</p>
+<p>terraform state的子命令</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240627084312-2xv492o.png" alt="image">​</p>
+<p>‍</p>
+<h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>官网 <a target="_blank" rel="noopener" href="https://developer.hashicorp.com/terraform/intro">https://developer.hashicorp.com/terraform/intro</a></p>
+<p>Infrastructure as Code tool.</p>
+<p>Terraform本质上是通过调用API实现对各种服务器资源的CRUD操作。</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621083744-cph8xt3.png" alt="image">​</p>
+<p>Terraform主要是用于架构的编排，譬如创建EC2，设置VPC，安装docker等，而且其中的顺序必须要遵循一定的顺序。</p>
+<p>另一个IaC工具是Ansible。Ansible可以用来配置基础设置、部署应用、安装和更新应用等</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617213010-g7rnt9g.png" alt="image">​</p>
+<p>‍</p>
+<p>Terraform创建并测试完后，可以精确自动化地复制更多的环境。</p>
+<p>‍</p>
+<h2 id="安装Terraform-1"><a href="#安装Terraform-1" class="headerlink" title="安装Terraform"></a>安装Terraform</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install terraform</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>查看Terraform版本号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform -v</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>安装结果如下</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617213642-gi9trte.png" alt="image">​</p>
+<p>‍</p>
+<h2 id="初始化AWS环境-1"><a href="#初始化AWS环境-1" class="headerlink" title="初始化AWS环境"></a>初始化AWS环境</h2><ul>
+<li>连接到AWS账户</li>
+<li>创建VPC</li>
+<li>创建Subnet</li>
+</ul>
+<h3 id="本地环境设置-1"><a href="#本地环境设置-1" class="headerlink" title="本地环境设置"></a>本地环境设置</h3><p>创建名为<code>Terraformed</code>​的文件夹，并在其中创建文件<code>main.tf</code>​</p>
+<p>​<code>*.tf</code>​是Terraform文件的标准命名方式</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617214824-h3zyfo9.png" alt="image">​</p>
+<p>‍</p>
+<p>使用Visual Studio Code打开<code>main.tf</code>​，并且安装Terraform官方插件。</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617215049-jdiqpkh.png" alt="image">​</p>
+<p>‍</p>
+<p>安装完插件以后可以在VS Code中更方便地编辑Terraform文件</p>
+<p>‍</p>
+<h3 id="注册AWS云账号-1"><a href="#注册AWS云账号-1" class="headerlink" title="注册AWS云账号"></a>注册AWS云账号</h3><p>注册完毕后可以免费使用AWS云计算资源</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240617215341-n63hg26.png" alt="image">​</p>
+<p>‍</p>
+<p>注册完毕后会自动创建root用户，此时应该通过IAM创建一个权限较低的管理员账户，并通过管理员账户管理普通账户。</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621082633-pze0qoe.png" alt="image">​</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621082734-ltw8n4d.png" alt="image">​</p>
+<p>添加group或者选择”Attach existing policies directly”勾选需要赋予的权限</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621082909-kl5bllb.png" alt="image">​</p>
+<p>‍</p>
+<h3 id="Terraform连接到AWS-1"><a href="#Terraform连接到AWS-1" class="headerlink" title="Terraform连接到AWS"></a>Terraform连接到AWS</h3><p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621083520-o2agtmi.png" alt="image">​</p>
+<p>‍</p>
+<p>Providers作为Terraform中最重要的关键字，用于标识需要调用的远程云服务供应商API</p>
+<p>Providers列表如下，支持许多的云服务供应商</p>
+<p>支持的资源供应商列表 <a target="_blank" rel="noopener" href="https://registry.terraform.io/browse/providers">https://registry.terraform.io/browse/providers</a></p>
+<p>包括云服务、Devops工具(Ansible、Github、Grafana、Jenkins、Kubernetes …)等</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621084141-ejuxa61.png" alt="image">​</p>
+<p>‍</p>
+<p>通过以下*.tf文件，将以编程的方式连接到AWS服务</p>
+<p>AWS语法和源码示例</p>
+<p><a target="_blank" rel="noopener" href="https://registry.terraform.io/providers/hashicorp/aws/latest">https://registry.terraform.io/providers/hashicorp/aws/latest</a></p>
+<p><a target="_blank" rel="noopener" href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">https://registry.terraform.io/providers/hashicorp/aws/latest/docs</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">provider &quot;aws&quot; &#123;</span><br><span class="line">    region = &quot;eu-west-3&quot; # 取决于购买的EC2实例所属的区域</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    不推荐hardcode明文的key</span><br><span class="line">    **/</span><br><span class="line">    access_key = &quot;&quot;</span><br><span class="line">    secret_key = &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>*.tf文件是一个定义文件，编写完毕后需要执行以下命令安装相应的依赖(类似npm&#x2F;maven instal)</p>
+<p>进入<code>*.tf</code>​所在的文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform init</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>运行结果</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621090125-g8a8waj.png" alt="image">​</p>
+<p>‍</p>
+<p>可以看到新文件生成</p>
+<p>​<img src="/2024/06/23/AWS-Terraform-Section1/image-20240621090308-ajssusd.png" alt="image">​</p>
+<p>‍</p>
+<h2 id="Terraform常用命令"><a href="#Terraform常用命令" class="headerlink" title="Terraform常用命令"></a>Terraform常用命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">terraform init       # 初始化terraform文件</span><br><span class="line"></span><br><span class="line">terraform plan       # 比对当前环境与tf文件的差异</span><br><span class="line"></span><br><span class="line">terraform apply      # 将tf文件的设置应用到aws</span><br><span class="line"></span><br><span class="line">terraform destroy -target [resource_type] [resource_name]  # 删除资源 </span><br><span class="line"></span><br><span class="line">terraform apply -auto-approve  # 无需二次确认，立即应用tf配置文件</span><br><span class="line"></span><br><span class="line">terraform destroy    # 删除全部基础设施</span><br><span class="line"></span><br><span class="line">terraform state      # 生成terraform状态文件</span><br><span class="line"></span><br><span class="line">terraform state list # tfstate 显示文件中所有组件</span><br><span class="line"></span><br><span class="line">terraform state show [组件名]  # 显示tfstate文件中某个组件的terraform完整语法</span><br><span class="line"></span><br><span class="line">terraform version    # 显示terraform版本</span><br><span class="line"></span><br><span class="line">terraform fmt        # 格式化tf文件</span><br><span class="line"></span><br><span class="line">terraform validate   # 验证terraform文件是否正确</span><br><span class="line"></span><br><span class="line">terraform show       # 查看terraform状态</span><br><span class="line"></span><br><span class="line">terraform workspace  # 管理terraform工作空间</span><br><span class="line"></span><br><span class="line">terraform get        # 下载 &amp; 安装(或升级)模块</span><br><span class="line"></span><br><span class="line">terraform import     # 导入模块</span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <p>‍</p>
@@ -632,7 +727,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +789,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Terraform"><span class="nav-number">2.</span> <span class="nav-text">安装Terraform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96AWS%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">初始化AWS环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">本地环境设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CAWS%E4%BA%91%E8%B4%A6%E5%8F%B7"><span class="nav-number">3.2.</span> <span class="nav-text">注册AWS云账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terraform%E8%BF%9E%E6%8E%A5%E5%88%B0AWS"><span class="nav-number">3.3.</span> <span class="nav-text">Terraform连接到AWS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Terraform%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">Terraform常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Terraform"><span class="nav-number">2.</span> <span class="nav-text">安装Terraform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96AWS%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">初始化AWS环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">本地环境设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CAWS%E4%BA%91%E8%B4%A6%E5%8F%B7"><span class="nav-number">3.2.</span> <span class="nav-text">注册AWS云账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terraform%E8%BF%9E%E6%8E%A5%E5%88%B0AWS"><span class="nav-number">3.3.</span> <span class="nav-text">Terraform连接到AWS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bterraform%E7%8A%B6%E6%80%81"><span class="nav-number">3.4.</span> <span class="nav-text">查看terraform状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="nav-number">4.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Terraform-1"><span class="nav-number">5.</span> <span class="nav-text">安装Terraform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96AWS%E7%8E%AF%E5%A2%83-1"><span class="nav-number">6.</span> <span class="nav-text">初始化AWS环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE-1"><span class="nav-number">6.1.</span> <span class="nav-text">本地环境设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CAWS%E4%BA%91%E8%B4%A6%E5%8F%B7-1"><span class="nav-number">6.2.</span> <span class="nav-text">注册AWS云账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terraform%E8%BF%9E%E6%8E%A5%E5%88%B0AWS-1"><span class="nav-number">6.3.</span> <span class="nav-text">Terraform连接到AWS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Terraform%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">Terraform常用命令</span></a></li></ol></div>
             
 
           </div>
@@ -728,7 +823,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.1k</span>
+    <span title="Site words total count">69.8k</span>
   
 </div>
 

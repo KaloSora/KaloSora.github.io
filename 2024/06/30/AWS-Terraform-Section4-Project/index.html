@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AWS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="‍ 创建Git仓库用于存放Terraform代码 创建.gitignore 1234# ignore local .terraform dir.terraform&#x2F;*  ‍ 目标：创建一个EC2实例，并且在EC2里运行一个nginx docker容器 ​​ ‍ 需要创建的AWS资源 *最好不要使用默认的AWS资源  创建VPC 创建Subnet 创建Route Table &amp; Intern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS Terraform Section4 - Project">
+<meta property="og:url" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="‍ 创建Git仓库用于存放Terraform代码 创建.gitignore 1234# ignore local .terraform dir.terraform&#x2F;*  ‍ 目标：创建一个EC2实例，并且在EC2里运行一个nginx docker容器 ​​ ‍ 需要创建的AWS资源 *最好不要使用默认的AWS资源  创建VPC 创建Subnet 创建Route Table &amp; Intern">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240627220019-nclsrwk.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240627220353-vawsy7w.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240627221856-zq53z7g.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629093707-g015c9a.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629095048-bxhndn1.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629095414-dwpb65b.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629100936-owifg74.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629101551-0c9lczq.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629102443-vk9vmei.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629145356-5h7sdlf.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629152214-ngas3tc.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629152738-j165ka4.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629154524-8ou2ulm.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629155206-cpb6z6n.png">
+<meta property="og:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240629160318-0x1irb3.png">
+<meta property="article:published_time" content="2024-06-30T02:27:54.000Z">
+<meta property="article:modified_time" content="2024-06-30T02:36:59.204Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="AWS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/image-20240627220019-nclsrwk.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/"/>
+
+
+
+
+
+  <title>AWS Terraform Section4 - Project | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AWS Terraform Section4 - Project</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-06-30T10:27:54+08:00">
+                2024-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS-Terraform/" itemprop="url" rel="index">
+                    <span itemprop="name">AWS Terraform</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,012 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>‍</p>
+<p>创建Git仓库用于存放Terraform代码</p>
+<p>创建.gitignore</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># ignore local .terraform dir</span><br><span class="line">.terraform/*</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>目标：创建一个EC2实例，并且在EC2里运行一个nginx docker容器</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240627220019-nclsrwk.png" alt="image">​</p>
+<p>‍</p>
+<p>需要创建的AWS资源</p>
+<p>*最好不要使用默认的AWS资源</p>
+<ol>
+<li>创建VPC</li>
+<li>创建Subnet</li>
+<li>创建Route Table &amp; Internet Gateway</li>
+<li>创建EC2</li>
+<li>部署nginx docker容器</li>
+<li>创建Security Group(Firewall)，并允许ssh</li>
+</ol>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240627220353-vawsy7w.png" alt="image">​</p>
+<p>‍</p>
+<h2 id="创建VPC-Subnet"><a href="#创建VPC-Subnet" class="headerlink" title="创建VPC &amp; Subnet"></a>创建VPC &amp; Subnet</h2><p>terraform.tfvars</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vpc_cidr_block = &quot;10.0.0.0/16&quot;</span><br><span class="line">subnet_cidr_block = &quot;10.0.0.0/24&quot;</span><br><span class="line">avail_zone = &quot;eu-west-3b&quot;</span><br><span class="line">env_prefix = &quot;dev&quot;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>main.tf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">provider &quot;aws&quot; &#123;</span><br><span class="line">    region = &quot;eu-west-3&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">variable vpc_cidr_block &#123;&#125;</span><br><span class="line">variable subnet_cidr_block &#123;&#125;</span><br><span class="line">variable avail_zone &#123;&#125;</span><br><span class="line">variable env_prefix &#123;&#125;</span><br><span class="line"></span><br><span class="line"># 创建VPC</span><br><span class="line">resource &quot;aws_vpc&quot; &quot;myapp-vpc&quot; &#123;</span><br><span class="line">  cidr_block = var.vpc_cidr_block</span><br><span class="line"></span><br><span class="line">  # vpc名称带有&quot;vpc&quot;前缀</span><br><span class="line">  tags = &#123;</span><br><span class="line">    Name: &quot;$&#123;var.env_prefix&#125;-vpc&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 创建Subnet</span><br><span class="line">resource &quot;aws_subnet&quot; &quot;myapp-subnet-1&quot; &#123;</span><br><span class="line">  vpc_id = aws_vpc.myapp-vpc.id</span><br><span class="line">  cidr_block = var.vpc_cidr_block</span><br><span class="line">  availability_zone = var.avail_zone</span><br><span class="line">  tags = &#123;</span><br><span class="line">    Name: &quot;$&#123;var.env_prefix&#125;-subnet-1&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>在AWS上查看结果</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240627221856-zq53z7g.png" alt="image">​</p>
+<p>‍</p>
+<h2 id="Route-Table"><a href="#Route-Table" class="headerlink" title="Route Table"></a>Route Table</h2><p>Route table决定了VPC转发的目的地</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629093707-g015c9a.png" alt="image">​</p>
+<p>‍</p>
+<p>在Terraform code不必根据执行的先后来编写代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 创建Route table</span><br><span class="line">resource &quot;aws_route_table&quot; &quot;myapp-route-table&quot; &#123;</span><br><span class="line">  vpc_id = aws_vpc.myapp-vpc.id</span><br><span class="line"></span><br><span class="line">  route = &#123;</span><br><span class="line">    cidr_block = &quot;0.0.0.0/0&quot;</span><br><span class="line">    gateway_id = aws_internet_gateway.myapp-igw.id</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  tags = &#123;</span><br><span class="line">    Name: &quot;$&#123;var.env_prefix&#125;-rtb&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Route table gateway</span><br><span class="line">resource &quot;aws_internet_gateway&quot; &quot;myapp-igw&quot; &#123;</span><br><span class="line">  vpc_id = aws_vpc.myapp-vpc.id</span><br><span class="line"></span><br><span class="line">    tags = &#123;</span><br><span class="line">    Name: &quot;$&#123;var.env_prefix&#125;-igw&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>执行结果</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629095048-bxhndn1.png" alt="image">​</p>
+<p>‍</p>
+<p>同时还要为Route table和Subnet创建关联</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629095414-dwpb65b.png" alt="image">​</p>
+<p>Terraform code</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Route table &amp; Subnect</span><br><span class="line">resource &quot;aws_route_table_association&quot; &quot;a-rtb-subnet&quot; &#123;</span><br><span class="line">  subnet_id = aws_subnet.myapp-subnet-1.id</span><br><span class="line">  route_table_id = aws_route_table.myapp-route-table.id</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h2 id="Security-Group-Firewall"><a href="#Security-Group-Firewall" class="headerlink" title="Security Group &amp; Firewall"></a>Security Group &amp; Firewall</h2><p>创建安全组</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629100936-owifg74.png" alt="image">​</p>
+<p>Terraform code</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># Security Group</span><br><span class="line">resource &quot;aws_security_group&quot; &quot;myapp-sg&quot; &#123;</span><br><span class="line">  name = &quot;myapp-sg&quot;</span><br><span class="line">  vpc_id = aws_vpc.myapp-vpc.id</span><br><span class="line">  </span><br><span class="line">  # Incoming traffic</span><br><span class="line">  ingress = &#123;</span><br><span class="line">    from_port = 22</span><br><span class="line">    to_port = 22</span><br><span class="line">    protocal = &quot;tcp&quot;</span><br><span class="line"></span><br><span class="line">    # IPs allow list</span><br><span class="line">    cidr_block = [&quot;your_allow_ip/32&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  # Outgoing traffic</span><br><span class="line">  egress = &#123;</span><br><span class="line">    # Allowing all port and ip</span><br><span class="line">    from_port = 0</span><br><span class="line">    to_port = 0</span><br><span class="line">    protocal = &quot;-1&quot;</span><br><span class="line">    cidr_block = [&quot;0.0.0.0/0&quot;]</span><br><span class="line">    prefix_list_ids = []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  tags = &#123;</span><br><span class="line">    Name: &quot;$&#123;var.env_prefix&#125;-sg&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>执行结果</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629101551-0c9lczq.png" alt="image">​</p>
+<p>‍</p>
+<h2 id="EC2-AMI"><a href="#EC2-AMI" class="headerlink" title="EC2 &amp; AMI"></a>EC2 &amp; AMI</h2><p>Amazon Machine Image(AMI)是aws提供的操作系统镜像，用户可以根据AMI创建自己的操作系统实例。</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629102443-vk9vmei.png" alt="image">​</p>
+<p>‍</p>
+<p>Terraform code</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># AWS AMI data definition</span><br><span class="line">data &quot;aws_ami&quot; &quot;latest_aws-linux-image&quot; &#123;</span><br><span class="line">  # Always get latest image</span><br><span class="line">  most_recent = true</span><br><span class="line"></span><br><span class="line">  owners = [&quot;amazon&quot;]</span><br><span class="line">  </span><br><span class="line">  # filter image name with regrex</span><br><span class="line">  filter &#123;</span><br><span class="line">    name = &quot;name&quot;</span><br><span class="line">    values = [&quot;amzn2-ami-hvm-*-x86_64_gp2&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">  filter &#123;</span><br><span class="line">    name = &quot;virtualization-type&quot;</span><br><span class="line">    values = [&quot;hvm&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Only test for ami id output</span><br><span class="line"># When execute &quot;terraform plan&quot;, can see value from console</span><br><span class="line"># output &quot;name&quot; &#123;</span><br><span class="line">#   value = data.aws_ami.latest_aws-linux-image</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># 创建aws key pair</span><br><span class="line">resource &quot;aws_key_pair&quot; &quot;ssh-key&quot; &#123;</span><br><span class="line">  key_name = &quot;server-key&quot;</span><br><span class="line"></span><br><span class="line">  # 引用文件</span><br><span class="line">  public_key = &quot;$&#123;file(&quot;/User/xxx/.ssh/key_file.pub&quot;)&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 创建操作系统实例 - EC2</span><br><span class="line">resource &quot;aws_instance&quot; &quot;myapp-server&quot; &#123;</span><br><span class="line">  # Id of ami</span><br><span class="line">  ami = data.aws_ami.latest_aws-linux-image.id</span><br><span class="line">  instance_type = &quot;t2.micro&quot;</span><br><span class="line"></span><br><span class="line">  # 引用已经创建好的VPC &amp; Subnect</span><br><span class="line">  subnet_id = aws_subnet.myapp-subnet-1.id</span><br><span class="line">  vpc_security_group_ids = [aws_default_security_group.default-sg.id]</span><br><span class="line">  availability_zone = var.avail_zone</span><br><span class="line">  associate_public_ip_address = true</span><br><span class="line"></span><br><span class="line">  # Server key pair, permission should be 400</span><br><span class="line">  # AWS will reject ssh request if permission not set correctly</span><br><span class="line">  # It&#x27;s generate from AWS console, provide the key file name</span><br><span class="line">  key_name = aws_key_pair.ssh-key.key_name </span><br><span class="line">  </span><br><span class="line">  tags = &#123;</span><br><span class="line">    Name = &quot;$&#123;var.env_prefix&#125;-server&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>等待EC2创建</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629145356-5h7sdlf.png" alt="image">​</p>
+<p>‍</p>
+<h3 id="EC2-initialize-script"><a href="#EC2-initialize-script" class="headerlink" title="EC2 initialize script"></a>EC2 initialize script</h3><p>添加 <code>user_data=</code>​，设置EC2初始化时自动运行脚本</p>
+<p>下图中的代码块只会在初始化的时候被执行一次</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629152214-ngas3tc.png" alt="image">​</p>
+<p>‍</p>
+<p>如果需要执行定义好的脚本而不是代码块，可以使用如下方式</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629152738-j165ka4.png" alt="image">​</p>
+<p>‍</p>
+<p><strong>另一种方式：使用Provisioner执行脚本</strong></p>
+<p>使用<code>remote-exec</code>​在EC2上执行脚本</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629154524-8ou2ulm.png" alt="image">​</p>
+<p>‍</p>
+<p>可以使用<code>local-exec</code>​在本地机器上执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">provisioner &quot;local-exec&quot; &#123;</span><br><span class="line">  command = &quot;echo $&#123;self.public_ip&#125; &gt; output.txt&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Terraform文档上说明<code>Provisioners</code>​是没有其他选择时的最后手段</p>
+<ul>
+<li>尽量采用<code>user_data</code>​而不是<code>Provisioners</code>​</li>
+<li>尽量使用”local provider”取代<code>local-exec</code>​</li>
+<li>尽量采用配置管理工具取代<code>Provisioners</code>​，如Ansible, Jenkins</li>
+</ul>
+<p>实际上<code>Provisioners</code>​打破了Terraform的概念。Terraform能通过相同的组件状态总是提供一致的返回结果，但是<code>Provisioners</code>​执行的脚本却是未知的，Terraform无法获取到其中的状态。</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629155206-cpb6z6n.png" alt="image">​</p>
+<p>‍</p>
+<p>一种可能的情况是，Provisioner中的脚本执行错误，此时terraform不会返回具体的状态信息。</p>
+<p>这种状态下无法得知EC2具体是否被创建</p>
+<p>​<img src="/2024/06/30/AWS-Terraform-Section4-Project/image-20240629160318-0x1irb3.png" alt="image">​</p>
+<p>‍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AWS/" rel="tag"># AWS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/06/29/AWS-Terraform-Section3-Input-and-Output/" rel="next" title="AWS Terraform Section3 - Input and Output">
+                <i class="fa fa-chevron-left"></i> AWS Terraform Section3 - Input and Output
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAVPC-Subnet"><span class="nav-number">1.</span> <span class="nav-text">创建VPC &amp; Subnet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Route-Table"><span class="nav-number">2.</span> <span class="nav-text">Route Table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Security-Group-Firewall"><span class="nav-number">3.</span> <span class="nav-text">Security Group &amp; Firewall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EC2-AMI"><span class="nav-number">4.</span> <span class="nav-text">EC2 &amp; AMI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EC2-initialize-script"><span class="nav-number">4.1.</span> <span class="nav-text">EC2 initialize script</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">69.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

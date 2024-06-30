@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/</loc>
+    <loc>http://example.com/2024/06/30/AWS-Terraform-Section4-Project/</loc>
     
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +13,25 @@
   <url>
     <loc>http://example.com/2024/06/23/AWS-Terraform-Section1/</loc>
     
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/</loc>
+    
+    <lastmod>2024-06-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/06/29/AWS-Terraform-Section3-Input-and-Output/</loc>
+    
+    <lastmod>2024-06-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -274,7 +292,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -282,56 +300,56 @@
   
   <url>
     <loc>http://example.com/tags/AWS/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/DATAWARE-HOUSE/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Python-Web/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Spring/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Devops/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Java-Core/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Oracle/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -340,49 +358,49 @@
   
   <url>
     <loc>http://example.com/categories/AWS-Terraform/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/ORACLE-BIEE/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Django/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Docker/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Java/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Database/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2024-06-23</lastmod>
+    <lastmod>2024-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
