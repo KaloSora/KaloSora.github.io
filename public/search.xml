@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Jupyter Notebook</title>
+      <link href="/2025/01/29/Jupyter-Notebook/"/>
+      <url>/2025/01/29/Jupyter-Notebook/</url>
+      
+        <content type="html"><![CDATA[<p>‍</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://jupyter.org/">Jupyter官网</a></p><blockquote><p>JupyterLab是最新的基于web的笔记本、代码和数据交互式开发环境。其灵活的界面允许用户配置和安排数据科学、科学计算、计算新闻和机器学习中的工作流程。模块化设计邀请扩展来扩展和丰富功能。</p></blockquote><p>该工具具有以下特征：</p><ul><li>允许使用markdown语法</li><li>支持快速导出多种文件格式</li><li>支持部署在远程环境</li><li>不仅仅支持Python，也支持Javascript，Ruby等语言</li></ul><p>因此，许多公开课网站和大学课程普遍使用Jupyter分发作业。它也适合机器学习和数据分析，是集编程和写作与一身的工具。</p><p>这种编程方式也可以称为文学编程。</p><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>安装命令</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter</span><br></pre></td></tr></table></figure><p>‍</p><p>运行结果</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194112-m528stx.png" alt="image">​</p><p>‍</p><p>运行命令</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="punctuation">[</span>target_folder<span class="punctuation">]</span></span><br><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure><p>‍</p><p>运行结果</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194224-8owk4qo.png" alt="image">​</p><p>浏览器输入<code>http://localhost:8888/</code>​访问Jupyter</p><p>‍</p><p>创建新Python文件，并运行第一行测试代码</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194421-wre78l2.png" alt="image">​</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194624-s0xokbq.png" alt="image">​</p><p>‍</p><p>在本地目录检查新文件</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194833-rsd6qx2.png" alt="image">​</p><p>‍</p><p>Jupyter文件支持导出多种格式</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194946-9pknd69.png" alt="image">​</p><p>‍</p><p>输入<code>h</code>​查看所有快捷键</p><p>​<img src="/2025/01/29/Jupyter-Notebook/image-20250125194351-1zd7ao9.png" alt="image">​</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI/ML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AWS Terraform Section4 - Project</title>
       <link href="/2024/06/30/AWS-Terraform-Section4-Project/"/>
       <url>/2024/06/30/AWS-Terraform-Section4-Project/</url>
