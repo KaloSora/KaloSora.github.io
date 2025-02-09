@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Mac DeepSeek本地部署</title>
+      <link href="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/"/>
+      <url>/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</url>
+      
+        <content type="html"><![CDATA[<p>‍</p><blockquote><p>DeepSeek Github开源仓库</p><p><a href="https://github.com/deepseek-ai">https://github.com/deepseek-ai</a></p><p>‍</p><p>R1仓库</p><p><a href="https://github.com/deepseek-ai/DeepSeek-R1">https://github.com/deepseek-ai/DeepSeek-R1</a></p></blockquote><p>‍</p><h2 id="安装Ollama"><a href="#安装Ollama" class="headerlink" title="安装Ollama"></a>安装Ollama</h2><p>Ollama是一个开源框架，专为在本地机器（支持跨平台，如Mac&#x2F;Windows）上便捷部署和运行大语言模型（LLM）而设计。</p><p>*使用的机器为Mac 2018 Pro, Intel CPU，LM Studio不支持。</p><blockquote><p>Ollama下载链接</p><p><a href="https://ollama.com/download/mac">https://ollama.com/download/mac</a></p></blockquote><p>‍</p><p>验证安装结果</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208155744-ss6d35f.png" alt="image">​</p><p>‍</p><h2 id="Ollama载入Deepseek-r1"><a href="#Ollama载入Deepseek-r1" class="headerlink" title="Ollama载入Deepseek-r1"></a>Ollama载入Deepseek-r1</h2><p>在Ollama官网找到R1模型</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208160225-5ukfsvg.png" alt="image">​</p><p>‍</p><p>选择需要的模型，复制命令</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208160323-kngn783.png" alt="image">​</p><p>在命令行里运行对应的命令，会自动下载模型</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208160414-bywa9rp.png" alt="image">​</p><p>‍</p><p>运行结果</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208193550-jd15aq2.png" alt="image">​</p><p>‍</p><h2 id="Chatbox为AI添加UI"><a href="#Chatbox为AI添加UI" class="headerlink" title="Chatbox为AI添加UI"></a>Chatbox为AI添加UI</h2><blockquote><p>Chatbox官网</p><p><a href="https://chatboxai.app/zh">https://chatboxai.app/zh</a></p></blockquote><p>*UI也可以选择Cherry Studio</p><p>选择Ollama API</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208193833-c6ffl5u.png" alt="image">​</p><p>‍</p><p>选择已下载的模型</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208193914-rpsuerz.png" alt="image">​</p><p>‍</p><p>选择你配置好的模型，然后提出你的问题</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250208194057-96fy3y7.png" alt="image">​</p><p>‍</p><h2 id="开启本地联网服务"><a href="#开启本地联网服务" class="headerlink" title="开启本地联网服务"></a>开启本地联网服务</h2><p>安装AnythingLLM</p><p><a href="https://docs.anythingllm.com/installation-desktop/macos">https://docs.anythingllm.com/installation-desktop/macos</a></p><p>‍</p><p>API提供商选择Ollama</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250209094623-o1t509s.png" alt="image">​</p><p>‍</p><p>在设置中找到“代理技能”，开启连网搜索</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250209094943-2vud5jw.png" alt="image">​</p><p>‍</p><p>尝试提出一个2025年2月的事件，并要求deepseek分析其影响</p><p>*这里联网速度和思考速度都比较慢</p><p>​<img src="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/image-20250209100454-72pvg99.png" alt="image">​</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI/ML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LLM </tag>
+            
+            <tag> DeepSeek </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Windows DeepSeek本地部署</title>
+      <link href="/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/"/>
+      <url>/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<p>‍</p><p>DeepSeek R1 Distill 本地部署相关资料</p><blockquote><p>资料来源 <a href="https://henjihenji.feishu.cn/wiki/MN3Vwl2STigk2qk1r6lcGoY5nYg">https://henjihenji.feishu.cn/wiki/MN3Vwl2STigk2qk1r6lcGoY5nYg</a></p></blockquote><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>建议使用 NVIDIA 卡，体验会好不少，AMD 显卡未做测试，但应该也是能跑的</p><p>欢迎各位在本文档评论区反馈各自运行情况，这样可以帮到更多人</p><h1 id="LM-Studio"><a href="#LM-Studio" class="headerlink" title="LM Studio"></a>LM Studio</h1><p>官网下载：<a href="https://lmstudio.ai/">https://lmstudio.ai/</a></p><p>夸克网盘：<a href="https://pan.quark.cn/s/f7f610d2ac7a">https://pan.quark.cn/s/f7f610d2ac7a</a></p><h1 id="模型列表"><a href="#模型列表" class="headerlink" title="模型列表"></a>模型列表</h1><p>请选择文件体积小于自己显存大小的模型，略大一些的虽然也能跑，但是速度会慢很多。因个人能力有限，以下模型推荐不一定是最好的</p><p>更多模型下载</p><p>  链接1：<a href="https://www.modelscope.cn/organization/lmstudio-community">https://www.modelscope.cn/organization/lmstudio-community</a></p><p>  记得用搜索功能搜索 DeepSeek 相关模型</p><p>  链接2：<a href="https://www.modelscope.cn/collections/DeepSeek-R1-Distill-GGUF-eec5fee2f2ee42">https://www.modelscope.cn/collections/DeepSeek-R1-Distill-GGUF-eec5fee2f2ee42</a></p><p>  相比链接1会多一点不同量化精度的模型</p><p><strong>点击模型名称可以直接下载</strong></p><table><thead><tr><th>显存大小</th><th>推荐模型</th><th>备注</th></tr></thead><tbody><tr><td>32GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-32B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-32B-Q6_K.gguf">DeepSeek-R1-Distill-Qwen-32B-Q6_K.gguf</a></td><td></td></tr><tr><td>24GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-32B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf">DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf</a><br><a href="https://www.modelscope.cn/models/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-32B-Q5_K_M.gguf">DeepSeek-R1-Distill-Qwen-32B-Q5_K_M.gguf</a></td><td>二选一即可，比较推荐第一个<br><a href="https://www.modelscope.cn/models/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-32B-Q5_K_M.gguf">Q5</a> 质量上可能会好一点，但是因为太接近 24G 显存，所以上下文多了之后，速度可能会慢。<br>上面的 <a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-32B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-32B-Q6_K.gguf">Q6</a> 勉强也能跑，但速度会比较慢。</td></tr><tr><td>16GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-14B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-14B-Q6_K.gguf">DeepSeek-R1-Distill-Qwen-14B-Q6_K.gguf</a></td><td></td></tr><tr><td>12GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-14B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf">DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf</a></td><td></td></tr><tr><td>11GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-14B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf">DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf</a></td><td></td></tr><tr><td>8GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-7B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-7B-Q6_K.gguf">DeepSeek-R1-Distill-Qwen-7B-Q6_K.gguf</a><br><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Llama-8B-GGUF/resolve/master/DeepSeek-R1-Distill-Llama-8B-Q6_K.gguf">DeepSeek-R1-Distill-Llama-8B-Q6_K.gguf</a></td><td>二选一即可</td></tr><tr><td>6GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-7B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf">DeepSeek-R1-Distill-Qwen-7B-Q4_K_M.gguf</a><br><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Llama-8B-GGUF/resolve/master/DeepSeek-R1-Distill-Llama-8B-Q4_K_M.gguf">DeepSeek-R1-Distill-Llama-8B-Q4_K_M.gguf</a></td><td>二选一即可</td></tr><tr><td>4GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-7B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-7B-Q3_K_L.gguf">DeepSeek-R1-Distill-Qwen-7B-Q3_K_L.gguf</a><br><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-1.5B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-1.5B-Q8_0.gguf">DeepSeek-R1-Distill-Qwen-1.5B-Q8_0.gguf</a></td><td>二选一即可，比较推荐第一个<br>第二个 4G 显存能跑，但可能会比较慢</td></tr><tr><td>3GB、2GB</td><td><a href="https://www.modelscope.cn/models/lmstudio-community/DeepSeek-R1-Distill-Qwen-1.5B-GGUF/resolve/master/DeepSeek-R1-Distill-Qwen-1.5B-Q8_0.gguf">DeepSeek-R1-Distill-Qwen-1.5B-Q8_0.gguf</a></td><td></td></tr></tbody></table><h1 id="如何查看自己的显存"><a href="#如何查看自己的显存" class="headerlink" title="如何查看自己的显存"></a>如何查看自己的显存</h1><p>​<img src="/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/image-20250209100647-xmyvf48.png" alt="image">​</p><table><thead><tr><th>显存大小</th><th>对应N卡型号</th></tr></thead><tbody><tr><td>2GB</td><td>GTX 1050、GT 1030</td></tr><tr><td>3GB</td><td>GTX 1060 3GB</td></tr><tr><td>4GB</td><td>GTX 1050 Ti</td></tr><tr><td>6GB</td><td>GTX 1060 6GB、RTX 2060 6GB、RTX 3050 (6GB)</td></tr><tr><td>8GB</td><td>GTX 1080、GTX 1070 Ti、GTX 1070、RTX 2080 SUPER、RTX 2080、RTX 2070 SUPER、RTX 2070、RTX 2060 SUPER、RTX 3070 Ti、RTX 3070、RTX 3060 Ti、RTX 3060 (8GB)、RTX 3050 (8GB)、RTX 4080、RTX 4060 Ti 8GB、RTX 4060、RTX 5070</td></tr><tr><td>11GB</td><td>GTX 1080 Ti、RTX 2080 Ti</td></tr><tr><td>12GB</td><td>RTX 2060 12GB、RTX 3060 (12GB)、RTX 4070 Ti SUPER、RTX 4070、RTX 5070 Ti</td></tr><tr><td>16GB</td><td>RTX 4060 Ti 16GB、RTX 5080</td></tr><tr><td>24GB</td><td>RTX 3090 Ti、RTX 3090、RTX 4090</td></tr><tr><td>32GB</td><td>RTX 5090</td></tr></tbody></table><p>‍</p><h1 id="本地部署测试"><a href="#本地部署测试" class="headerlink" title="本地部署测试"></a>本地部署测试</h1><p>GPU：AMD Radeon RX580 8G</p><p>CPU：AMD Ryzen 5600X</p><p>内存：16G</p><p>‍</p><p>运行LM Studio</p><p>​<img src="/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/image-20250209110548-fxxeq1n.png" alt="image">​</p><p>‍</p><p>加载本地模型</p><p>注意模型这里直接选根目录，LM Studio会自动搜索</p><p>​<img src="/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/image-20250209110613-zipexwj.png" alt="image">​</p><p>‍</p><p>点击顶部加载模型，开始新的对话</p><p>​<img src="/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/image-20250209110630-hf4qhqg.png" alt="image">​</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI/ML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LLM </tag>
+            
+            <tag> DeepSeek </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Jupyter Notebook</title>
       <link href="/2025/01/29/Jupyter-Notebook/"/>
       <url>/2025/01/29/Jupyter-Notebook/</url>
@@ -21,6 +75,8 @@
         <tags>
             
             <tag> Python </tag>
+            
+            <tag> LLM </tag>
             
         </tags>
       

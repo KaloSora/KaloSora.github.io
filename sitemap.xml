@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2025-02-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</loc>
+    
+    <lastmod>2025-02-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2025/01/29/Jupyter-Notebook/</loc>
     
     <lastmod>2025-01-29</lastmod>
@@ -301,7 +319,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -309,63 +327,77 @@
   
   <url>
     <loc>http://example.com/tags/AWS/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/DATAWARE-HOUSE/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Python-Web/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Spring/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Devops/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Java-Core/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Python/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/LLM/</loc>
+    <lastmod>2025-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/DeepSeek/</loc>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/Oracle/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -374,56 +406,56 @@
   
   <url>
     <loc>http://example.com/categories/AWS-Terraform/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/ORACLE-BIEE/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Django/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Docker/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Java/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/AI-ML/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/Database/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2025-01-29</lastmod>
+    <lastmod>2025-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
