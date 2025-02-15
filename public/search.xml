@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>搭建HelloGPT</title>
+      <link href="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/"/>
+      <url>/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/</url>
+      
+        <content type="html"><![CDATA[<p>‍</p><h2 id="通过Azure访问GPT"><a href="#通过Azure访问GPT" class="headerlink" title="通过Azure访问GPT"></a>通过Azure访问GPT</h2><p>中国大陆地区不允许访问GPT服务，可以通过微软云搭建GPT服务。</p><p>*微软云首次注册有30天免费体验</p><p><a href="https://azure.microsoft.com/zh-cn/pricing/purchase-options/azure-account/">https://azure.microsoft.com/zh-cn/pricing/purchase-options/azure-account/</a></p><p>‍</p><p>创建OpenAI服务</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125200329-jo21jm7.png" alt="image">​</p><p>‍</p><p>选择部署模型</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125200414-0bcfzdx.png" alt="image">​</p><p>‍</p><p>获取环境变量</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125200526-o69r4x2.png" alt="image">​</p><p>设置到系统配置文件中，也可以在代码中import</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125200541-inoh9dd.png" alt="image">​</p><p>‍</p><p>代码详解</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125200913-vsz9usw.png" alt="image">​</p><ul><li>temperature：针对回答的稳定性设置，0为最稳定</li><li>max_token：设置回答的长度</li></ul><p>‍</p><p>Token计费规则</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125105549-o7q171o.png" alt="image">​</p><p>‍</p><p>模型请求配额</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250125105618-6jmorto.png" alt="image">​</p><h2 id="使用DeepSeekAPI"><a href="#使用DeepSeekAPI" class="headerlink" title="使用DeepSeekAPI"></a><strong>使用DeepSeekAPI</strong></h2><p>可以使用DeepSeek的API作为代替</p><p><a href="https://platform.deepseek.com/sign_in">deepseek open platform</a></p><p><a href="https://chat.deepseek.com/">deepseek free chat</a></p><p>首次注册可以获得免费额度</p><p>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250128103053-btd7xa1.png" alt="image">​</p><p>‍</p><p><a href="https://api-docs.deepseek.com/zh-cn/">API document</a></p><blockquote><p>示例源代码</p><p><a href="https://github.com/KaloSora/HelloGPT/blob/dev/code/gpt_api_example.ipynb">https://github.com/KaloSora/HelloGPT/blob/main/code/gpt_api_example.ipynb</a></p></blockquote><p>‍</p><h2 id="提示词工程"><a href="#提示词工程" class="headerlink" title="提示词工程"></a>提示词工程</h2><p>大模型返回的自然语言无法被程序使用。</p><p>让大模型结合到程序中，让程序能理解大模型返回的结果。</p><h3 id="提示词技巧"><a href="#提示词技巧" class="headerlink" title="提示词技巧"></a>提示词技巧</h3><ul><li>利用反向提示词（如：不使用……）</li><li>规范输出的格式（如指定Json格式，便于程序处理）</li><li>文本规范异常输出的格式（如遇到异常时，返回简单的ERROR，便于程序处理）</li><li>不断迭代提示词</li><li>提示词尽量使用英语</li></ul><p>‍</p><p>DeepSeek官方提示库</p><p><a href="https://api-docs.deepseek.com/zh-cn/prompt-library/">DeepSeek提示库</a></p><p>‍</p><blockquote><p>示例源代码</p><p><a href="https://github.com/KaloSora/HelloGPT/blob/dev/code/gpt_prompt_demo.ipynb">https://github.com/KaloSora/HelloGPT/blob/dev/code/gpt_prompt_demo.ipynb</a></p></blockquote><p>‍</p><h2 id="LangChain"><a href="#LangChain" class="headerlink" title="LangChain"></a>LangChain</h2><p>大语言模型中的拓展工具类库，作为大语言模型和应用程序之间的桥梁。</p><blockquote><p>LangChain is a flexible abstractions and extensive toolkit enables developers to harness the power of LLMs.</p></blockquote><p>‍</p><p>安装方式</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install langchain</span><br><span class="line"></span><br><span class="line">pip install langchain-community</span><br></pre></td></tr></table></figure><p>‍</p><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul><li><p>提示词模板</p></li><li><p>不同程度的上下文记忆</p></li><li><p>大模型调用API</p><ul><li>这种查询方式类似于爬虫，可能会被外部网站阻止，建议使用网站提供的API</li></ul></li><li><p>链式请求</p><ul><li>将复杂的任务分解为更简单的子任务</li><li>​<img src="/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/image-20250128163023-kgl4499.png" alt="image">​</li></ul></li></ul><p>‍</p><blockquote><p>示例源代码</p><p><a href="https://github.com/KaloSora/HelloGPT/blob/dev/code/langchain_demo.ipynb">https://github.com/KaloSora/HelloGPT/blob/dev/code/langchain_demo.ipynb</a></p></blockquote><p>‍</p><h2 id="保持会话状态"><a href="#保持会话状态" class="headerlink" title="保持会话状态"></a>保持会话状态</h2><p>LLM模型本身的对话是无状态的。</p><p>使用<code>Gradio</code>​类库让Chatbot获得记忆，能够根据上下文回答问题。</p><ul><li>能够快速构建原型</li><li>能够保存上下文对话信息</li></ul><p>‍</p><p>安装</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install gradio</span><br></pre></td></tr></table></figure><p>‍</p><p>可以使用LangChain的记忆功能，让开发更加简单</p><p>可以尝试不同程度的记忆功能</p><p>例如：ConversationSummaryBufferMemory</p><p>当缓存内容Token超过参数 “max_token_limit” 的值后，就会将超出的会话内容进行总结，这个总结过程也是通过大模型完成的。</p><p>‍</p><p>使用记忆功能的模型：</p><p><strong>优点</strong></p><ul><li>控制了缓存内容的大小</li><li>尽量记忆对话的上下文</li></ul><p>缺点</p><ul><li>在缓存内容超出限制后，为了控制缓存的大小，会持续通过大模型来总结较早的内容，使程序相应的延迟增加</li><li>成本增加</li></ul><p>‍</p><blockquote><p> 示例源代码</p><p><a href="https://github.com/KaloSora/HelloGPT/blob/dev/code/gpt_langchain_history.ipynb">https://github.com/KaloSora/HelloGPT/blob/dev/code/gpt_langchain_history.ipynb</a></p></blockquote><p>‍</p><h2 id="大模型在企业中的应用畅想"><a href="#大模型在企业中的应用畅想" class="headerlink" title="大模型在企业中的应用畅想"></a>大模型在企业中的应用畅想</h2><p>启发式交互应用：如低代码平台，或自然语言生成代码</p><p>Copilot：AI助手，如微软、Apple的AI助手，或者是企业中的IT系统诊断助手</p><p>大语言模型的推理&#x2F;生成：生成式AI应用</p><p>‍</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI/ML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LLM </tag>
+            
+            <tag> DeepSeek </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Mac DeepSeek本地部署</title>
       <link href="/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/"/>
       <url>/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</url>
