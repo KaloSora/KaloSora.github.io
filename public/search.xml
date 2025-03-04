@@ -416,7 +416,7 @@
     
     
     <entry>
-      <title>Java 文件上传与下载</title>
+      <title>Docker部署Eureka</title>
       <link href="/2021/07/14/Docker%E9%83%A8%E7%BD%B2Eureka/"/>
       <url>/2021/07/14/Docker%E9%83%A8%E7%BD%B2Eureka/</url>
       
@@ -425,7 +425,7 @@
       
       <categories>
           
-          <category> Docker </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -435,6 +435,8 @@
             <tag> Spring </tag>
             
             <tag> Devops </tag>
+            
+            <tag> Docker </tag>
             
         </tags>
       
