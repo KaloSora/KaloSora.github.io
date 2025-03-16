@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="AWS," />
+  <meta name="keywords" content="Kubernetes," />
 
 
 
@@ -81,40 +81,23 @@
 
 
 
-<meta name="description" content="VPC &amp; Subnet​​ ‍ 每当一个账户在区域创建时，都会拥有一个AWS VPC（Virtual Private Cloud） ​​ ‍ 跟随区域，跟随AWS账户默认创建，用于保护每个账户的私有资源访问权限 例如不同的账户可能创建在同一台物理服务器上，但是不同的账号间的资源访问是互相隔离的 ​​ ‍ 控制台可以看到默认创建的VPC ​​ ‍ VPC代表了公司的网络架构，包括网络配置、">
+<meta name="description" content="‍‍‍ 自动自愈什么是自动自愈？  当业务进程意外中断，或者节点产生故障时，系统可以快速识别，自动重启并恢复服务。 自愈能够自动转移故障，也就是让业务不健康的节点不接收流量，保证用户体验。  通过自动自愈摆脱 7*24 小时 Oncall😀 ‍ 首先，通过 kubectl create deployment 创建另一种工作负载类型：Deployment。 例如 12yihui.li@yihuil">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AWS Terraform Section2 - VPC">
-<meta property="og:url" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/index.html">
+<meta property="og:title" content="K8s自动扩容和自愈">
+<meta property="og:url" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/index.html">
 <meta property="og:site_name" content="KaloSora的博客">
-<meta property="og:description" content="VPC &amp; Subnet​​ ‍ 每当一个账户在区域创建时，都会拥有一个AWS VPC（Virtual Private Cloud） ​​ ‍ 跟随区域，跟随AWS账户默认创建，用于保护每个账户的私有资源访问权限 例如不同的账户可能创建在同一台物理服务器上，但是不同的账号间的资源访问是互相隔离的 ​​ ‍ 控制台可以看到默认创建的VPC ​​ ‍ VPC代表了公司的网络架构，包括网络配置、">
+<meta property="og:description" content="‍‍‍ 自动自愈什么是自动自愈？  当业务进程意外中断，或者节点产生故障时，系统可以快速识别，自动重启并恢复服务。 自愈能够自动转移故障，也就是让业务不健康的节点不接收流量，保证用户体验。  通过自动自愈摆脱 7*24 小时 Oncall😀 ‍ 首先，通过 kubectl create deployment 创建另一种工作负载类型：Deployment。 例如 12yihui.li@yihuil">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090636-8pfda8m.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091018-bj1wwsq.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090729-glyury5.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091717-r6rsa9e.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092301-v45hvvl.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092558-4chx80a.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623100755-9y6u10a.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623101644-fx9ybbf.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623102401-7sfq2ts.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103153-6tu25vy.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104620-e98o9gy.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105005-f2r9sza.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104640-82dkf08.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105243-u2uvsfs.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105535-ysouex2.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105738-ldw0dxg.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110048-4j3479w.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110453-hpt2fxs.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103603-vixezkm.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103705-nm2hmts.png">
-<meta property="article:published_time" content="2024-06-23T03:20:03.000Z">
-<meta property="article:modified_time" content="2024-06-30T02:29:24.441Z">
+<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png">
+<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224808-cbfg1rf.png">
+<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316094914-emi0rys.png">
+<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316095640-f39x90m.png">
+<meta property="article:published_time" content="2025-03-16T02:00:11.000Z">
+<meta property="article:modified_time" content="2025-03-16T02:18:10.560Z">
 <meta property="article:author" content="KaloSora">
-<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png">
+<meta name="twitter:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png">
 
 
 
@@ -144,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/"/>
+  <link rel="canonical" href="http://example.com/2025/03/16/K8s自动扩容和自愈/"/>
 
 
 
 
 
-  <title>AWS Terraform Section2 - VPC | KaloSora的博客</title>
+  <title>K8s自动扩容和自愈 | KaloSora的博客</title>
   
 
 
@@ -321,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -338,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AWS Terraform Section2 - VPC</h1>
+          <h1 class="post-title" itemprop="name headline">K8s自动扩容和自愈</h1>
         
 
         <div class="post-meta">
@@ -353,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-06-23T11:20:03+08:00">
-                2024-06-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-03-16T10:00:11+08:00">
+                2025-03-16
               </time>
             
 
@@ -376,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AWS-Terraform/" itemprop="url" rel="index">
-                    <span itemprop="name">AWS Terraform</span>
+                  <a href="/categories/Cloud-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">Cloud Native</span>
                   </a>
                 </span>
 
@@ -407,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,052 字
+                  1,687 字
                 </span>
               
 
@@ -423,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -444,111 +427,102 @@
       
 
       
-        <h2 id="VPC-Subnet"><a href="#VPC-Subnet" class="headerlink" title="VPC &amp; Subnet"></a>VPC &amp; Subnet</h2><p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png" alt="image">​</p>
-<p>‍</p>
-<p>每当一个账户在区域创建时，都会拥有一个AWS VPC（Virtual Private Cloud）</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090636-8pfda8m.png" alt="image">​</p>
-<p>‍</p>
-<p>跟随区域，跟随AWS账户默认创建，用于保护每个账户的私有资源访问权限</p>
-<p>例如不同的账户可能创建在同一台物理服务器上，但是不同的账号间的资源访问是互相隔离的</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091018-bj1wwsq.png" alt="image">​</p>
-<p>‍</p>
-<p>控制台可以看到默认创建的VPC</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090729-glyury5.png" alt="image">​</p>
-<p>‍</p>
-<p>VPC代表了公司的网络架构，包括网络配置、路由、防火墙等</p>
-<p>VPC由不同的<code>Availability Zone</code>​组成，具体指代实际的物理服务器所在的数据中心</p>
-<p>例如 我在中国区，可能会有华南、华中、华北3个数据中心都有虚拟服务器运行，那么就会有3个<code>Availability Zone</code>​，也就会有3个subnet</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091717-r6rsa9e.png" alt="image">​</p>
-<p>‍</p>
-<p>当我们需要从外部访问资源时，需要配置一个公共IP地址，可以使用<code>Internet Gateway</code>​</p>
-<p>当我们需要控制外部对VPC访问权限，可以配置防火墙</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092301-v45hvvl.png" alt="image">​</p>
-<p>‍</p>
-<h3 id="配置外部访问"><a href="#配置外部访问" class="headerlink" title="配置外部访问"></a>配置外部访问</h3><p>设置防火墙规则和安全组</p>
-<p>VPC -&gt; SECURITY</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092558-4chx80a.png" alt="image">​</p>
-<p>‍</p>
-<h2 id="添加VPC资源"><a href="#添加VPC资源" class="headerlink" title="添加VPC资源"></a>添加VPC资源</h2><p>资源命名规则:  aws_[resource_name]</p>
-<p>‍</p>
-<p>所有的语法示例都能在文档中找到</p>
-<p><a target="_blank" rel="noopener" href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc</a></p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623100755-9y6u10a.png" alt="image">​</p>
-<p>‍</p>
-<p>代码示例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">provider &quot;aws&quot; &#123;</span><br><span class="line">    region = &quot;eu-west-3&quot; # 取决于购买的EC2实例所属的区域</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    不推荐hardcode明文的key</span><br><span class="line">    **/</span><br><span class="line">    access_key = &quot;&quot;</span><br><span class="line">    secret_key = &quot;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 资源命名规则 - aws_resource</span><br><span class="line"># 创建名为 development-vpc的VPC</span><br><span class="line">resource &quot;aws_pvc&quot; &quot;development-vpc&quot; &#123;</span><br><span class="line"></span><br><span class="line">    # VPC地址范围</span><br><span class="line">    cider_block = &quot;10.0.0.0/16&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 创建名为 dev-subnet-1 的subnet</span><br><span class="line">resource &quot;aws_subnet&quot; &quot;dev-subnet-1&quot; &#123;</span><br><span class="line">    # 指定subnet所属的VPC</span><br><span class="line">    # 目前VPC还没创建，所以需要动态引用定义的资源</span><br><span class="line">    vpc_id = aws_pvc.development-vpc.id</span><br><span class="line"></span><br><span class="line">    # 定义VPC地址范围的子集</span><br><span class="line">    cidr_block = &quot;10.0.10.0/24&quot;</span><br><span class="line"></span><br><span class="line">    availability_zone = &quot;eu-west-3a&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>通过执行如下命令应用到AWS</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform apply</span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>执行命令以后可以预览terraform的执行计划，然后输入<code>yes</code>​确认该计划</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623101644-fx9ybbf.png" alt="image">​</p>
-<p>‍</p>
-<h3 id="DataSource"><a href="#DataSource" class="headerlink" title="DataSource"></a>DataSource</h3><p>假如我们需要从已有的VPC中创建subnet，则需要先拉取AWS已有的VPC信息，然后引用其id</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623102401-7sfq2ts.png" alt="image">​</p>
-<p>‍</p>
-<p>示例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 拉取aws数据</span><br><span class="line"># 定义变量名为 existing_vpc 的vpc数据源</span><br><span class="line">data &quot;aws_vpc&quot; &quot;existing_vpc&quot; &#123;</span><br><span class="line"></span><br><span class="line">    # 拉取默认的vpc</span><br><span class="line">    default = true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 创建名为 dev-subnet-1 的subnet</span><br><span class="line">resource &quot;aws_subnet&quot; &quot;dev-subnet-2&quot; &#123;</span><br><span class="line">    # 从已有的vpc中获取id</span><br><span class="line">    vpc_id = data.aws_vpc.existing_vpc.id</span><br><span class="line"></span><br><span class="line">    # 定义VPC地址范围的子集</span><br><span class="line">    # 不应与vpc中的已有subnet ip范围重复</span><br><span class="line">    cidr_block = &quot;172.31.48.0/20&quot;</span><br><span class="line"></span><br><span class="line">    availability_zone = &quot;eu-west-3a&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>执行 terraform apply</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103153-6tu25vy.png" alt="image">​</p>
-<p>‍</p>
-<h2 id="修改-删除资源"><a href="#修改-删除资源" class="headerlink" title="修改 &amp; 删除资源"></a>修改 &amp; 删除资源</h2><p>继续以AWS VPC为例</p>
-<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>使用关键字<code>tags</code>​，它存在于所有的资源中</p>
-<p>例如，指定VPC名称</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104620-e98o9gy.png" alt="image">​</p>
-<p>在应用tf文件的时候，<code>~</code>​代表资源修改，<code>+</code>​代表新增</p>
-<p>并且在执行计划中有8个属性保持不变</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105005-f2r9sza.png" alt="image">​</p>
-<p>‍</p>
-<p>将会在控制台显示名称</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104640-82dkf08.png" alt="image">​</p>
-<p>‍</p>
-<p>如果删除掉<code>tags</code>​，那么在执行计划中会以<code>-</code>​显示</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105243-u2uvsfs.png" alt="image">​</p>
-<p>‍</p>
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><h4 id="修改tf"><a href="#修改tf" class="headerlink" title="修改tf"></a>修改tf</h4><p> *<strong>推荐使用配置文件的方式，配置文件方便代码管理</strong></p>
-<p>如果把<code>*.tf</code>​中的subnet删除，执行 terraform apply，则意味着删除该subnet</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105535-ysouex2.png" alt="image">​</p>
-<p>‍</p>
-<p>执行计划如下</p>
-<p>可以看到整个资源都标有<code>-</code>​，因为这个资源即将被删除</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105738-ldw0dxg.png" alt="image">​</p>
-<p>‍</p>
-<h4 id="terraform-destroy"><a href="#terraform-destroy" class="headerlink" title="terraform destroy"></a>terraform destroy</h4><p>执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform destroy -target [resource_type] [resource_name]</span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>例如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform destroy -target aws_subnet dev-subnet-2</span><br></pre></td></tr></table></figure>
-
-<p>‍</p>
-<p>可以看到执行计划也是类似的</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110048-4j3479w.png" alt="image">​</p>
-<p>‍</p>
-<h2 id="对比差异"><a href="#对比差异" class="headerlink" title="对比差异"></a>对比差异</h2><p>检查aws和tf文件的差异</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform plan</span><br></pre></td></tr></table></figure>
-
-<p>示例</p>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110453-hpt2fxs.png" alt="image">​</p>
-<p>‍</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>provider: 用于导入一组或一段代码，类似import library</li>
-<li>resource: 类似于从库中调用一段函数</li>
-<li>data: 类似于返回已经存在的资源的函数</li>
+        <p>‍‍‍</p>
+<h2 id="自动自愈"><a href="#自动自愈" class="headerlink" title="自动自愈"></a>自动自愈</h2><p>什么是自动自愈？</p>
+<ul>
+<li>当业务进程意外中断，或者节点产生故障时，系统可以快速识别，自动重启并恢复服务。</li>
+<li>自愈能够自动转移故障，也就是让业务不健康的节点不接收流量，保证用户体验。</li>
 </ul>
-<p>​<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103603-vixezkm.png" alt="image">​</p>
+<p>通过自动自愈摆脱 7*24 小时 Oncall😀</p>
 <p>‍</p>
-<p>需要注意的是，这里的用户必须具有创建资源所必须的权限<img src="/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103705-nm2hmts.png" alt="image">​</p>
+<p><strong>首先</strong>，通过 kubectl create deployment 创建另一种工作负载类型：Deployment。</p>
+<p>例如</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl create deployment hello-docker-flask --image=kalosora/hello-docker-flask:latest --replicas=2</span><br><span class="line">deployment.apps/hello-docker-flask created</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hello-docker-flask，代表工作负载的名称</li>
+<li>– image，代表镜像名称</li>
+<li>–replicas， 代表pod的副本数</li>
+<li>还可以添加 –dry-run&#x3D;client 和 -o 参数，单纯输出 Manifest 内容</li>
+</ul>
+<p>本质上，这条命令会生成 Deployment Manifest，然后自动执行 kubectl apply 将 Manifest 应用到集群内，省略了我们手动编写 Manifest 的过程</p>
 <p>‍</p>
-<p>另外，terraform在apply相同的tf文件的时候，会自动检查所有组件的状态</p>
-<p>如果组件已经存在，则terraform不会再执行操作</p>
-<p>也就是说每当应用相同的配置时，总会得到一样的结果。用户不需要记住当前组件的状态，也不会意外地破坏某些原有的组件。</p>
+<p><strong>然后</strong>，使用 kubectl create service 命令创建 Service：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl create service clusterip hello-docker-flask --tcp=5000:5000</span><br><span class="line">service/hello-docker-flask created</span><br><span class="line">yihui.li@yihuilideMBP k8sdemo %</span><br></pre></td></tr></table></figure>
+
 <p>‍</p>
+<p><strong>此外</strong>，使用 kubectl create ingress 命令创建 Ingress：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create ingress hello-docker-flask --rule=&quot;/=hello-docker-flask:5000&quot;</span><br></pre></td></tr></table></figure>
+
 <p>‍</p>
+<p><strong>最后</strong>，部署Ingress-nginx</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/KaloSora/K8s-Learn/blob/main/resource/ingress-nginx/ingress-nginx.yaml">ingress-nginx</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl create -f https://ghfast.top/https://raw.githubusercontent.com/lyzhang1999/resource/main/ingress-nginx/ingress-nginx.yaml</span><br><span class="line">namespace/ingress-nginx created</span><br><span class="line">serviceaccount/ingress-nginx created</span><br><span class="line">serviceaccount/ingress-nginx-admission created</span><br><span class="line">role.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">role.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">rolebinding.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created</span><br><span class="line">configmap/ingress-nginx-controller created</span><br><span class="line">service/ingress-nginx-controller created</span><br><span class="line">service/ingress-nginx-controller-admission created</span><br><span class="line">deployment.apps/ingress-nginx-controller created</span><br><span class="line">job.batch/ingress-nginx-admission-create created</span><br><span class="line">job.batch/ingress-nginx-admission-patch created</span><br><span class="line">ingressclass.networking.k8s.io/nginx created</span><br><span class="line">validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created</span><br><span class="line">yihui.li@yihuilideMBP k8sdemo %</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>执行上述步骤以后：</p>
+<ol>
+<li>Pod 会被 Deployment 工作负载管理起来，例如创建和销毁等；</li>
+<li>Service 相当于弹性伸缩组的负载均衡器，它能以加权轮训的方式将流量转发到多个 Pod 副本上；</li>
+<li>Ingress 相当于集群的外网访问入口。</li>
+</ol>
+<p>‍</p>
+<p><strong>开始K8s自愈实验。</strong></p>
+<p>查看现有的pod</p>
+<p>​<img src="/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png" alt="image">​</p>
+<p>有了 Ingress-nginx，我们访问 Pod 就不再需要进行端口转发了，我们可以直接访问 127.0.0.1。下面的命令会每隔 1 秒钟发送一次请求，并打印出时间和返回内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % while true; do sleep 1; curl http://127.0.0.1; echo -e &#x27;\n&#x27;$(date);done</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-txhbk</span><br><span class="line">2025年 3月15日 星期六 22时42分21秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-ccjnc</span><br><span class="line">2025年 3月15日 星期六 22时42分22秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-ccjnc</span><br><span class="line">2025年 3月15日 星期六 22时42分23秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-txhbk</span><br><span class="line">2025年 3月15日 星期六 22时42分24秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-txhbk</span><br><span class="line">2025年 3月15日 星期六 22时42分25秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-ccjnc</span><br><span class="line">2025年 3月15日 星期六 22时42分26秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-ccjnc</span><br><span class="line">2025年 3月15日 星期六 22时42分27秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-txhbk</span><br><span class="line">2025年 3月15日 星期六 22时42分28秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-ccjnc</span><br><span class="line">2025年 3月15日 星期六 22时42分29秒 CST</span><br><span class="line">Hello, my first docker images! hello-docker-flask-5dccc98654-ccjnc</span><br><span class="line">2025年 3月15日 星期六 22时42分30秒 CST</span><br></pre></td></tr></table></figure>
+
+<p>这里可以发现，请求被分配到了两个 Pod 上，Pod 名称是交替出现的。</p>
+<p>‍</p>
+<p>模拟其中的一个 Pod 宕机，观察返回内容。</p>
+<p>开启新的命令行窗口，终止其中一个pod的python进程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl exec -it hello-docker-flask-5dccc98654-ccjnc -- bash -c &quot;killall python3&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>等待几秒钟后可以看见，所有的流量都被转发到了 <code>hello-docker-flask-5dccc98654-txhbk</code>​</p>
+<p>​<img src="/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224808-cbfg1rf.png" alt="image">​</p>
+<p>紧接着，<code>hello-docker-flask-5dccc98654-ccjnc</code>​也恢复了服务</p>
+<p>‍</p>
+<h2 id="自动扩容"><a href="#自动扩容" class="headerlink" title="自动扩容"></a>自动扩容</h2><p>自动扩容依赖于 K8s Metric Server 提供的监控指标，首先我们需要安装它：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/KaloSora/K8s-Learn/blob/main/resource/metrics/metrics.yaml">metrics.yaml</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl apply -f https://ghfast.top/https://raw.githubusercontent.com/lyzhang1999/resource/main/metrics/metrics.yaml</span><br><span class="line">serviceaccount/metrics-server created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/system:metrics-server created</span><br><span class="line">rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created</span><br><span class="line">service/metrics-server created</span><br><span class="line">deployment.apps/metrics-server created</span><br><span class="line">apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>安装完成后，等待 Metric 工作负载就绪：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl wait deployment -n kube-system metrics-server --for condition=Available=True --timeout=90s</span><br><span class="line">deployment.apps/metrics-server condition met</span><br><span class="line">yihui.li@yihuilideMBP k8sdemo %</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Metric Server 就绪后，通过 kubectl autoscale 命令来为 Deployment 创建自动扩容策略：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl autoscale deployment hello-docker-flask --cpu-percent=50 --min=2 --max=10</span><br><span class="line">horizontalpodautoscaler.autoscaling/hello-docker-flask autoscaled</span><br><span class="line">yihui.li@yihuilideMBP k8sdemo %</span><br></pre></td></tr></table></figure>
+
+<p>–cpu-percent 表示 CPU 使用率阈值，当 CPU 超过 50% 时将进行自动扩容；</p>
+<p>–min 代表最小的 Pod 副本数；</p>
+<p>–max 代表最大扩容的副本数。也就是说，自动扩容会根据 CPU 的使用率在 2 个副本和 10 个副本之间进行扩缩容</p>
+<p>‍</p>
+<p>最后，要使自动扩容生效，还需要为刚才部署的 hello-docker-flask Deployment 设置资源配额。可以通过下面的命令来配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl patch deployment hello-docker-flask --type=&#x27;json&#x27; -p=&#x27;[&#123;&quot;op&quot;: &quot;add&quot;, &quot;path&quot;: &quot;/spec/template/spec/containers/0/resources&quot;, &quot;value&quot;: &#123;&quot;requests&quot;: &#123;&quot;memory&quot;: &quot;100Mi&quot;, &quot;cpu&quot;: &quot;100m&quot;&#125;&#125;&#125;]&#x27;</span><br><span class="line">deployment.apps/hello-docker-flask patched</span><br><span class="line">yihui.li@yihuilideMBP k8sdemo %</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>现在，Deployment 将会重新创建两个新的 Pod，可以使用下面的命令筛选出新的 Pod：</p>
+<p>​<img src="/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316094914-emi0rys.png" alt="image">​</p>
+<p>命令如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yihui.li@yihuilideMBP k8sdemo % kubectl get pod --field-selector=status.phase==Running</span><br><span class="line">NAME                                  READY   STATUS    RESTARTS   AGE</span><br><span class="line">hello-docker-flask-7b8f894675-bvnj6   1/1     Running   0          81s</span><br><span class="line">hello-docker-flask-7b8f894675-pn5br   1/1     Running   0          86s</span><br><span class="line">yihui.li@yihuilideMBP k8sdemo %</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>选择一个 Pod 并使用 kubectl exec 进入到容器内。模拟业务高峰期场景，使用 ab 命令来创建并发请求：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@hello-docker-flask-7b8f894675-bvnj6:/app#</span><br><span class="line">root@hello-docker-flask-7b8f894675-bvnj6:/app# ab -c 50 -n 10000 http://127.0.0.1:5000/</span><br><span class="line">This is ApacheBench, Version 2.3 &lt;$Revision: 1913912 $&gt;</span><br><span class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</span><br><span class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</span><br><span class="line"></span><br><span class="line">Benchmarking 127.0.0.1 (be patient)</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>开启新的命令行窗口，持续监控 Pod 的状态，–watch 参数会一直等待</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods --watch</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>可以观察到K8s已经感知到了Pod的压力，并且正在自动横向扩容</p>
+<p>​<img src="/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316095640-f39x90m.png" alt="image">​</p>
+<p>‍</p>
+<p>实验的最后，执行 kind delete cluster 来删除集群：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sun Mar 16 09:54:59 on ttys001</span><br><span class="line">(base) yihui.li@yihuilideMBP ~ % kind delete cluster</span><br><span class="line">Deleting cluster &quot;kind&quot; ...</span><br><span class="line">Deleted nodes: [&quot;kind-control-plane&quot;]</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -566,7 +540,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AWS/" rel="tag"># AWS</a>
+            <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
           
         </div>
       
@@ -579,8 +553,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/06/23/AWS-Terraform-Section1/" rel="next" title="AWS Terraform Section1 - 简介">
-                <i class="fa fa-chevron-left"></i> AWS Terraform Section1 - 简介
+              <a href="/2025/03/15/%E9%83%A8%E7%BD%B2%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%88%B0K8s/" rel="next" title="部署容器镜像到K8s">
+                <i class="fa fa-chevron-left"></i> 部署容器镜像到K8s
               </a>
             
           </div>
@@ -588,10 +562,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2024/06/29/AWS-Terraform-Section3-Input-and-Output/" rel="prev" title="AWS Terraform Section3 - Input and Output">
-                AWS Terraform Section3 - Input and Output <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -734,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#VPC-Subnet"><span class="nav-number">1.</span> <span class="nav-text">VPC &amp; Subnet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE"><span class="nav-number">1.1.</span> <span class="nav-text">配置外部访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0VPC%E8%B5%84%E6%BA%90"><span class="nav-number">2.</span> <span class="nav-text">添加VPC资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataSource"><span class="nav-number">2.1.</span> <span class="nav-text">DataSource</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-%E5%88%A0%E9%99%A4%E8%B5%84%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">修改 &amp; 删除资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">3.1.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">3.2.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9tf"><span class="nav-number">3.2.1.</span> <span class="nav-text">修改tf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#terraform-destroy"><span class="nav-number">3.2.2.</span> <span class="nav-text">terraform destroy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E5%B7%AE%E5%BC%82"><span class="nav-number">4.</span> <span class="nav-text">对比差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%87%AA%E6%84%88"><span class="nav-number">1.</span> <span class="nav-text">自动自愈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">自动扩容</span></a></li></ol></div>
             
 
           </div>
