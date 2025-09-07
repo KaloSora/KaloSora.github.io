@@ -84,37 +84,37 @@
 <meta name="description" content="VPC &amp; Subnet​​ ‍ 每当一个账户在区域创建时，都会拥有一个AWS VPC（Virtual Private Cloud） ​​ ‍ 跟随区域，跟随AWS账户默认创建，用于保护每个账户的私有资源访问权限 例如不同的账户可能创建在同一台物理服务器上，但是不同的账号间的资源访问是互相隔离的 ​​ ‍ 控制台可以看到默认创建的VPC ​​ ‍ VPC代表了公司的网络架构，包括网络配置、">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AWS Terraform Section2 - VPC">
-<meta property="og:url" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/index.html">
+<meta property="og:url" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/index.html">
 <meta property="og:site_name" content="KaloSora的博客">
 <meta property="og:description" content="VPC &amp; Subnet​​ ‍ 每当一个账户在区域创建时，都会拥有一个AWS VPC（Virtual Private Cloud） ​​ ‍ 跟随区域，跟随AWS账户默认创建，用于保护每个账户的私有资源访问权限 例如不同的账户可能创建在同一台物理服务器上，但是不同的账号间的资源访问是互相隔离的 ​​ ‍ 控制台可以看到默认创建的VPC ​​ ‍ VPC代表了公司的网络架构，包括网络配置、">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090636-8pfda8m.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091018-bj1wwsq.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090729-glyury5.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091717-r6rsa9e.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092301-v45hvvl.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092558-4chx80a.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623100755-9y6u10a.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623101644-fx9ybbf.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623102401-7sfq2ts.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103153-6tu25vy.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104620-e98o9gy.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105005-f2r9sza.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104640-82dkf08.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105243-u2uvsfs.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105535-ysouex2.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105738-ldw0dxg.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110048-4j3479w.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110453-hpt2fxs.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103603-vixezkm.png">
-<meta property="og:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103705-nm2hmts.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090636-8pfda8m.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091018-bj1wwsq.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090729-glyury5.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621091717-r6rsa9e.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092301-v45hvvl.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621092558-4chx80a.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623100755-9y6u10a.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623101644-fx9ybbf.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623102401-7sfq2ts.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103153-6tu25vy.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104620-e98o9gy.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105005-f2r9sza.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623104640-82dkf08.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105243-u2uvsfs.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105535-ysouex2.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623105738-ldw0dxg.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110048-4j3479w.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623110453-hpt2fxs.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103603-vixezkm.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240623103705-nm2hmts.png">
 <meta property="article:published_time" content="2024-06-23T03:20:03.000Z">
 <meta property="article:modified_time" content="2024-06-30T02:29:24.441Z">
 <meta property="article:author" content="KaloSora">
 <meta property="article:tag" content="AWS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png">
+<meta name="twitter:image" content="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/image-20240621090538-0t4qsb0.png">
 
 
 
@@ -144,7 +144,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/"/>
+  <link rel="canonical" href="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/"/>
 
 
 
@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/">
+    <link itemprop="mainEntityOfPage" href="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -711,6 +711,22 @@
             </div>
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="www.linkedin.com/in/yi-hui-li-8591ab383" target="_blank" title="Linkedin">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Linkedin</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kalosora@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           

@@ -3,11 +3,11 @@
   <title>KaloSora的博客</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://kalosora.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://kalosora.github.io/"/>
   <updated>2025-03-16T02:18:10.560Z</updated>
-  <id>http://example.com/</id>
+  <id>https://kalosora.github.io/</id>
   
   <author>
     <name>KaloSora</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>K8s自动扩容和自愈</title>
-    <link href="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/"/>
-    <id>http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/</id>
+    <link href="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/"/>
+    <id>https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/</id>
     <published>2025-03-16T02:00:11.000Z</published>
     <updated>2025-03-16T02:18:10.560Z</updated>
     
@@ -36,17 +36,17 @@
     
     
     
-    <category term="Cloud Native" scheme="http://example.com/categories/Cloud-Native/"/>
+    <category term="Cloud Native" scheme="https://kalosora.github.io/categories/Cloud-Native/"/>
     
     
-    <category term="Kubernetes" scheme="http://example.com/tags/Kubernetes/"/>
+    <category term="Kubernetes" scheme="https://kalosora.github.io/tags/Kubernetes/"/>
     
   </entry>
   
   <entry>
     <title>部署容器镜像到K8s</title>
-    <link href="http://example.com/2025/03/15/%E9%83%A8%E7%BD%B2%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%88%B0K8s/"/>
-    <id>http://example.com/2025/03/15/%E9%83%A8%E7%BD%B2%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%88%B0K8s/</id>
+    <link href="https://kalosora.github.io/2025/03/15/%E9%83%A8%E7%BD%B2%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%88%B0K8s/"/>
+    <id>https://kalosora.github.io/2025/03/15/%E9%83%A8%E7%BD%B2%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%88%B0K8s/</id>
     <published>2025-03-15T14:03:11.000Z</published>
     <updated>2025-03-16T01:31:40.874Z</updated>
     
@@ -61,19 +61,19 @@
     
     
     
-    <category term="Cloud Native" scheme="http://example.com/categories/Cloud-Native/"/>
+    <category term="Cloud Native" scheme="https://kalosora.github.io/categories/Cloud-Native/"/>
     
     
-    <category term="Docker" scheme="http://example.com/tags/Docker/"/>
+    <category term="Docker" scheme="https://kalosora.github.io/tags/Docker/"/>
     
-    <category term="Kubernetes" scheme="http://example.com/tags/Kubernetes/"/>
+    <category term="Kubernetes" scheme="https://kalosora.github.io/tags/Kubernetes/"/>
     
   </entry>
   
   <entry>
     <title>Docker 基础</title>
-    <link href="http://example.com/2025/03/04/Docker%E5%9F%BA%E7%A1%80/"/>
-    <id>http://example.com/2025/03/04/Docker%E5%9F%BA%E7%A1%80/</id>
+    <link href="https://kalosora.github.io/2025/03/04/Docker%E5%9F%BA%E7%A1%80/"/>
+    <id>https://kalosora.github.io/2025/03/04/Docker%E5%9F%BA%E7%A1%80/</id>
     <published>2025-03-04T01:30:11.000Z</published>
     <updated>2025-03-16T01:30:09.011Z</updated>
     
@@ -89,17 +89,17 @@
     
     
     
-    <category term="Cloud Native" scheme="http://example.com/categories/Cloud-Native/"/>
+    <category term="Cloud Native" scheme="https://kalosora.github.io/categories/Cloud-Native/"/>
     
     
-    <category term="Docker" scheme="http://example.com/tags/Docker/"/>
+    <category term="Docker" scheme="https://kalosora.github.io/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>使用GPT提高研发效率</title>
-    <link href="http://example.com/2025/02/23/%E4%BD%BF%E7%94%A8GPT%E6%8F%90%E9%AB%98%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87/"/>
-    <id>http://example.com/2025/02/23/%E4%BD%BF%E7%94%A8GPT%E6%8F%90%E9%AB%98%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87/</id>
+    <link href="https://kalosora.github.io/2025/02/23/%E4%BD%BF%E7%94%A8GPT%E6%8F%90%E9%AB%98%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87/"/>
+    <id>https://kalosora.github.io/2025/02/23/%E4%BD%BF%E7%94%A8GPT%E6%8F%90%E9%AB%98%E7%A0%94%E5%8F%91%E6%95%88%E7%8E%87/</id>
     <published>2025-02-23T02:45:11.000Z</published>
     <updated>2025-02-23T02:45:16.985Z</updated>
     
@@ -117,19 +117,19 @@
     
     
     
-    <category term="AI/ML" scheme="http://example.com/categories/AI-ML/"/>
+    <category term="AI/ML" scheme="https://kalosora.github.io/categories/AI-ML/"/>
     
     
-    <category term="LLM" scheme="http://example.com/tags/LLM/"/>
+    <category term="LLM" scheme="https://kalosora.github.io/tags/LLM/"/>
     
-    <category term="DeepSeek" scheme="http://example.com/tags/DeepSeek/"/>
+    <category term="DeepSeek" scheme="https://kalosora.github.io/tags/DeepSeek/"/>
     
   </entry>
   
   <entry>
     <title>让GPT使用工具</title>
-    <link href="http://example.com/2025/02/22/%E8%AE%A9GPT%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
-    <id>http://example.com/2025/02/22/%E8%AE%A9GPT%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7/</id>
+    <link href="https://kalosora.github.io/2025/02/22/%E8%AE%A9GPT%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>https://kalosora.github.io/2025/02/22/%E8%AE%A9GPT%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7/</id>
     <published>2025-02-22T08:24:11.000Z</published>
     <updated>2025-02-22T08:25:46.388Z</updated>
     
@@ -145,19 +145,19 @@
     
     
     
-    <category term="AI/ML" scheme="http://example.com/categories/AI-ML/"/>
+    <category term="AI/ML" scheme="https://kalosora.github.io/categories/AI-ML/"/>
     
     
-    <category term="LLM" scheme="http://example.com/tags/LLM/"/>
+    <category term="LLM" scheme="https://kalosora.github.io/tags/LLM/"/>
     
-    <category term="DeepSeek" scheme="http://example.com/tags/DeepSeek/"/>
+    <category term="DeepSeek" scheme="https://kalosora.github.io/tags/DeepSeek/"/>
     
   </entry>
   
   <entry>
     <title>搭建HelloGPT</title>
-    <link href="http://example.com/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/"/>
-    <id>http://example.com/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/</id>
+    <link href="https://kalosora.github.io/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/"/>
+    <id>https://kalosora.github.io/2025/02/15/%E6%90%AD%E5%BB%BAHelloGPT/</id>
     <published>2025-02-15T07:49:11.000Z</published>
     <updated>2025-02-15T07:49:26.297Z</updated>
     
@@ -172,19 +172,19 @@
     
     
     
-    <category term="AI/ML" scheme="http://example.com/categories/AI-ML/"/>
+    <category term="AI/ML" scheme="https://kalosora.github.io/categories/AI-ML/"/>
     
     
-    <category term="LLM" scheme="http://example.com/tags/LLM/"/>
+    <category term="LLM" scheme="https://kalosora.github.io/tags/LLM/"/>
     
-    <category term="DeepSeek" scheme="http://example.com/tags/DeepSeek/"/>
+    <category term="DeepSeek" scheme="https://kalosora.github.io/tags/DeepSeek/"/>
     
   </entry>
   
   <entry>
     <title>Mac DeepSeek本地部署</title>
-    <link href="http://example.com/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://kalosora.github.io/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/"/>
+    <id>https://kalosora.github.io/2025/02/09/Mac-DeepSeek%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</id>
     <published>2025-02-09T03:11:11.000Z</published>
     <updated>2025-02-09T03:11:25.396Z</updated>
     
@@ -202,19 +202,19 @@
     
     
     
-    <category term="AI/ML" scheme="http://example.com/categories/AI-ML/"/>
+    <category term="AI/ML" scheme="https://kalosora.github.io/categories/AI-ML/"/>
     
     
-    <category term="LLM" scheme="http://example.com/tags/LLM/"/>
+    <category term="LLM" scheme="https://kalosora.github.io/tags/LLM/"/>
     
-    <category term="DeepSeek" scheme="http://example.com/tags/DeepSeek/"/>
+    <category term="DeepSeek" scheme="https://kalosora.github.io/tags/DeepSeek/"/>
     
   </entry>
   
   <entry>
     <title>Windows DeepSeek本地部署</title>
-    <link href="http://example.com/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/"/>
-    <id>http://example.com/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/</id>
+    <link href="https://kalosora.github.io/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/"/>
+    <id>https://kalosora.github.io/2025/02/02/Windows-DeepSeek%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA/</id>
     <published>2025-02-02T07:11:11.000Z</published>
     <updated>2025-02-09T03:16:02.904Z</updated>
     
@@ -231,19 +231,19 @@
     
     
     
-    <category term="AI/ML" scheme="http://example.com/categories/AI-ML/"/>
+    <category term="AI/ML" scheme="https://kalosora.github.io/categories/AI-ML/"/>
     
     
-    <category term="LLM" scheme="http://example.com/tags/LLM/"/>
+    <category term="LLM" scheme="https://kalosora.github.io/tags/LLM/"/>
     
-    <category term="DeepSeek" scheme="http://example.com/tags/DeepSeek/"/>
+    <category term="DeepSeek" scheme="https://kalosora.github.io/tags/DeepSeek/"/>
     
   </entry>
   
   <entry>
     <title>Jupyter Notebook</title>
-    <link href="http://example.com/2025/01/29/Jupyter-Notebook/"/>
-    <id>http://example.com/2025/01/29/Jupyter-Notebook/</id>
+    <link href="https://kalosora.github.io/2025/01/29/Jupyter-Notebook/"/>
+    <id>https://kalosora.github.io/2025/01/29/Jupyter-Notebook/</id>
     <published>2025-01-29T06:07:11.000Z</published>
     <updated>2025-01-29T06:16:35.669Z</updated>
     
@@ -259,19 +259,19 @@
     
     
     
-    <category term="AI/ML" scheme="http://example.com/categories/AI-ML/"/>
+    <category term="AI/ML" scheme="https://kalosora.github.io/categories/AI-ML/"/>
     
     
-    <category term="Python" scheme="http://example.com/tags/Python/"/>
+    <category term="Python" scheme="https://kalosora.github.io/tags/Python/"/>
     
-    <category term="LLM" scheme="http://example.com/tags/LLM/"/>
+    <category term="LLM" scheme="https://kalosora.github.io/tags/LLM/"/>
     
   </entry>
   
   <entry>
     <title>AWS Terraform Section4 - Project</title>
-    <link href="http://example.com/2024/06/30/AWS-Terraform-Section4-Project/"/>
-    <id>http://example.com/2024/06/30/AWS-Terraform-Section4-Project/</id>
+    <link href="https://kalosora.github.io/2024/06/30/AWS-Terraform-Section4-Project/"/>
+    <id>https://kalosora.github.io/2024/06/30/AWS-Terraform-Section4-Project/</id>
     <published>2024-06-30T02:27:54.000Z</published>
     <updated>2024-06-30T02:36:59.204Z</updated>
     
@@ -288,17 +288,17 @@
     
     
     
-    <category term="AWS Terraform" scheme="http://example.com/categories/AWS-Terraform/"/>
+    <category term="AWS Terraform" scheme="https://kalosora.github.io/categories/AWS-Terraform/"/>
     
     
-    <category term="AWS" scheme="http://example.com/tags/AWS/"/>
+    <category term="AWS" scheme="https://kalosora.github.io/tags/AWS/"/>
     
   </entry>
   
   <entry>
     <title>AWS Terraform Section3 - Input and Output</title>
-    <link href="http://example.com/2024/06/29/AWS-Terraform-Section3-Input-and-Output/"/>
-    <id>http://example.com/2024/06/29/AWS-Terraform-Section3-Input-and-Output/</id>
+    <link href="https://kalosora.github.io/2024/06/29/AWS-Terraform-Section3-Input-and-Output/"/>
+    <id>https://kalosora.github.io/2024/06/29/AWS-Terraform-Section3-Input-and-Output/</id>
     <published>2024-06-29T07:20:11.000Z</published>
     <updated>2024-06-30T02:24:49.755Z</updated>
     
@@ -313,17 +313,17 @@
     
     
     
-    <category term="AWS Terraform" scheme="http://example.com/categories/AWS-Terraform/"/>
+    <category term="AWS Terraform" scheme="https://kalosora.github.io/categories/AWS-Terraform/"/>
     
     
-    <category term="AWS" scheme="http://example.com/tags/AWS/"/>
+    <category term="AWS" scheme="https://kalosora.github.io/tags/AWS/"/>
     
   </entry>
   
   <entry>
     <title>AWS Terraform Section2 - VPC</title>
-    <link href="http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/"/>
-    <id>http://example.com/2024/06/23/AWS-Terraform-Section2-VPC/</id>
+    <link href="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/"/>
+    <id>https://kalosora.github.io/2024/06/23/AWS-Terraform-Section2-VPC/</id>
     <published>2024-06-23T03:20:03.000Z</published>
     <updated>2024-06-30T02:29:24.441Z</updated>
     
@@ -337,17 +337,17 @@
     
     
     
-    <category term="AWS Terraform" scheme="http://example.com/categories/AWS-Terraform/"/>
+    <category term="AWS Terraform" scheme="https://kalosora.github.io/categories/AWS-Terraform/"/>
     
     
-    <category term="AWS" scheme="http://example.com/tags/AWS/"/>
+    <category term="AWS" scheme="https://kalosora.github.io/tags/AWS/"/>
     
   </entry>
   
   <entry>
     <title>AWS Terraform Section1 - 简介</title>
-    <link href="http://example.com/2024/06/23/AWS-Terraform-Section1/"/>
-    <id>http://example.com/2024/06/23/AWS-Terraform-Section1/</id>
+    <link href="https://kalosora.github.io/2024/06/23/AWS-Terraform-Section1/"/>
+    <id>https://kalosora.github.io/2024/06/23/AWS-Terraform-Section1/</id>
     <published>2024-06-23T03:13:21.000Z</published>
     <updated>2024-06-30T02:31:47.218Z</updated>
     
@@ -361,17 +361,17 @@
     
     
     
-    <category term="AWS Terraform" scheme="http://example.com/categories/AWS-Terraform/"/>
+    <category term="AWS Terraform" scheme="https://kalosora.github.io/categories/AWS-Terraform/"/>
     
     
-    <category term="AWS" scheme="http://example.com/tags/AWS/"/>
+    <category term="AWS" scheme="https://kalosora.github.io/tags/AWS/"/>
     
   </entry>
   
   <entry>
     <title>DRF Django 学习笔记</title>
-    <link href="http://example.com/2024/06/16/DRF-Django-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://example.com/2024/06/16/DRF-Django-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://kalosora.github.io/2024/06/16/DRF-Django-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://kalosora.github.io/2024/06/16/DRF-Django-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
     <published>2024-06-16T13:34:18.000Z</published>
     <updated>2024-06-16T13:43:02.751Z</updated>
     
@@ -386,17 +386,17 @@
     
     
     
-    <category term="Django" scheme="http://example.com/categories/Django/"/>
+    <category term="Django" scheme="https://kalosora.github.io/categories/Django/"/>
     
     
-    <category term="Python Web" scheme="http://example.com/tags/Python-Web/"/>
+    <category term="Python Web" scheme="https://kalosora.github.io/tags/Python-Web/"/>
     
   </entry>
   
   <entry>
     <title>Java Lucene中文分词</title>
-    <link href="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/"/>
-    <id>http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/</id>
+    <link href="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/"/>
+    <id>https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/</id>
     <published>2024-04-15T14:07:18.000Z</published>
     <updated>2024-04-16T13:23:34.203Z</updated>
     
@@ -410,17 +410,17 @@
     
     
     
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    <category term="Java" scheme="https://kalosora.github.io/categories/Java/"/>
     
     
-    <category term="Java Core" scheme="http://example.com/tags/Java-Core/"/>
+    <category term="Java Core" scheme="https://kalosora.github.io/tags/Java-Core/"/>
     
   </entry>
   
   <entry>
     <title>旅程还在继续</title>
-    <link href="http://example.com/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/"/>
-    <id>http://example.com/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/</id>
+    <link href="https://kalosora.github.io/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/"/>
+    <id>https://kalosora.github.io/2024/03/29/%E6%97%85%E7%A8%8B%E8%BF%98%E5%9C%A8%E7%BB%A7%E7%BB%AD/</id>
     <published>2024-03-29T14:22:13.000Z</published>
     <updated>2024-03-30T03:31:59.330Z</updated>
     
@@ -435,17 +435,17 @@
     
     
     
-    <category term="随记" scheme="http://example.com/categories/%E9%9A%8F%E8%AE%B0/"/>
+    <category term="随记" scheme="https://kalosora.github.io/categories/%E9%9A%8F%E8%AE%B0/"/>
     
     
-    <category term="随记" scheme="http://example.com/tags/%E9%9A%8F%E8%AE%B0/"/>
+    <category term="随记" scheme="https://kalosora.github.io/tags/%E9%9A%8F%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>Oracle 开发常用代码</title>
-    <link href="http://example.com/2022/06/14/Oracle%20%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/"/>
-    <id>http://example.com/2022/06/14/Oracle%20%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/</id>
+    <link href="https://kalosora.github.io/2022/06/14/Oracle%20%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/"/>
+    <id>https://kalosora.github.io/2022/06/14/Oracle%20%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/</id>
     <published>2022-06-14T03:04:05.000Z</published>
     <updated>2024-03-29T14:19:05.191Z</updated>
     
@@ -459,17 +459,17 @@
     
     
     
-    <category term="Database" scheme="http://example.com/categories/Database/"/>
+    <category term="Database" scheme="https://kalosora.github.io/categories/Database/"/>
     
     
-    <category term="Oracle" scheme="http://example.com/tags/Oracle/"/>
+    <category term="Oracle" scheme="https://kalosora.github.io/tags/Oracle/"/>
     
   </entry>
   
   <entry>
     <title>Java 单例模式的安全性</title>
-    <link href="http://example.com/2022/05/26/Java%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/"/>
-    <id>http://example.com/2022/05/26/Java%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/</id>
+    <link href="https://kalosora.github.io/2022/05/26/Java%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/"/>
+    <id>https://kalosora.github.io/2022/05/26/Java%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/</id>
     <published>2022-05-26T02:14:13.000Z</published>
     <updated>2024-03-29T14:17:51.079Z</updated>
     
@@ -485,17 +485,17 @@
     
     
     
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    <category term="Java" scheme="https://kalosora.github.io/categories/Java/"/>
     
     
-    <category term="Java Core" scheme="http://example.com/tags/Java-Core/"/>
+    <category term="Java Core" scheme="https://kalosora.github.io/tags/Java-Core/"/>
     
   </entry>
   
   <entry>
     <title>MinIO搭建OSS</title>
-    <link href="http://example.com/2021/08/23/MinIO%E6%90%AD%E5%BB%BAOSS/"/>
-    <id>http://example.com/2021/08/23/MinIO%E6%90%AD%E5%BB%BAOSS/</id>
+    <link href="https://kalosora.github.io/2021/08/23/MinIO%E6%90%AD%E5%BB%BAOSS/"/>
+    <id>https://kalosora.github.io/2021/08/23/MinIO%E6%90%AD%E5%BB%BAOSS/</id>
     <published>2021-08-23T06:34:17.000Z</published>
     <updated>2024-03-29T14:15:51.448Z</updated>
     
@@ -509,17 +509,17 @@
     
     
     
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    <category term="Java" scheme="https://kalosora.github.io/categories/Java/"/>
     
     
-    <category term="Spring" scheme="http://example.com/tags/Spring/"/>
+    <category term="Spring" scheme="https://kalosora.github.io/tags/Spring/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署Eureka</title>
-    <link href="http://example.com/2021/07/14/Docker%E9%83%A8%E7%BD%B2Eureka/"/>
-    <id>http://example.com/2021/07/14/Docker%E9%83%A8%E7%BD%B2Eureka/</id>
+    <link href="https://kalosora.github.io/2021/07/14/Docker%E9%83%A8%E7%BD%B2Eureka/"/>
+    <id>https://kalosora.github.io/2021/07/14/Docker%E9%83%A8%E7%BD%B2Eureka/</id>
     <published>2021-07-14T07:21:03.000Z</published>
     <updated>2025-03-04T00:53:03.048Z</updated>
     
@@ -533,14 +533,14 @@
     
     
     
-    <category term="Cloud Native" scheme="http://example.com/categories/Cloud-Native/"/>
+    <category term="Cloud Native" scheme="https://kalosora.github.io/categories/Cloud-Native/"/>
     
     
-    <category term="Docker" scheme="http://example.com/tags/Docker/"/>
+    <category term="Docker" scheme="https://kalosora.github.io/tags/Docker/"/>
     
-    <category term="Spring" scheme="http://example.com/tags/Spring/"/>
+    <category term="Spring" scheme="https://kalosora.github.io/tags/Spring/"/>
     
-    <category term="Devops" scheme="http://example.com/tags/Devops/"/>
+    <category term="Devops" scheme="https://kalosora.github.io/tags/Devops/"/>
     
   </entry>
   

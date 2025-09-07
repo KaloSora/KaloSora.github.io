@@ -84,22 +84,22 @@
 <meta name="description" content="Lucene中文分词基本概念非结构化数据查询方法（1）顺序扫描法(Serial Scanning) 所谓顺序扫描，比如要找内容包含某一个字符串的文件，就是一个文档一个文档的看，对于每一个文档， 从头看到尾，如果此文档包含此字符串，则此文档为我们要找的文件，接着看下一个文件， 直到扫描完所有的文件。如利用windows的搜索也可以搜索文件内容，只是相当的慢。 （2）全文检索(Full-text Se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Lucene中文分词">
-<meta property="og:url" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/index.html">
+<meta property="og:url" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/index.html">
 <meta property="og:site_name" content="KaloSora的博客">
 <meta property="og:description" content="Lucene中文分词基本概念非结构化数据查询方法（1）顺序扫描法(Serial Scanning) 所谓顺序扫描，比如要找内容包含某一个字符串的文件，就是一个文档一个文档的看，对于每一个文档， 从头看到尾，如果此文档包含此字符串，则此文档为我们要找的文件，接着看下一个文件， 直到扫描完所有的文件。如利用windows的搜索也可以搜索文件内容，只是相当的慢。 （2）全文检索(Full-text Se">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210529105841-4936d6f.png">
-<meta property="og:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210602160526-o4n214r.png">
-<meta property="og:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210602160619-ul7mobu.png">
-<meta property="og:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210603145755-lvyw6f9.png">
-<meta property="og:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210603151149-q6tptou.png">
-<meta property="og:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210603151130-diflmqr.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210529105841-4936d6f.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210602160526-o4n214r.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210602160619-ul7mobu.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210603145755-lvyw6f9.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210603151149-q6tptou.png">
+<meta property="og:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210603151130-diflmqr.png">
 <meta property="article:published_time" content="2024-04-15T14:07:18.000Z">
 <meta property="article:modified_time" content="2024-04-16T13:23:34.203Z">
 <meta property="article:author" content="KaloSora">
 <meta property="article:tag" content="Java Core">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210529105841-4936d6f.png">
+<meta name="twitter:image" content="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/image-20210529105841-4936d6f.png">
 
 
 
@@ -129,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2024/04/15/Lucene中文分词/"/>
+  <link rel="canonical" href="https://kalosora.github.io/2024/04/15/Lucene中文分词/"/>
 
 
 
@@ -306,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/">
+    <link itemprop="mainEntityOfPage" href="https://kalosora.github.io/2024/04/15/Lucene%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -709,6 +709,22 @@
             </div>
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="www.linkedin.com/in/yi-hui-li-8591ab383" target="_blank" title="Linkedin">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Linkedin</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kalosora@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           

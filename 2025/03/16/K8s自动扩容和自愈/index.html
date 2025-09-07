@@ -84,20 +84,20 @@
 <meta name="description" content="‍‍‍ 自动自愈什么是自动自愈？  当业务进程意外中断，或者节点产生故障时，系统可以快速识别，自动重启并恢复服务。 自愈能够自动转移故障，也就是让业务不健康的节点不接收流量，保证用户体验。  通过自动自愈摆脱 7*24 小时 Oncall😀 ‍ 首先，通过 kubectl create deployment 创建另一种工作负载类型：Deployment。 例如 12yihui.li@yihuil">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K8s自动扩容和自愈">
-<meta property="og:url" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/index.html">
+<meta property="og:url" content="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/index.html">
 <meta property="og:site_name" content="KaloSora的博客">
 <meta property="og:description" content="‍‍‍ 自动自愈什么是自动自愈？  当业务进程意外中断，或者节点产生故障时，系统可以快速识别，自动重启并恢复服务。 自愈能够自动转移故障，也就是让业务不健康的节点不接收流量，保证用户体验。  通过自动自愈摆脱 7*24 小时 Oncall😀 ‍ 首先，通过 kubectl create deployment 创建另一种工作负载类型：Deployment。 例如 12yihui.li@yihuil">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png">
-<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224808-cbfg1rf.png">
-<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316094914-emi0rys.png">
-<meta property="og:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316095640-f39x90m.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224808-cbfg1rf.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316094914-emi0rys.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250316095640-f39x90m.png">
 <meta property="article:published_time" content="2025-03-16T02:00:11.000Z">
 <meta property="article:modified_time" content="2025-03-16T02:18:10.560Z">
 <meta property="article:author" content="KaloSora">
 <meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png">
+<meta name="twitter:image" content="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/image-20250315224138-a9l4fdq.png">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2025/03/16/K8s自动扩容和自愈/"/>
+  <link rel="canonical" href="https://kalosora.github.io/2025/03/16/K8s自动扩容和自愈/"/>
 
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/">
+    <link itemprop="mainEntityOfPage" href="https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -681,6 +681,22 @@
             </div>
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="www.linkedin.com/in/yi-hui-li-8591ab383" target="_blank" title="Linkedin">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Linkedin</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kalosora@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
