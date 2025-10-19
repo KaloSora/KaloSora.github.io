@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>AWS Useful Document</title>
+      <link href="/2025/10/19/AWS-Useful-Document/"/>
+      <url>/2025/10/19/AWS-Useful-Document/</url>
+      
+        <content type="html"><![CDATA[<p>‍</p><p>The article is mainly used to record some very useful link for AWS development.</p><p>‍</p><h2 id="AWS-Perscriptive-Guide"><a href="#AWS-Perscriptive-Guide" class="headerlink" title="AWS Perscriptive Guide"></a>AWS Perscriptive Guide</h2><p>This guide provide many best practise on AWS area.</p><p><a href="https://aws.amazon.com/cn/prescriptive-guidance/">AWS Perscriptive Guide</a></p><p>‍</p><p>For example, it provide a solution for AWS database random password generation as well as the secret rotation.</p><p><a href="https://docs.aws.amazon.com/zh_cn/prescriptive-guidance/latest/secure-sensitive-data-secrets-manager-terraform/rotate-secrets.html">RDS password rotation</a></p><p>‍</p><h2 id="AWS-Well-Architected-Framework"><a href="#AWS-Well-Architected-Framework" class="headerlink" title="AWS Well-Architected Framework"></a>AWS Well-Architected Framework</h2><p>AWS Well-Architected helps cloud architects build secure, high-performing, resilient, and efficient infrastructure for a variety of applications and workloads. Built around six pillars—operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability—AWS Well-Architected provides a consistent approach for customers and partners to evaluate architectures and implement scalable designs.</p><p><a href="https://docs.aws.amazon.com/zh_cn/prescriptive-guidance/latest/secure-sensitive-data-secrets-manager-terraform/rotate-secrets.html">AWS Well-Architected Framework</a></p><p>‍</p><h2 id="AWS-CDK-Project-Template-for-DevOps"><a href="#AWS-CDK-Project-Template-for-DevOps" class="headerlink" title="AWS CDK Project Template for DevOps"></a>AWS CDK Project Template for DevOps</h2><p>This repository provides best practices and template framework for developing AWS Cloud Development Kit(CDK)-based applications effectively, quickly and collaboratively. In detail, practical approaches such as how to deploy to multi-environment, how to organize directories and how to manage dependencies between stacks will be introduced, and template codes are provided to support them. Gradually, these template codes will be further expanded to support various DevOps scenario.</p><p><a href="AWS%20CDK%20Project%20Template%20for%20DevOps">https://github.com/aws-samples/aws-cdk-project-template-for-devops</a></p><p>‍</p><p>Developer can also explore <a href="https://github.com/aws-samples">aws-samples</a> repository to find some useful code for AWS development, there are more than 7000+ code sample for reference.</p><p>‍</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AWS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>K8s自动扩容和自愈</title>
       <link href="/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/"/>
       <url>/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/</url>
