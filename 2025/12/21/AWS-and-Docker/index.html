@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AWS,Docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="KaloSora的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="‍ Docker has become an essential skill for developers and an integral part of DevOps practices in modern software development. The Docker container make application more efficiently and reliably accro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS and Docker">
+<meta property="og:url" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/index.html">
+<meta property="og:site_name" content="KaloSora的博客">
+<meta property="og:description" content="‍ Docker has become an essential skill for developers and an integral part of DevOps practices in modern software development. The Docker container make application more efficiently and reliably accro">
+<meta property="og:locale">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251221094207-jcj73vi.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251212221743-a4wiyax.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214095408-mij14av.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214095622-deuiyy9.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214095714-8vmtzdq.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214095814-bf9fjv3.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214162708-ygj15pj.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214164715-qlh4lt0.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251214172036-h9mt8s8.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251215204947-ih6cuu8.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220094925-pq69buq.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251215211527-j2x6h40.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251215211548-wliy7k4.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251215211622-gkrnivx.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251215212619-erogffx.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251215215722-a5jgx4o.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220212330-e9soxsl.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220213002-b2tt42j.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220223140-5r9fgxh.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220223237-n9wen24.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220212645-n5e5s3o.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220212556-w6fgd6e.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220221818-cq9z9uw.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251220222616-goqe1e2.png">
+<meta property="og:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251216220811-d3655b2.png">
+<meta property="article:published_time" content="2025-12-21T01:48:03.000Z">
+<meta property="article:modified_time" content="2025-12-21T01:47:33.995Z">
+<meta property="article:author" content="KaloSora">
+<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kalosora.github.io/2025/12/21/AWS-and-Docker/image-20251221094207-jcj73vi.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kalosora.github.io/2025/12/21/AWS-and-Docker/"/>
+
+
+
+
+
+  <title>AWS and Docker | KaloSora的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KaloSora的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kalosora.github.io/2025/12/21/AWS-and-Docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KaloSora的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AWS and Docker</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+          
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-12-21T09:48:03+08:00">
+                2025-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index">
+                    <span itemprop="name">AWS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,374 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>‍</p>
+<p>Docker has become an essential skill for developers and an integral part of DevOps practices in modern software development. The Docker container make application more efficiently and reliably accross different environments.</p>
+<p>‍</p>
+<p>This article mainly to record down my on hand experience about deploying Docker on AWS.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251221094207-jcj73vi.png" alt="image"></p>
+<p>To achieve this, I will need to:</p>
+<ol>
+<li>Create a AWS account and a custom role</li>
+<li>Create a S3 bucket to store Terraform state</li>
+<li>Create a Terraform Github repository and coding</li>
+<li>Run Terraform to create AWS EC2</li>
+</ol>
+<p>‍</p>
+<h1 id="Docker-Deploy"><a href="#Docker-Deploy" class="headerlink" title="Docker Deploy"></a>Docker Deploy</h1><p>Amazon Web Service (AWS) provide 6 months free plan for new user the free cost up to 200 USD.</p>
+<p>I will apply the free plan and create Docker to AWS EC2.</p>
+<p>‍</p>
+<h2 id="AWS-Authentication"><a href="#AWS-Authentication" class="headerlink" title="AWS Authentication"></a>AWS Authentication</h2><h3 id="Generate-Access-Key"><a href="#Generate-Access-Key" class="headerlink" title="Generate Access Key"></a>Generate Access Key</h3><p>Firstly, Create a new user, don’t use root user to operate AWS resource.</p>
+<p>Setup the root user and role, assign trust relationships and role policy, make sure the new user can assume the new roles.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251212221743-a4wiyax.png" alt="image"></p>
+<p>‍</p>
+<p>Secondly. login with new user, switch to role, and switch to IAM function so that we can create access key for terraform api call.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214095408-mij14av.png" alt="image"></p>
+<p>Select <strong>Command Line Interface (CLI)</strong> , click “Next” button</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214095622-deuiyy9.png" alt="image"></p>
+<p>Provide description for the access key and then confirm.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214095714-8vmtzdq.png" alt="image"></p>
+<p>Remember to store your key safely.</p>
+<p>*Each IAM user can have a maximum of <strong>two</strong> active access keys at a time.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214095814-bf9fjv3.png" alt="image"></p>
+<p>‍</p>
+<h3 id="Install-AWS-CLI-and-Login"><a href="#Install-AWS-CLI-and-Login" class="headerlink" title="Install AWS CLI and Login"></a>Install AWS CLI and Login</h3><p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html">AWS CLI Installation Guide</a></p>
+<p>Install AWS CLI on local machine, execute below command.</p>
+<p>*For Mac, we can download pkg directly.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install awscli</span><br><span class="line"></span><br><span class="line"><span class="comment"># Health check result</span></span><br><span class="line">(base) yihui.li@yihuilideMBP ~ % aws --version</span><br><span class="line">aws-cli/2.32.16 Python/3.13.11 Darwin/22.6.0 exe/x86_64</span><br><span class="line">(base) yihui.li@yihuilideMBP ~ %</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Regarding authenticate to AWS via command line, we have 2 methods to configure the access.</p>
+<p><strong>The first method is to setup Linux variable.</strong></p>
+<p>From above result, we need to config AWS key pair and region</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Better to store it on ~/.bash_profile</span></span><br><span class="line"><span class="built_in">export</span> AWS_ACCESS_KEY_ID=<span class="string">&quot;your_access_key&quot;</span></span><br><span class="line"><span class="built_in">export</span> AWS_SECRET_ACCESS_KEY=<span class="string">&quot;your_secret_key&quot;</span></span><br><span class="line"><span class="built_in">export</span> AWS_REGION=<span class="string">&quot;your_region&quot;</span></span><br><span class="line"><span class="built_in">export</span> AWS_ACCOUNT_ID=<span class="string">&quot;your_account_id&quot;</span></span><br><span class="line"><span class="built_in">export</span> AWS_ROLE_NAME=<span class="string">&quot;your_role_name&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>To verify AWS config, run below command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws sts assume-role --role-arn arn:aws:iam::<span class="variable">$AWS_ACCOUNT_ID</span>:role/<span class="variable">$AWS_ROLE_NAME</span> --role-session-name <span class="string">&quot;CLI-Session&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214162708-ygj15pj.png" alt="image"></p>
+<p>By default, session duration is 1 hour, can use <code>--duration-seconds</code> to specify the vaule.</p>
+<p>Session duration can’t exceed the <strong>Maximum session duration</strong> on AWS IAM role setting.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214164715-qlh4lt0.png" alt="image"></p>
+<p>​</p>
+<p><strong>Or we can choose AWS config file to login.</strong></p>
+<p>Run command <code>aws configure</code>, it will create 2 files under <code>~/.aws/</code>​</p>
+<p>​<code>~/.aws/credentials</code> This file mainly to store Access Key ID and Secret Access Key</p>
+<p>​<code>~/.aws/config</code> This file will define each aws profile</p>
+<p>After the setup done, can use <code>aws configure list</code> to list all profile setting.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251214172036-h9mt8s8.png" alt="image"></p>
+<p>Run below command to login.</p>
+<p>If we have many profile defined on <code>~/.aws/config</code>, can use <code>--profile your-profile-name</code> to specify the value.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> AWS_ACCOUNT_ID=<span class="string">&quot;your_account_id&quot;</span></span><br><span class="line"><span class="built_in">export</span> AWS_ROLE_NAME=<span class="string">&quot;your_role_name&quot;</span></span><br><span class="line">aws sts assume-role --role-arn arn:aws:iam::<span class="variable">$AWS_ACCOUNT_ID</span>\:role/<span class="variable">$AWS_ROLE_NAME</span> --role-session-name <span class="string">&quot;CLI-Session&quot;</span> --profile default</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p><strong>Next Step</strong></p>
+<p>After the login, it will return the <code>SessionToken</code>, now we should store it together with AWS key pair to the local variable. Because previously we only assume the role, <strong>it’s not contain any AWS resource policy, only the token represent the role permission actually.</strong></p>
+<p>If we don’t setup the AWS variable including the token, we can’t create any resources on AWS.</p>
+<p>Here is the full command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AWS CLI assume role</span></span><br><span class="line"><span class="built_in">export</span> AWS_ACCOUNT_ID=<span class="string">&quot;your_account_id&quot;</span></span><br><span class="line"><span class="built_in">export</span> AWS_ROLE_NAME=<span class="string">&quot;your_role_name&quot;</span></span><br><span class="line">aws sts assume-role --role-arn arn:aws:iam::<span class="variable">$AWS_ACCOUNT_ID</span>\:role/<span class="variable">$AWS_ROLE_NAME</span> --role-session-name <span class="string">&quot;CLI-Session&quot;</span> --profile default &gt; /tmp/aws_creds.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># Setup the IAM credentials</span></span><br><span class="line"><span class="built_in">export</span> AWS_ACCESS_KEY_ID=$(<span class="built_in">cat</span> /tmp/aws_creds.json | grep AccessKeyId | <span class="built_in">cut</span> -d <span class="string">&#x27;&quot;&#x27;</span> -f 4)</span><br><span class="line"><span class="built_in">export</span> AWS_SECRET_ACCESS_KEY=$(<span class="built_in">cat</span> /tmp/aws_creds.json | grep SecretAccessKey | <span class="built_in">cut</span> -d <span class="string">&#x27;&quot;&#x27;</span> -f 4)</span><br><span class="line"><span class="built_in">export</span> AWS_SESSION_TOKEN=$(<span class="built_in">cat</span> /tmp/aws_creds.json | grep SessionToken | <span class="built_in">cut</span> -d <span class="string">&#x27;&quot;&#x27;</span> -f 4)</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Example</p>
+<p>Step 1 only assume role but not specify the IAM role credentials. It will permission deny error.</p>
+<p>But step2 works fine after proivide the IAM role credentials.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251215204947-ih6cuu8.png" alt="image"></p>
+<p>‍</p>
+<h4 id="One-click-auth-script"><a href="#One-click-auth-script" class="headerlink" title="One click auth script"></a>One click auth script</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># assume-role.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This file should contain account_id, access key, role name</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br><span class="line"></span><br><span class="line">CREDENTIALS_FILE=<span class="string">&quot;/tmp/aws_creds.json&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Assuming <span class="variable">$AWS_ROLE_NAME</span> role...&quot;</span></span><br><span class="line">aws sts assume-role \</span><br><span class="line">  --role-arn <span class="string">&quot;arn:aws:iam::<span class="variable">$AWS_ACCOUN_ID</span>\:role/<span class="variable">$AWS_ROLE_NAME</span>&quot;</span> \</span><br><span class="line">  --role-session-name <span class="string">&quot;Terraform-<span class="subst">$(date +%s)</span>&quot;</span> \</span><br><span class="line">  --profile default &gt; <span class="variable">$CREDENTIALS_FILE</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> AWS_ACCESS_KEY_ID=$(jq -r <span class="string">&#x27;.Credentials.AccessKeyId&#x27;</span> <span class="variable">$CREDENTIALS_FILE</span>)</span><br><span class="line"><span class="built_in">export</span> AWS_SECRET_ACCESS_KEY=$(jq -r <span class="string">&#x27;.Credentials.SecretAccessKey&#x27;</span> <span class="variable">$CREDENTIALS_FILE</span>)</span><br><span class="line"><span class="built_in">export</span> AWS_SESSION_TOKEN=$(jq -r <span class="string">&#x27;.Credentials.SessionToken&#x27;</span> <span class="variable">$CREDENTIALS_FILE</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Health check</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Current identity:&quot;</span></span><br><span class="line">aws sts get-caller-identity</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set timer for the session</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Credentials valid for 1 hour&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Result as below</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220094925-pq69buq.png" alt="image"></p>
+<p>‍</p>
+<h3 id="Execute-Terraform"><a href="#Execute-Terraform" class="headerlink" title="Execute Terraform"></a>Execute Terraform</h3><p><a target="_blank" rel="noopener" href="https://github.com/KaloSora/AWS-EC2-DOCKER">Github Repository</a></p>
+<h4 id="Create-terraform-state-bucket"><a href="#Create-terraform-state-bucket" class="headerlink" title="Create terraform state bucket"></a>Create terraform state bucket</h4><p>Run step 1 to step 5, now we can find our own bucket. The bucket mainly to store Terraform state.</p>
+<p>The bucket should include below feature now:</p>
+<ul>
+<li>Enable version for each terraform change</li>
+<li>Enable AES256 server side encryption</li>
+<li>Only authenticated access can access the bucket</li>
+</ul>
+<p>‍</p>
+<p>Health check result should as below</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251215211527-j2x6h40.png" alt="image"></p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251215211548-wliy7k4.png" alt="image"></p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251215211622-gkrnivx.png" alt="image"></p>
+<p>‍</p>
+<p>Run step 6 to create table on <code>DynamoDB</code>.</p>
+<p>The table is to store the Terraform lock to prevent concurrent writes and ensures data consistency. Since DynamoDB is a AWS service, the locking mechanism should be good and reliable.</p>
+<p>For cost saving, we can skip this part if needed. It will also need DynamoDB IAM access.</p>
+<p>*We should also enable the deletion protection as well since it’s a important table, but I will skip this part.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251215212619-erogffx.png" alt="image"></p>
+<h4 id="Create-EC2"><a href="#Create-EC2" class="headerlink" title="Create EC2"></a>Create EC2</h4><p>Follow the step7, it wll initialize Terraform local repository, like download the AWS provider.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251215215722-a5jgx4o.png" alt="image"></p>
+<p>Run step 8 to create EC2 on AWS</p>
+<p>This step will:</p>
+<ul>
+<li>Create ssh key pair, store pem file on local and upload public key on AWS</li>
+<li>Create EC2 with Amazon Linux 2 with docker installed</li>
+<li>Assign inbound security group to the EC2</li>
+<li>Allow AWS System Manager to manage EC2</li>
+</ul>
+<p>‍</p>
+<p>Health check - Below AWS resource should be modified.</p>
+<p>Terraform works fine, ssh connected.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220212330-e9soxsl.png" alt="image"></p>
+<p>Try to reboot the EC2 from console, the docker process should auto startup</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220213002-b2tt42j.png" alt="image"></p>
+<p>Use System Manager to connect EC2</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220223140-5r9fgxh.png" alt="image"></p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220223237-n9wen24.png" alt="image"></p>
+<p>S3 bucket should be updated.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220212645-n5e5s3o.png" alt="image"></p>
+<p>DynamoDB should also updated due to terraform state changed.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220212556-w6fgd6e.png" alt="image"></p>
+<p>‍</p>
+<p><strong>About EC2 key pair</strong></p>
+<p>During the testing, it will auto create the key pair and store it on local machine.</p>
+<p>Actually the key pair is generated by terraform plugin <code>tls_private_key</code>.</p>
+<p>But when we destroy the module as below, it will also delete the local file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform destroy -target=module.ec2-docker -var-file=<span class="string">&quot;./aws-docker.tfvars&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>To avoid this, we’d better use linux command to generate the key pair first, and then specify the key file path on PROD environment.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -m PEM -f ec2-docker-keypair</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<h3 id="Troubleshoot"><a href="#Troubleshoot" class="headerlink" title="Troubleshoot"></a>Troubleshoot</h3><p><strong>Handle terraform state lock</strong></p>
+<p>Sometimes terraform state file will be locked as below.</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220221818-cq9z9uw.png" alt="image"></p>
+<p>Solution:</p>
+<p>Temporarily we can add <code>-lock=false</code> as below to skip the lock</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform destroy -target=module.ec2-docker -var-file=<span class="string">&quot;./aws-docker.tfvars&quot;</span> --auto-approve -lock=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>For long term solution, we need to handle the S3 status.</p>
+<p>Here I’m using S3 + DynamoDB, so I will need to handle the table record as well.</p>
+<p>step1, try to init the terraform repository again</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">terraform init -reconfigure</span><br><span class="line"></span><br><span class="line">terraform destroy -target=module.ec2-docker -var-file=<span class="string">&quot;./aws-docker.tfvars&quot;</span> --auto-approve</span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>If it’s not working, try force unlock</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">terraform force-unlock aff280c9-91f6-971b-7d9a-4539ce90072f</span><br><span class="line"></span><br><span class="line"><span class="comment"># Optional for DynamoDB</span></span><br><span class="line">aws dynamodb scan --table-name terraform-state-lock-table</span><br><span class="line">aws dynamodb delete-item --table-name terraform-state-lock-table --key <span class="string">&#x27;&#123;&quot;LockID&quot;: &#123;&quot;S&quot;: &quot;795359014551-terraform-state/tfstate/terraform.tfstate-md5&quot;&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>‍</p>
+<p>Result as below</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251220222616-goqe1e2.png" alt="image"></p>
+<p>‍</p>
+<p><strong>IAM role simulation</strong></p>
+<p>During the terraform creating, we might need to check whether our role have enough permission for AWS action, then we can use below command to test.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">aws iam simulate-principal-policy \</span><br><span class="line">    --policy-source-arn arn:aws:iam::<span class="variable">$AWS_ACCOUN_ID</span>\:user/<span class="variable">$AWS_ROLE_NAME</span> \</span><br><span class="line">    --action-names <span class="string">&quot;ec2:DescribeImages&quot;</span> \</span><br><span class="line">    --resource-arns <span class="string">&quot;*&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>For example</p>
+<p><img src="/2025/12/21/AWS-and-Docker/image-20251216220811-d3655b2.png" alt="image"></p>
+<p>‍</p>
+<p>Add 1 if else condition for the public key path</p>
+<p>timestamp and hex for security group</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AWS/" rel="tag"># AWS</a>
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/10/19/AWS-Useful-Document/" rel="next" title="AWS Useful Document">
+                <i class="fa fa-chevron-left"></i> AWS Useful Document
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/yi-hui-li-8591ab383" target="_blank" title="Linkedin">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kalosora@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-Deploy"><span class="nav-number">1.</span> <span class="nav-text">Docker Deploy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AWS-Authentication"><span class="nav-number">1.1.</span> <span class="nav-text">AWS Authentication</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-Access-Key"><span class="nav-number">1.1.1.</span> <span class="nav-text">Generate Access Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-AWS-CLI-and-Login"><span class="nav-number">1.1.2.</span> <span class="nav-text">Install AWS CLI and Login</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#One-click-auth-script"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">One click auth script</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Execute-Terraform"><span class="nav-number">1.1.3.</span> <span class="nav-text">Execute Terraform</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-terraform-state-bucket"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Create terraform state bucket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-EC2"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Create EC2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Troubleshoot"><span class="nav-number">1.1.4.</span> <span class="nav-text">Troubleshoot</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KaloSora</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":100,"vOffset":-50},"mobile":{"show":true,"scale":0.5}});</script></body>
+</html>

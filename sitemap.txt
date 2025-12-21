@@ -1,3 +1,4 @@
+https://kalosora.github.io/2025/12/21/AWS-and-Docker/
 https://kalosora.github.io/2025/10/19/AWS-Useful-Document/
 https://kalosora.github.io/2025/03/16/K8s%E8%87%AA%E5%8A%A8%E6%89%A9%E5%AE%B9%E5%92%8C%E8%87%AA%E6%84%88/
 https://kalosora.github.io/2025/03/15/%E9%83%A8%E7%BD%B2%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%88%B0K8s/
@@ -42,9 +43,9 @@ https://kalosora.github.io/2020/01/23/BIEE%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E
 https://kalosora.github.io/about/index.html
 https://kalosora.github.io/
 https://kalosora.github.io/tags/AWS/
+https://kalosora.github.io/tags/Docker/
 https://kalosora.github.io/tags/DATAWARE-HOUSE/
 https://kalosora.github.io/tags/Python-Web/
-https://kalosora.github.io/tags/Docker/
 https://kalosora.github.io/tags/Spring/
 https://kalosora.github.io/tags/Devops/
 https://kalosora.github.io/tags/Java-Core/
