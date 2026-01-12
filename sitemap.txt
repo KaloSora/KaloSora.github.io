@@ -1,3 +1,4 @@
+https://kalosora.github.io/2026/01/12/AWS-ECS/
 https://kalosora.github.io/2025/12/28/Deep-dive-into-Docker/
 https://kalosora.github.io/2025/12/21/AWS-and-Docker/
 https://kalosora.github.io/2025/10/19/AWS-Useful-Document/
@@ -47,17 +48,17 @@ https://kalosora.github.io/tags/AWS/
 https://kalosora.github.io/tags/Docker/
 https://kalosora.github.io/tags/DATAWARE-HOUSE/
 https://kalosora.github.io/tags/Python-Web/
+https://kalosora.github.io/tags/Java-Core/
 https://kalosora.github.io/tags/Spring/
 https://kalosora.github.io/tags/Devops/
-https://kalosora.github.io/tags/Java-Core/
 https://kalosora.github.io/tags/Python/
 https://kalosora.github.io/tags/LLM/
 https://kalosora.github.io/tags/Kubernetes/
 https://kalosora.github.io/tags/DeepSeek/
 https://kalosora.github.io/tags/Oracle/
 https://kalosora.github.io/tags/%E9%9A%8F%E8%AE%B0/
-https://kalosora.github.io/categories/AWS-Terraform/
 https://kalosora.github.io/categories/AWS/
+https://kalosora.github.io/categories/AWS-Terraform/
 https://kalosora.github.io/categories/ORACLE-BIEE/
 https://kalosora.github.io/categories/Django/
 https://kalosora.github.io/categories/Cloud-Native/
