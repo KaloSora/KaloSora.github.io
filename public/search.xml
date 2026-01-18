@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>K3s deployment</title>
+      <link href="/2026/01/19/K3S-deployment/"/>
+      <url>/2026/01/19/K3S-deployment/</url>
+      
+        <content type="html"><![CDATA[<p>‍</p><p>K3s is a lightweight version of Kubernetes, which is very easy to deploy on the server with very low resource consuming. It’s friendly to new developer in Cloud-Native. It can also be used in edge computing to handle less computing on limited device.</p><p><a href="https://docs.k3s.io/">K3s Document</a></p><p>‍</p><h2 id="Tencent-Cloud"><a href="#Tencent-Cloud" class="headerlink" title="Tencent Cloud"></a>Tencent Cloud</h2><p>In this section, I will deploy K3s to tencent cloud elastic compute server via terraform.</p><p><a href="https://github.com/KaloSora/k3s-learn/tree/main/tencent-cloud">Tencentcloud K3s</a></p><p>‍</p><p>Run step 1 to step 2, make sure backend bucket is created successfully.</p><p><img src="/2026/01/19/K3S-deployment/image-20260112210714-zqlwg13.png" alt="image"></p><p>‍</p><p>Run step3 to initialize terraform plugins.</p><p><img src="/2026/01/19/K3S-deployment/image-20260112211325-19z7fbb.png" alt="image"></p><p>‍</p><p>Run step 4 to deploy K3s on tencent cloud vm.</p><p><img src="/2026/01/19/K3S-deployment/image-20260112211522-odmhm4y.png" alt="image"></p><p>It will create below resource:</p><ul><li>Create vm and auto deploy K3s</li><li>Create FQDN on Cloudflare (DNS resolver)</li></ul><p>‍</p><h2 id="AWS"><a href="#AWS" class="headerlink" title="AWS"></a>AWS</h2><p>Execute below command to AWS modules.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./aws/ </span><br></pre></td></tr></table></figure><p>‍</p><p>Follow <code>Readme.md</code> to create AWS EC2.</p><p>It will create below resource:</p><ul><li>Create AWS EC2 with SSH and session manager role</li><li>Install K3s on EC2</li></ul><p>‍</p><p>Login AWS Console to make sure EC2 is created.</p><p><img src="/2026/01/19/K3S-deployment/image-20260118163444-cl05c3q.png" alt="image"></p><p>‍</p><p>Connect to EC2 to verify the K3s cluster is up.</p><p><img src="/2026/01/19/K3S-deployment/image-20260118163420-i3cj53i.png" alt="image"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud Native </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> K8s </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AWS ECR &amp; ECS</title>
       <link href="/2026/01/12/AWS-ECS/"/>
       <url>/2026/01/12/AWS-ECS/</url>
@@ -13,7 +40,7 @@
       
       <categories>
           
-          <category> AWS </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -40,7 +67,7 @@
       
       <categories>
           
-          <category> AWS </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -67,7 +94,7 @@
       
       <categories>
           
-          <category> AWS </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -94,7 +121,7 @@
       
       <categories>
           
-          <category> AWS </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -358,7 +385,7 @@
       
       <categories>
           
-          <category> AWS Terraform </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -366,6 +393,8 @@
         <tags>
             
             <tag> AWS </tag>
+            
+            <tag> Terraform </tag>
             
         </tags>
       
@@ -383,7 +412,7 @@
       
       <categories>
           
-          <category> AWS Terraform </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -391,6 +420,8 @@
         <tags>
             
             <tag> AWS </tag>
+            
+            <tag> Terraform </tag>
             
         </tags>
       
@@ -408,7 +439,7 @@
       
       <categories>
           
-          <category> AWS Terraform </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -416,6 +447,8 @@
         <tags>
             
             <tag> AWS </tag>
+            
+            <tag> Terraform </tag>
             
         </tags>
       
@@ -433,7 +466,7 @@
       
       <categories>
           
-          <category> AWS Terraform </category>
+          <category> Cloud Native </category>
           
       </categories>
       
@@ -441,6 +474,8 @@
         <tags>
             
             <tag> AWS </tag>
+            
+            <tag> Terraform </tag>
             
         </tags>
       
